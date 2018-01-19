@@ -2,17 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">	
  	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.bana</groupId>
+ 	<parent>
+ 		<groupId>org.bana</groupId>
+ 		<artifactId>wechat-parent</artifactId>
+ 		<version>0.4.0-SNAPSHOT</version>
+ 		<relativePath>../pom.xml</relativePath>
+ 	</parent>
 	<artifactId>wechat-client</artifactId>
-	<version>0.4.0-SNAPSHOT</version>
 	<name>wechat-client</name> 
 	<description>wechat-client</description>
-
-	<properties>
-		<httpclient.version>4.3.5</httpclient.version>
-		<bana.version>0.1.4-SNAPSHOT</bana.version>
-		<common.util.version>1.0.5-SNAPSHOT</common.util.version>
-	</properties> 
 
 	<dependencies>
 		<!-- *********************************************************** -->
