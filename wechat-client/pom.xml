@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">	
+ 	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.bana</groupId>
+	<artifactId>wechat-client</artifactId>
+	<version>0.3.0-SNAPSHOT</version>
+	<name>wechat-client</name>
+	<description>wechat-client</description>
+
+	<properties>
+		<httpclient.version>4.3.5</httpclient.version>
+		<bana.version>0.1.4-SNAPSHOT</bana.version>
+		<common.util.version>1.0.5-SNAPSHOT</common.util.version>
+	</properties>
+
+	<dependencies>
+		<!-- *********************************************************** -->
+
+		<!-- *********************************************************** -->
+		<!-- ========begin======系统正式运行需要的jar报配置依赖====begin========== -->
+		<!-- *********************************************************** -->
+
+		<!-- ===============bana 公共组件依赖 begin ========================== -->
+		<!-- 自开发的公共方法类组件 -->
+		<dependency>
+			<groupId>org.bana</groupId>
+			<artifactId>common-util-basic</artifactId>
+			<version>${common.util.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.bana</groupId>
+			<artifactId>common-util-file</artifactId>
+			<version>${common.util.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bana</groupId>
+			<artifactId>bana-core</artifactId>
+			<version>${bana.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- ===============bana 公共组件依赖 END ========================== -->
+
+		<!-- =======================json 组件的依赖 begin ================= -->
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<classifier>jdk15</classifier>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ezmorph</groupId>
+			<artifactId>ezmorph</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+		<!-- =======================json 组件的依赖 end ================= -->
+
+		<!-- =======================log 组件的依赖 begin ================= -->
+		<!-- 日志的API配置系统 -->
+	  	<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.7</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- =======================log4j 组件的依赖 end ================= -->
+		
+		<!-- =======================上传文件 组件的依赖 begin ================= -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.3.1</version>
+		</dependency>
+		<!-- =======================上传文件 组件的依赖 end ================= -->
+		
+		<!-- =======================解析微信服务号依赖包===================== -->
+		<!-- Stream begin -->
+		<dependency>
+		    <groupId>com.thoughtworks.xstream</groupId>
+		    <artifactId>xstream</artifactId>
+		    <version>1.4.8</version>
+		</dependency>
+		<!-- Stream end -->
+		<!-- Dom4j begin -->
+		<dependency>
+			<groupId>org.dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>2.0.0-RC1</version>
+		</dependency>
+		<!-- Dom4j end -->
+		<!-- =======================解析微信服务号依赖包===================== -->
+		<!-- ===============微信加解密依赖的公共jar包 =begin====================-->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.9</version>
+		</dependency>
+		<!-- SSL安全访问需要的jar包  -->
+		<dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>fluent-hc</artifactId>
+            <version>${httpclient.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient-cache</artifactId>
+            <version>${httpclient.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>${httpclient.version}</version>
+        </dependency>
+		<!-- ===============微信加解密依赖的公共jar包 =end====================-->
+		<!-- *********************************************************** -->
+		<!-- ========end======系统正式运行需要的jar报配置依赖====end========== -->
+		<!-- *********************************************************** -->
+
+		<!-- *********************************************************** -->
+		<!-- ========begin==========测试级别的依赖配置========begin========== -->
+		<!-- *********************************************************** -->
+		<!-- junit 测试依赖 begin -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+			<version>4.11</version>
+		</dependency>
+		<!-- junit 测试依赖 end -->
+		<!-- *********************************************************** -->
+		<!-- ========end==========测试级别的依赖配置========end========== -->
+		<!-- *********************************************************** -->
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<!-- 工程编码插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!-- 生成javadoc插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<charset>UTF-8</charset>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!-- 打包java源码 -->
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource><!-- 不对指定的资源文件进行资源替换 -->
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+		</testResources>
+	</build>
+	<!-- Maven私服配置 -->
+
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>hosts-release</name>
+			<url>http://118.190.61.243:8081/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>hosts-snapshot</name>
+			<url>http://118.190.61.243:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<!-- ~~~~~~~~~~Maven私服配置结束 -->
+</project>
