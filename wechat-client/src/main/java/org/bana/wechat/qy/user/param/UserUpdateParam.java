@@ -10,7 +10,7 @@ package org.bana.wechat.qy.user.param;
 
 import java.util.List;
 
-import org.bana.wechat.qy.common.WeChatExtAttr;
+import org.bana.wechat.cp.common.WeChatExtAttr;
 import org.bana.wechat.qy.common.WeChatParam;
 
 /** 

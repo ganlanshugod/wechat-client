@@ -10,7 +10,7 @@ package org.bana.wechat.qy.user.domain;
 
 import java.util.List;
 
-import org.bana.wechat.qy.common.WeChatExtAttr;
+import org.bana.wechat.cp.common.WeChatExtAttr;
 
 /**
  * @ClassName: User

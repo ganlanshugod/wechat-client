@@ -6,7 +6,7 @@
 * @date 2015-5-11 下午4:19:04 
 * @version V1.0   
 */ 
-package org.bana.wechat.qy.common;
+package org.bana.wechat.cp.common;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +85,11 @@ public class WeChatExtAttr {
 	@Override
 	public String toString() {
 		return "WeChatExtAttr [attrs=" + attrs + "]";
+	}
+	
+	public WeChatExtAttr append(String name,String value){
+		getAttrs().add(new AttrObject(name,value));
+		return this;
 	}
 	
 }

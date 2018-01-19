@@ -6,7 +6,7 @@
 * @date 2015-5-27 下午2:28:15 
 * @version V1.0   
 */ 
-package org.bana.wechat.qy.common.log;
+package org.bana.wechat.common.log;
 
 import org.bana.wechat.qy.common.BanaWeChatException;
 

@@ -6,7 +6,7 @@
 * @date 2015-5-11 下午4:20:50 
 * @version V1.0   
 */ 
-package org.bana.wechat.qy.common;
+package org.bana.wechat.cp.common;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -19,6 +19,14 @@ public class AttrObject {
 
 	private String name; //属性名
 	private String value; //属性值
+	
+	public AttrObject() {
+	}
+	public AttrObject(String name, String value) {
+		super();
+		this.name = name;
+		this.value = value;
+	}
 	/**
 	 * @Description: 属性 name 的get方法 
 	 * @return name

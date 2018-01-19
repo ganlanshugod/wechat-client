@@ -26,6 +26,8 @@ import org.bana.wechat.qy.common.WeChatConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.alibaba.fastjson.JSON;
+
 /** 
  * @ClassName: CardClient 
  * @Description: 服务号卡券
@@ -51,6 +53,7 @@ public class CardClient {
 		// 访问微信接口得到json返回值对象
 		String result = WeChatConnection.post(Constants.创建卡券.getValue(), paramMap);
 		// 将结果进行转换
+		JSON parse = (JSON)JSON.parse(result);
 		JSONObject json = JSONObject.fromObject(result);
 		if (WeChatConnection.isSuccess(json)) {
 			String cardId = json.getString("card_id");

@@ -6,7 +6,7 @@
 * @date 2015-5-27 下午4:22:27 
 * @version V1.0   
 */ 
-package org.bana.wechat.qy.common.log;
+package org.bana.wechat.common.log;
 
 import java.io.Serializable;
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import org.bana.wechat.qy.common.AttrObject;
+import org.bana.wechat.cp.common.AttrObject;
 
 public class ExtAttr {
 

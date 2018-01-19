@@ -6,7 +6,7 @@
 * @date 2015-5-27 下午2:28:15 
 * @version V1.0   
 */ 
-package org.bana.wechat.qy.common.log;
+package org.bana.wechat.common.log;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -18,6 +18,8 @@ import org.bana.common.util.exception.ThrowableUtil;
 import org.bana.wechat.qy.common.ThreadPoolUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.alibaba.fastjson.JSON;
 
 /** 
  * @ClassName: WechatLogger 
@@ -86,7 +88,11 @@ public class WechatLogger {
 	* @param logDomain
 	 */
 	protected void doSaveWechatLog(WechatLogDomain logDomain){
-		LOG.warn("微信的日志没有保存，只是控制台打印 " + logDomain);
+		LOG.warn("===微信的日志没有保存，只是控制台打印=== " + logDomain);
+		LOG.warn("url 地址为 " + logDomain.getWechatUrl());
+		LOG.warn("参数为===" + JSON.toJSONString(logDomain.getParamData()));
+		LOG.warn("HTTP Status code 为 ===" + logDomain.getStatusCode());
+		LOG.warn("返回结果为==" + logDomain.getWechatResult());
 	}
 	/** 
 	* @Description: 记录开始信息
