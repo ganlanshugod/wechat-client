@@ -11,11 +11,16 @@
 	
 	
 	<properties>
-		<httpclient.version>4.3.5</httpclient.version>
+		<httpclient.version>4.5.3</httpclient.version>
 		<bana.version>0.1.4-SNAPSHOT</bana.version>
 		<common.util.version>1.0.5-SNAPSHOT</common.util.version>
 		<spring.boot.version>1.5.2.RELEASE</spring.boot.version>
 	</properties> 
+	
+	<modules>
+		<module>wechat-client</module>
+		<module>spring-boot-starter-wechat</module>
+	</modules>
 	
 	<build>
 		<plugins>
