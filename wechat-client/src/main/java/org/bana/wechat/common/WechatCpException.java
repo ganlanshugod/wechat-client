@@ -20,6 +20,7 @@ public class WechatCpException extends WechatException {
 	
 	public static final String APP_PARAM_ERROR1 = "CP-a001";
 	public static final String APP_PARAM_ERROR2 = "CP-a002";
+	public static final String APP_PARAM_ERROR3 = "CP-a003";
 
 	/**
 	 * @Fields serialVersionUID : 

@@ -121,7 +121,7 @@
 			<version>1.9</version>
 		</dependency>
 		<!-- SSL安全访问需要的jar包  -->
-		<dependency>
+		<!-- <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>fluent-hc</artifactId>
             <version>${httpclient.version}</version>
@@ -130,17 +130,12 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient-cache</artifactId>
             <version>${httpclient.version}</version>
-        </dependency>
+        </dependency> -->
         <!-- =======================http 组件的依赖 begin ================= -->
 		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>${httpclient.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpmime</artifactId>
-			<version>${httpclient.version}</version>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpmime</artifactId>
+		    <version>${httpclient.version}</version>
 		</dependency>
 		<!-- =======================http 组件的依赖 begin ================= -->
 		<!-- ===============微信加解密依赖的公共jar包 =end====================-->
