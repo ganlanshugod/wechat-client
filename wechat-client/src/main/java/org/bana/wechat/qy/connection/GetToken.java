@@ -14,13 +14,13 @@ import java.util.Map;
 import net.sf.json.JSONObject;
 
 import org.bana.common.util.basic.StringUtils;
+import org.bana.wechat.cp.token.domain.AccessToken;
+import org.bana.wechat.cp.token.domain.SuiteAccessToken;
 import org.bana.wechat.qy.common.BanaWeChatException;
 import org.bana.wechat.qy.common.Constants;
 import org.bana.wechat.qy.common.WeChatConnection;
-import org.bana.wechat.qy.connection.domain.AccessToken;
 import org.bana.wechat.qy.connection.domain.JsApiTicket;
 import org.bana.wechat.qy.connection.domain.ProviderAccessToken;
-import org.bana.wechat.qy.connection.domain.SuiteAccessToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

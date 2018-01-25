@@ -13,12 +13,14 @@ import org.bana.wechat.common.WechatCpException;
 import org.bana.wechat.cp.app.CorpAppType;
 import org.bana.wechat.cp.app.WechatAppManager;
 import org.bana.wechat.cp.app.WechatCorpAppConfig;
+import org.bana.wechat.cp.app.WechatCorpSuiteConfig;
 import org.bana.wechat.cp.app.impl.MemoryWechatAppManager;
 import org.bana.wechat.cp.token.AccessTokenService;
 import org.bana.wechat.cp.token.impl.SimpleAccessTokenServiceImpl;
 import org.bana.wechat.cp.user.UserCPService;
 import org.bana.wechat.cp.user.impl.UserCPServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +33,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableConfigurationProperties(WechatCpProperties.class)
+@ConditionalOnWebApplication
 public class WechatCpAutoConfiguration {
 	
 	@Bean
@@ -62,6 +65,18 @@ public class WechatCpAutoConfiguration {
 		wechatCorpConfig.setCorpId(corpId);
 		wechatCorpConfig.setSecret(secret);
 		manager.addAppConfig(wechatCorpConfig);
+		// 默认套件信息
+		String suiteId = wechatCpProperties.getSuiteId();
+		String suiteSecret = wechatCpProperties.getSuiteSecret();
+		String suiteTicket = wechatCpProperties.getSuiteTicket();
+		if(StringUtils.isBlank(suiteId,suiteSecret,suiteTicket)){
+			throw new WechatCpException(WechatCpException.SUITE_PARAM_ERROR1, "suiteId,suiteSecret,suiteTicket配置不能为空"+suiteId +","+suiteSecret+","+suiteTicket);
+		}
+		WechatCorpSuiteConfig suiteConfig = new WechatCorpSuiteConfig();
+		suiteConfig.setSuiteId(suiteId);
+		suiteConfig.setSuiteSecret(suiteSecret);
+		suiteConfig.setSuiteTicket(suiteTicket);
+		manager.addSuiteConfig(suiteConfig);
 		return manager;
 	}
 	

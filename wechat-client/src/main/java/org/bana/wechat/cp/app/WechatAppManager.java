@@ -24,4 +24,13 @@ public interface WechatAppManager {
 	 * @return
 	 */
 	WechatCorpAppConfig getAppConfig(String corpId,String agentId);
+	
+	/**
+	 * Description: 获取套件信息
+	 * @author Zhang Zhichao
+	 * @date 2018年1月25日 下午4:13:54
+	 * @param suiteId
+	 * @return
+	 */
+	WechatCorpSuiteConfig getSuiteConfig(String suiteId);
 }

@@ -25,4 +25,13 @@ public interface AccessTokenService {
 	 */
 	String getAccessToken(String corpId,String agentId);
 	
+	/**
+	 * Description: 根据企业微信的suiteId获取套件的suite_access_token
+	 * @author Zhang Zhichao
+	 * @date 2018年1月25日 下午2:16:55
+	 * @param suiteId
+	 * @return
+	 */
+	String getSuiteAccessToken(String suiteId);
+	
 }

@@ -20,13 +20,13 @@ import net.sf.json.util.PropertyFilter;
 
 import org.bana.common.util.basic.ClonePojoUtil;
 import org.bana.wechat.BaseTestCase;
+import org.bana.wechat.cp.token.domain.AccessToken;
+import org.bana.wechat.cp.token.domain.SuiteAccessToken;
 import org.bana.wechat.qy.agent.domain.AgentInfo;
 import org.bana.wechat.qy.common.BanaWeChatException;
 import org.bana.wechat.qy.common.Constants;
 import org.bana.wechat.qy.common.WeChatConnection;
 import org.bana.wechat.qy.connection.GetToken;
-import org.bana.wechat.qy.connection.domain.AccessToken;
-import org.bana.wechat.qy.connection.domain.SuiteAccessToken;
 import org.bana.wechat.qy.suite.domain.Agent;
 import org.bana.wechat.qy.suite.domain.Department;
 import org.bana.wechat.qy.suite.domain.PermanentCode;

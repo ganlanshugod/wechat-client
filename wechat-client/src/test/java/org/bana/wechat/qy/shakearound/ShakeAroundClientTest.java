@@ -9,8 +9,8 @@
 package org.bana.wechat.qy.shakearound;
 
 import org.bana.wechat.BaseTestCase;
+import org.bana.wechat.cp.token.domain.AccessToken;
 import org.bana.wechat.qy.connection.GetToken;
-import org.bana.wechat.qy.connection.domain.AccessToken;
 import org.bana.wechat.qy.shakearound.domain.ShakeInfoDomain;
 import org.bana.wechat.qy.shakearound.param.GetShakeInfoParam;
 import org.junit.Assert;
@@ -40,9 +40,9 @@ public class ShakeAroundClientTest extends BaseTestCase{
 	 */
 	@Test
 	public void testGetShakeInfo() {
-		accessToken.getAccess_token();
+		accessToken.getAccessToken();
 		GetShakeInfoParam param = new GetShakeInfoParam();
-		param.setAccess_token(accessToken.getAccess_token());
+		param.setAccess_token(accessToken.getAccessToken());
 		param.setTicket(ticket);
 		ShakeInfoDomain shakeInfo = ShakeAroundClient.getShakeInfo(param);
 		Assert.assertNotNull(shakeInfo);

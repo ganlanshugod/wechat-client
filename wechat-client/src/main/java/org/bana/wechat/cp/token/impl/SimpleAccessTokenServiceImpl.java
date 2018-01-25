@@ -17,10 +17,12 @@ import org.bana.wechat.common.WechatCpException;
 import org.bana.wechat.cp.app.CorpAppType;
 import org.bana.wechat.cp.app.WechatAppManager;
 import org.bana.wechat.cp.app.WechatCorpAppConfig;
+import org.bana.wechat.cp.app.WechatCorpSuiteConfig;
 import org.bana.wechat.cp.common.WechatCpResultHandler;
 import org.bana.wechat.cp.token.AccessTokenService;
+import org.bana.wechat.cp.token.domain.AccessToken;
+import org.bana.wechat.cp.token.domain.SuiteAccessToken;
 import org.bana.wechat.qy.common.Constants;
-import org.bana.wechat.qy.connection.domain.AccessToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,7 +65,7 @@ public class SimpleAccessTokenServiceImpl implements AccessTokenService {
 			case 通讯录管理API:
 				String secret = appConfig.getSecret();
 				AccessToken accessToken = getAccessTokenBySecret(corpId, secret);
-				return accessToken.getAccess_token();
+				return accessToken.getAccessToken();
 			case 第三方托管:
 			case 第三方通讯录:
 				throw new RuntimeException("不支持第三方的应用的token获取方式");
@@ -71,6 +73,26 @@ public class SimpleAccessTokenServiceImpl implements AccessTokenService {
 				throw new RuntimeException("位置的AppType"+corpAppType);
 		}
 		
+	}
+	
+	/**
+	 * <p>Description: 根据企业微信的suiteId获取套件的suite_access_token</p>
+	 * @author Zhang Zhichao
+	 * @date 2018年1月25日 下午2:17:51
+	 * @param suiteId
+	 * @return
+	 * @see org.bana.wechat.cp.token.AccessTokenService#getSuiteAccessToken(java.lang.String)
+	 */
+	@Override
+	public String getSuiteAccessToken(String suiteId) {
+		// 获取套件信息
+		WechatCorpSuiteConfig suiteConfig = wechatAppManager.getSuiteConfig(suiteId);
+		if(suiteConfig==null){
+			throw new WechatCpException(WechatCpException.SUITE_PARAM_ERROR2, "没有找到suiteId="+suiteId+"的套件信息");
+		}
+		JSONObject httpPost = httpHelper.httpPost(Constants.获取SuiteToken.getValue(), suiteConfig);
+		SuiteAccessToken suiteAccessToken = WechatCpResultHandler.handleResult(httpPost,SuiteAccessToken.class);
+		return suiteAccessToken.getSuiteAccessToken();
 	}
 	
 	/**
@@ -85,9 +107,6 @@ public class SimpleAccessTokenServiceImpl implements AccessTokenService {
 		if(StringUtils.isBlank(corpId,secret)){
 			throw new WechatCpException(WechatCpException.PARAM_ERROR,"获取AccessToken时参数不能为空,corpId="+corpId+",secret="+secret);
 		}
-		Map<String,Object> mapParam = new HashMap<String, Object>();
-		mapParam.put("corpid", corpId);
-		mapParam.put("corpsecret", secret);
 		StringBuffer sb = new StringBuffer(Constants.获取AccessToken.getValue())
 				.append("?corpid=").append(corpId)
 				.append("&corpsecret=").append(secret);

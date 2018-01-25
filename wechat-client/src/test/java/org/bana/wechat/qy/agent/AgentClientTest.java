@@ -13,13 +13,13 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.bana.wechat.BaseTestCase;
+import org.bana.wechat.cp.token.domain.AccessToken;
+import org.bana.wechat.cp.token.domain.SuiteAccessToken;
 import org.bana.wechat.qy.agent.domain.AgentInfo;
 import org.bana.wechat.qy.agent.param.AgentGetParam;
 import org.bana.wechat.qy.agent.param.AgentSetParam;
 import org.bana.wechat.qy.common.WeChatParam;
 import org.bana.wechat.qy.connection.GetToken;
-import org.bana.wechat.qy.connection.domain.AccessToken;
-import org.bana.wechat.qy.connection.domain.SuiteAccessToken;
 import org.bana.wechat.qy.suite.SuiteClient;
 import org.bana.wechat.qy.suite.domain.Agent;
 import org.bana.wechat.qy.suite.param.GetCorpTokenParam;
@@ -38,7 +38,7 @@ public class AgentClientTest extends BaseTestCase{
 	public void init(){
 		suiteToken = GetToken.getSuiteToken(suite_id, suite_secret, suite_ticket);
 		GetCorpTokenParam tokenParam = new GetCorpTokenParam();
-		tokenParam.setSuite_access_token(suiteToken.getSuite_access_token());
+		tokenParam.setSuite_access_token(suiteToken.getSuiteAccessToken());
 		tokenParam.setSuite_id(suite_id);
 		tokenParam.setPermanent_code(permanentCode);
 		tokenParam.setAuth_corpid(cropId);
@@ -51,7 +51,7 @@ public class AgentClientTest extends BaseTestCase{
 	@Test
 	public void testGet() {
 		AgentGetParam getParam = new AgentGetParam();
-		getParam.setAccess_token(corpToken.getAccess_token());
+		getParam.setAccess_token(corpToken.getAccessToken());
 		getParam.setAgentId("132");
 		
 		AgentInfo agentInfo = AgentClient.get(getParam);
@@ -66,7 +66,7 @@ public class AgentClientTest extends BaseTestCase{
 	@Test
 	public void testSet() {
 		AgentSetParam setParam = new AgentSetParam();
-		setParam.setAccess_token(corpToken.getAccess_token());
+		setParam.setAccess_token(corpToken.getAccessToken());
 		setParam.setAgentid("132");
 		setParam.setDescription("");
 //		setParam.setIsreportenter(isreportenter);
@@ -86,7 +86,7 @@ public class AgentClientTest extends BaseTestCase{
 	public void testList() {
 		AccessToken accessToken = GetToken.getAccessToken(cropId, secret);
 		WeChatParam listParam = new WeChatParam();
-		listParam.setAccess_token(accessToken.getAccess_token());
+		listParam.setAccess_token(accessToken.getAccessToken());
 		
 		List<Agent> list = AgentClient.list(listParam);
 		assertNotNull(list);

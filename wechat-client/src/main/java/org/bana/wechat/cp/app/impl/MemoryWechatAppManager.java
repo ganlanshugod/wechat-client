@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.bana.wechat.cp.app.WechatAppManager;
 import org.bana.wechat.cp.app.WechatCorpAppConfig;
+import org.bana.wechat.cp.app.WechatCorpSuiteConfig;
 
 /**
  * @ClassName: MemoryWechatAppManager
@@ -22,6 +23,7 @@ import org.bana.wechat.cp.app.WechatCorpAppConfig;
 public class MemoryWechatAppManager implements WechatAppManager {
 
 	private Map<String,WechatCorpAppConfig> appConfigMap = new HashMap<String,WechatCorpAppConfig>();
+	private Map<String,WechatCorpSuiteConfig> suiteConfigMap = new HashMap<String,WechatCorpSuiteConfig>();
 	
 	/**
 	 * <p>Description: </p>
@@ -38,10 +40,28 @@ public class MemoryWechatAppManager implements WechatAppManager {
 		return appConfigMap.get(key);
 	}
 	
+	/**
+	 * <p>Description: 获取套件信息</p>
+	 * @author Zhang Zhichao
+	 * @date 2018年1月25日 下午4:14:43
+	 * @param suiteId
+	 * @return
+	 * @see org.bana.wechat.cp.app.WechatAppManager#getSuiteConfig(java.lang.String)
+	 */
+	@Override
+	public WechatCorpSuiteConfig getSuiteConfig(String suiteId) {
+		return suiteConfigMap.get(suiteId);
+	}
+	
 	public void addAppConfig(WechatCorpAppConfig appConfig){
 		String corpId = appConfig.getCorpId();
 		String agentId = appConfig.getAgentId();
 		String key = corpId+"|"+agentId;
 		appConfigMap.put(key, appConfig);
 	}
+	
+	public void addSuiteConfig(WechatCorpSuiteConfig suiteConfig){
+		suiteConfigMap.put(suiteConfig.getSuiteId(), suiteConfig);
+	}
+	
 }

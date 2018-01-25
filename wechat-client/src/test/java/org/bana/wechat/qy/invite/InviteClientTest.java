@@ -11,8 +11,8 @@ package org.bana.wechat.qy.invite;
 import static org.junit.Assert.*;
 
 import org.bana.wechat.BaseTestCase;
+import org.bana.wechat.cp.token.domain.AccessToken;
 import org.bana.wechat.qy.connection.GetToken;
-import org.bana.wechat.qy.connection.domain.AccessToken;
 import org.bana.wechat.qy.invite.param.InviteSendParam;
 import org.junit.Test;
 
@@ -30,7 +30,7 @@ public class InviteClientTest extends BaseTestCase{
 	public void testSend() {
 		AccessToken accessToken = GetToken.getAccessToken(cropId, secret);
 		InviteSendParam sendParam = new InviteSendParam();
-		sendParam.setAccess_token(accessToken.getAccess_token());
+		sendParam.setAccess_token(accessToken.getAccessToken());
 		sendParam.setUserid("lijiaxiu");
 		Integer type = InviteClient.send(sendParam);
 		assertNotNull(type);

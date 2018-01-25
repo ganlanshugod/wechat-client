@@ -11,10 +11,10 @@ package org.bana.wechat.qy.media;
 import static org.junit.Assert.*;
 
 import org.bana.wechat.BaseTestCase;
+import org.bana.wechat.cp.token.domain.AccessToken;
+import org.bana.wechat.cp.token.domain.SuiteAccessToken;
 import org.bana.wechat.qy.common.Constants;
 import org.bana.wechat.qy.connection.GetToken;
-import org.bana.wechat.qy.connection.domain.AccessToken;
-import org.bana.wechat.qy.connection.domain.SuiteAccessToken;
 import org.bana.wechat.qy.media.domain.UploadResult;
 import org.bana.wechat.qy.media.param.UploadParam;
 import org.bana.wechat.qy.suite.SuiteClient;
@@ -34,7 +34,7 @@ public class MediaClientTest extends BaseTestCase{
 	public void init(){
 		SuiteAccessToken suiteToken = GetToken.getSuiteToken(suite_id, suite_secret, suite_ticket);
 		GetCorpTokenParam tokenParam = new GetCorpTokenParam();
-		tokenParam.setSuite_access_token(suiteToken.getSuite_access_token());
+		tokenParam.setSuite_access_token(suiteToken.getSuiteAccessToken());
 		tokenParam.setSuite_id(suite_id);
 		tokenParam.setPermanent_code(permanentCode);
 		tokenParam.setAuth_corpid(cropId);

@@ -13,9 +13,9 @@ import java.net.URLEncoder;
 import java.util.Arrays;
 
 import org.bana.wechat.BaseTestCase;
+import org.bana.wechat.cp.token.domain.AccessToken;
+import org.bana.wechat.cp.token.domain.SuiteAccessToken;
 import org.bana.wechat.qy.connection.GetToken;
-import org.bana.wechat.qy.connection.domain.AccessToken;
-import org.bana.wechat.qy.connection.domain.SuiteAccessToken;
 import org.bana.wechat.qy.message.param.news.Article;
 import org.bana.wechat.qy.message.param.news.NewsMessage;
 import org.bana.wechat.qy.message.param.news.NewsMessageParam;
@@ -39,7 +39,7 @@ public class MessageClientTest extends BaseTestCase{
 	public void init(){
 //		SuiteAccessToken suiteToken = GetToken.getSuiteToken(suite_id, suite_secret, suite_ticket);
 //		GetCorpTokenParam tokenParam = new GetCorpTokenParam();
-//		tokenParam.setSuite_access_token(suiteToken.getSuite_access_token());
+//		tokenParam.setSuite_access_token(suiteToken.getSuiteAccessToken());
 //		tokenParam.setSuite_id(suite_id);
 //		tokenParam.setPermanent_code(permanentCode);
 //		tokenParam.setAuth_corpid(cropId);
@@ -53,7 +53,7 @@ public class MessageClientTest extends BaseTestCase{
 	@Test
 	public void testSend() throws UnsupportedEncodingException {
 		NewsMessageParam message = new NewsMessageParam();
-		message.setAccess_token(corpToken.getAccess_token());
+		message.setAccess_token(corpToken.getAccessToken());
 		message.setAgentid("253");
 		message.setTouser("QY71_lxjj_1434013153877");
 		NewsMessage news = new NewsMessage();
@@ -71,7 +71,7 @@ public class MessageClientTest extends BaseTestCase{
 	@Test
 	public void testSendMessage() {
 		TextMessageParam message = new TextMessageParam();
-		message.setAccess_token(corpToken.getAccess_token());
+		message.setAccess_token(corpToken.getAccessToken());
 		message.setAgentid("4");
 		message.setTouser("liuwenjie");
 		TextMessage text = new TextMessage();
@@ -84,7 +84,7 @@ public class MessageClientTest extends BaseTestCase{
 	public void testSendMessageH5(){
 		AccessToken accessToken = GetToken.getAccessToken(cropId, secret);
 		TextMessageParam message = new TextMessageParam();
-		message.setAccess_token(accessToken.getAccess_token());
+		message.setAccess_token(accessToken.getAccessToken());
 		message.setAgentid("141");
 		message.setTouser("@all");
 		TextMessage text = new TextMessage();

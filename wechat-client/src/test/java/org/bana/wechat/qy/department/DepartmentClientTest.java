@@ -17,8 +17,8 @@ import org.bana.common.util.tree.TreeNode;
 import org.bana.common.util.tree.TreeNodeList;
 import org.bana.common.util.tree.TreeUtil;
 import org.bana.wechat.BaseTestCase;
+import org.bana.wechat.cp.token.domain.AccessToken;
 import org.bana.wechat.qy.connection.GetToken;
-import org.bana.wechat.qy.connection.domain.AccessToken;
 import org.bana.wechat.qy.department.domain.Department;
 import org.bana.wechat.qy.department.param.DepartmentDeleteParam;
 import org.bana.wechat.qy.department.param.DepartmentListParam;
@@ -37,7 +37,7 @@ public class DepartmentClientTest extends BaseTestCase{
 	public void testList() {
 //		String corpId = "wx7dbc31a2b1914a1a";
 //		String secret = "50Gmr4TGRAqT0Eh6nlAd_mi6Dt4_i9PYNKNDS88ETK6OgU-MY6h9tPPg10gcZMo-";
-//		String accessToken = GetToken.getAccessToken(cropId, secret).getAccess_token();
+//		String accessToken = GetToken.getAccessToken(cropId, secret).getAccessToken();
 //		AccessToken accessToken = GetToken.getAccessToken(corpId, secret);
 		DepartmentListParam listParam = new DepartmentListParam();
 		listParam.setAccess_token(accessToken);
@@ -99,7 +99,7 @@ public class DepartmentClientTest extends BaseTestCase{
 	public void testCreate(){
 		AccessToken accessToken = GetToken.getAccessToken(cropId, secret);
 		DepartmentModifyParam createParam = new DepartmentModifyParam();
-		createParam.setAccess_token(accessToken.getAccess_token());
+		createParam.setAccess_token(accessToken.getAccessToken());
 		createParam.setName("测试创建中文");
 		createParam.setOrder(3);
 		createParam.setParentid(59);
@@ -112,7 +112,7 @@ public class DepartmentClientTest extends BaseTestCase{
 	public void testUpdate(){
 		AccessToken accessToken = GetToken.getAccessToken(cropId, secret);
 		DepartmentModifyParam updateParam = new DepartmentModifyParam();
-		updateParam.setAccess_token(accessToken.getAccess_token());
+		updateParam.setAccess_token(accessToken.getAccessToken());
 		updateParam.setId(66);
 //		updateParam.setName("测试修改中文");
 //		updateParam.setOrder(3);
@@ -126,7 +126,7 @@ public class DepartmentClientTest extends BaseTestCase{
 	public void testDelete(){
 		AccessToken accessToken = GetToken.getAccessToken(cropId, secret);
 		DepartmentDeleteParam deleteParam = new DepartmentDeleteParam();
-		deleteParam.setAccess_token(accessToken.getAccess_token());
+		deleteParam.setAccess_token(accessToken.getAccessToken());
 		deleteParam.setId(89);
 		DepartmentClient.delete(deleteParam);
 	}

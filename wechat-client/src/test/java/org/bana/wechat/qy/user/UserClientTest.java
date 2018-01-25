@@ -14,10 +14,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.bana.wechat.BaseTestCase;
+import org.bana.wechat.cp.token.domain.AccessToken;
+import org.bana.wechat.cp.token.domain.SuiteAccessToken;
 import org.bana.wechat.qy.common.BanaWeChatException;
 import org.bana.wechat.qy.connection.GetToken;
-import org.bana.wechat.qy.connection.domain.AccessToken;
-import org.bana.wechat.qy.connection.domain.SuiteAccessToken;
 import org.bana.wechat.qy.login.domain.WechatLoginUser;
 import org.bana.wechat.qy.login.param.LoginInfoParam;
 import org.bana.wechat.qy.suite.SuiteClient;
@@ -45,7 +45,7 @@ public class UserClientTest extends BaseTestCase{
 	
 	@Test
 	public void testGet() {
-//		String accessToken = GetToken.getAccessToken(cropId, secret).getAccess_token();
+//		String accessToken = GetToken.getAccessToken(cropId, secret).getAccessToken();
 		UserGetParam param = new UserGetParam();
 		param.setAccess_token(accessToken);
 		param.setUserid("liuwenjie");
@@ -57,7 +57,7 @@ public class UserClientTest extends BaseTestCase{
 	public void testConvertToUserId(){
 		AccessToken accessToken = GetToken.getAccessToken(cropId, secret);
 		CovertToUserIdParam param = new CovertToUserIdParam();
-		param.setAccess_token(accessToken.getAccess_token());
+		param.setAccess_token(accessToken.getAccessToken());
 		param.setOpenid("oDP0bwO6zOYw6pf-tbuh7r-qLmRA");
 		String userId = UserClient.convertToUserId(param);
 		System.out.println(userId);
@@ -67,7 +67,7 @@ public class UserClientTest extends BaseTestCase{
 	public void testConvertToOpenId(){
 		AccessToken accessToken = GetToken.getAccessToken(cropId, secret);
 		CovertToOpenIdParam param = new CovertToOpenIdParam();
-		param.setAccess_token(accessToken.getAccess_token());
+		param.setAccess_token(accessToken.getAccessToken());
 		param.setUserid("Z0007");
 		OpenIdUser openId = UserClient.convertToOpenIdUser(param);
 		System.out.println(openId);
@@ -75,7 +75,7 @@ public class UserClientTest extends BaseTestCase{
 	
 	@Test
 	public void testSimpleList(){
-//		String accessToken = GetToken.getAccessToken(cropId, secret).getAccess_token();
+//		String accessToken = GetToken.getAccessToken(cropId, secret).getAccessToken();
 		UserListParam param = new UserListParam();
 //		param.setDepartment_id(48);
 		param.setAccess_token(accessToken);
@@ -99,7 +99,7 @@ public class UserClientTest extends BaseTestCase{
 	
 	@Test
 	public void testCreate(){
-//		AccessToken accessToken = GetToken.getAccessToken(cropId, secret).getAccess_token();
+//		AccessToken accessToken = GetToken.getAccessToken(cropId, secret).getAccessToken();
 		UserCreateParam param = new UserCreateParam();
 		param.setAccess_token(accessToken);
 		param.setName("于小佳的家长");
@@ -121,13 +121,13 @@ public class UserClientTest extends BaseTestCase{
 	public void testCurrentUser(){
 		SuiteAccessToken suiteToken = GetToken.getSuiteToken(suite_id, suite_secret, suite_ticket);
 		GetCorpTokenParam tokenParam = new GetCorpTokenParam();
-		tokenParam.setSuite_access_token(suiteToken.getSuite_access_token());
+		tokenParam.setSuite_access_token(suiteToken.getSuiteAccessToken());
 		tokenParam.setSuite_id(suite_id);
 		tokenParam.setPermanent_code(permanentCode);
 		tokenParam.setAuth_corpid(cropId);
 		AccessToken corpToken = SuiteClient.getCorpToken(tokenParam);
 		GetCurrentUserParam userParam = new GetCurrentUserParam();
-		userParam.setAccess_token(corpToken.getAccess_token());
+		userParam.setAccess_token(corpToken.getAccessToken());
 		userParam.setAgentid("5");
 		userParam.setCode("937dad3e3bef466054939162d00beff7");
 		CurrentUserInfo userInfo = UserClient.getUserInfo(userParam);

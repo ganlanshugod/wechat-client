@@ -9,10 +9,10 @@
 package org.bana.wechat.qy.connection;
 
 import org.bana.wechat.BaseTestCase;
-import org.bana.wechat.qy.connection.domain.AccessToken;
+import org.bana.wechat.cp.token.domain.AccessToken;
+import org.bana.wechat.cp.token.domain.SuiteAccessToken;
 import org.bana.wechat.qy.connection.domain.JsApiTicket;
 import org.bana.wechat.qy.connection.domain.ProviderAccessToken;
-import org.bana.wechat.qy.connection.domain.SuiteAccessToken;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,20 +35,20 @@ public class GetTokenTest extends BaseTestCase{
 	public void testGetToken() {
 		AccessToken accessToken = GetToken.getAccessToken(cropId, secret);
 		Assert.assertNotNull(accessToken);
-		Assert.assertNotNull(accessToken.getAccess_token());
+		Assert.assertNotNull(accessToken.getAccessToken());
 	}
 
 	@Test
 	public void testGetSuiteToken() {
 		SuiteAccessToken suiteToken = GetToken.getSuiteToken(suite_id, suite_secret, suite_ticket);
 		Assert.assertNotNull(suiteToken);
-		Assert.assertNotNull(suiteToken.getSuite_access_token());
+		Assert.assertNotNull(suiteToken.getSuiteAccessToken());
 	}
 	
 	@Test
 	public void testGetJsApiTicket(){
 		AccessToken accessToken = GetToken.getAccessToken(cropId, secret);
-		JsApiTicket jsApiTicket = GetToken.getJsApiTicket(accessToken.getAccess_token());
+		JsApiTicket jsApiTicket = GetToken.getJsApiTicket(accessToken.getAccessToken());
 		System.out.println(jsApiTicket);
 	}
 	@Test

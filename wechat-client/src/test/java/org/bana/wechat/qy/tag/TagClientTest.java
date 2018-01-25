@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bana.wechat.BaseTestCase;
+import org.bana.wechat.cp.token.domain.AccessToken;
 import org.bana.wechat.qy.common.WeChatParam;
 import org.bana.wechat.qy.connection.GetToken;
-import org.bana.wechat.qy.connection.domain.AccessToken;
 import org.bana.wechat.qy.tag.domain.GetTagUserResult;
 import org.bana.wechat.qy.tag.domain.ManagerTagUserResult;
 import org.bana.wechat.qy.tag.param.TagCreateParam;
@@ -40,7 +40,7 @@ public class TagClientTest extends BaseTestCase{
 	public void testGet() {
 		AccessToken accessToken = GetToken.getAccessToken(cropId, secret);
 		TagGetParam getParam = new TagGetParam();
-		getParam.setAccess_token(accessToken.getAccess_token());
+		getParam.setAccess_token(accessToken.getAccessToken());
 		getParam.setTagid("1");
 		GetTagUserResult tagUserResult = TagClient.get(getParam);
 		assertNotNull(tagUserResult);
@@ -57,7 +57,7 @@ public class TagClientTest extends BaseTestCase{
 		AccessToken accessToken = GetToken.getAccessToken(cropId, secret);
 		TagCreateParam createParam = new TagCreateParam();
 		createParam.setTagname("i3618测试微信标签");
-		createParam.setAccess_token(accessToken.getAccess_token());
+		createParam.setAccess_token(accessToken.getAccessToken());
 		
 		String create = TagClient.create(createParam);
 		assertNotNull(create);
@@ -69,7 +69,7 @@ public class TagClientTest extends BaseTestCase{
 	public void testAddTagUsers(){
 		AccessToken accessToken = GetToken.getAccessToken(cropId, secret);
 		TagUserParam userParam = new TagUserParam();
-		userParam.setAccess_token(accessToken.getAccess_token());
+		userParam.setAccess_token(accessToken.getAccessToken());
 		userParam.setTagid("2");
 		List<String> userList = new ArrayList<String>();
 		userList.add("lijiaxiu");
@@ -83,7 +83,7 @@ public class TagClientTest extends BaseTestCase{
 	public void testDelTagUsers(){
 		AccessToken accessToken = GetToken.getAccessToken(cropId, secret);
 		TagUserParam userParam = new TagUserParam();
-		userParam.setAccess_token(accessToken.getAccess_token());
+		userParam.setAccess_token(accessToken.getAccessToken());
 		userParam.setTagid("2");
 		List<String> userList = new ArrayList<String>();
 		userList.add("lijiaxiu");
@@ -97,7 +97,7 @@ public class TagClientTest extends BaseTestCase{
 	public void testList(){
 		AccessToken accessToken = GetToken.getAccessToken(cropId, secret);
 		WeChatParam userParam = new WeChatParam();
-		userParam.setAccess_token(accessToken.getAccess_token());
+		userParam.setAccess_token(accessToken.getAccessToken());
 		List<Tag> list = TagClient.list(userParam);
 		assertNotNull(list);
 	}

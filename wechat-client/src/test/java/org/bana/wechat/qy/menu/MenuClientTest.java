@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bana.wechat.BaseTestCase;
+import org.bana.wechat.cp.token.domain.AccessToken;
+import org.bana.wechat.cp.token.domain.SuiteAccessToken;
 import org.bana.wechat.qy.common.WeChatConnection;
 import org.bana.wechat.qy.connection.GetToken;
-import org.bana.wechat.qy.connection.domain.AccessToken;
-import org.bana.wechat.qy.connection.domain.SuiteAccessToken;
 import org.bana.wechat.qy.menu.domain.Button;
 import org.bana.wechat.qy.menu.domain.Menu;
 import org.bana.wechat.qy.menu.param.MenuCreateParam;
@@ -41,7 +41,7 @@ public class MenuClientTest extends BaseTestCase{
 	public void init(){
 		SuiteAccessToken suiteToken = GetToken.getSuiteToken(suite_id, suite_secret, suite_ticket);
 		GetCorpTokenParam tokenParam = new GetCorpTokenParam();
-		tokenParam.setSuite_access_token(suiteToken.getSuite_access_token());
+		tokenParam.setSuite_access_token(suiteToken.getSuiteAccessToken());
 		tokenParam.setSuite_id(suite_id);
 		tokenParam.setPermanent_code(permanentCode);
 		tokenParam.setAuth_corpid(cropId);
@@ -54,13 +54,13 @@ public class MenuClientTest extends BaseTestCase{
 	public void testGet() {
 		String agentId = "20";
 		MenuGetParam getParam = new MenuGetParam();
-		getParam.setAccess_token(corpToken.getAccess_token());
+		getParam.setAccess_token(corpToken.getAccessToken());
 		getParam.setAgentid(agentId);
 		Menu menu = MenuClient.get(getParam);
 		assertNotNull(menu);
 		//update 增加新的菜单// http://wechat.i3618.com.cn/wechat-web/wechatcorp/test/moments?corpId=${corpid}&agentId=${agentid}
 		MenuCreateParam createParam = new MenuCreateParam();
-		createParam.setAccess_token(corpToken.getAccess_token());
+		createParam.setAccess_token(corpToken.getAccessToken());
 		createParam.setAgentid(agentId);
 		List<Button> buttonList = menu.getButton();
 		Button subButton2 = new Button();
@@ -76,7 +76,7 @@ public class MenuClientTest extends BaseTestCase{
 	@Test
 	public void testCreate() {
 		MenuCreateParam createParam = new MenuCreateParam();
-		createParam.setAccess_token(corpToken.getAccess_token());
+		createParam.setAccess_token(corpToken.getAccessToken());
 		createParam.setAgentid("5");
 		//创建Menu
 		List<Button> buttonList = new ArrayList<Button>();

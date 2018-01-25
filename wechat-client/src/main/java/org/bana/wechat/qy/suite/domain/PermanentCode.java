@@ -8,7 +8,7 @@
 */ 
 package org.bana.wechat.qy.suite.domain;
 
-import org.bana.wechat.qy.connection.domain.AccessToken;
+import org.bana.wechat.cp.token.domain.AccessToken;
 
 /** 
  * @ClassName: PermanentCode 
