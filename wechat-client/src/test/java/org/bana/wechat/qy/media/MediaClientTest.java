@@ -8,18 +8,15 @@
 */ 
 package org.bana.wechat.qy.media;
 
-import static org.junit.Assert.*;
-
 import org.bana.wechat.BaseTestCase;
+import org.bana.wechat.cp.common.Constants;
 import org.bana.wechat.cp.token.domain.AccessToken;
 import org.bana.wechat.cp.token.domain.SuiteAccessToken;
-import org.bana.wechat.qy.common.Constants;
 import org.bana.wechat.qy.connection.GetToken;
 import org.bana.wechat.qy.media.domain.UploadResult;
 import org.bana.wechat.qy.media.param.UploadParam;
 import org.bana.wechat.qy.suite.SuiteClient;
 import org.bana.wechat.qy.suite.param.GetCorpTokenParam;
-import org.junit.Before;
 import org.junit.Test;
 
 /** 

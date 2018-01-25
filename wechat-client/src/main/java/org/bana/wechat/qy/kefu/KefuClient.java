@@ -11,18 +11,18 @@ package org.bana.wechat.qy.kefu;
 import java.util.Arrays;
 import java.util.Map;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import org.bana.common.util.basic.BeanToMapUtil;
+import org.bana.wechat.cp.common.Constants;
 import org.bana.wechat.qy.common.BanaWeChatException;
-import org.bana.wechat.qy.common.Constants;
 import org.bana.wechat.qy.common.WeChatConnection;
 import org.bana.wechat.qy.kefu.domain.Kefu;
 import org.bana.wechat.qy.kefu.param.KefuParam;
 import org.bana.wechat.qy.kefu.param.KefuQueryParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  * 

@@ -12,20 +12,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import org.bana.common.util.basic.BeanToMapUtil;
+import org.bana.wechat.cp.common.Constants;
 import org.bana.wechat.qy.agent.domain.AgentInfo;
 import org.bana.wechat.qy.agent.param.AgentGetParam;
 import org.bana.wechat.qy.agent.param.AgentSetParam;
 import org.bana.wechat.qy.common.BanaWeChatException;
-import org.bana.wechat.qy.common.Constants;
 import org.bana.wechat.qy.common.WeChatConnection;
 import org.bana.wechat.qy.common.WeChatParam;
 import org.bana.wechat.qy.suite.domain.Agent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /** 
  * @ClassName: AgentClient 

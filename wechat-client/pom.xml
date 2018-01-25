@@ -18,7 +18,14 @@
 		<!-- *********************************************************** -->
 		<!-- ========begin======系统正式运行需要的jar报配置依赖====begin========== -->
 		<!-- *********************************************************** -->
-
+		<dependency>
+			<groupId>org.bana</groupId>
+			<artifactId>wechat-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.bana</groupId>
+			<artifactId>wechat-cp-client</artifactId>
+		</dependency>
 		<!-- ===============bana 公共组件依赖 begin ========================== -->
 		<!-- 自开发的公共方法类组件 -->
 		<dependency>
@@ -79,12 +86,11 @@
 	  	<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-			<version>1.7.7</version>
+			<version>${slf4j.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		

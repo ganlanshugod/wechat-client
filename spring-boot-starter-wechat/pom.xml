@@ -15,15 +15,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.bana</groupId>
-			<artifactId>wechat-client</artifactId>
+			<artifactId>spring-boot-starter-wechat-cp</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
-		<!-- 自动注入类 -->
-		<dependency>
-	  		<groupId>org.springframework.boot</groupId>
-	  		<artifactId>spring-boot-autoconfigure</artifactId>
-	  		<version>${spring.boot.version}</version>
-	  	</dependency>
 	</dependencies>
 </project>

@@ -8,7 +8,7 @@
  */
 package org.bana.wechat.qy.kefu.param.text;
 
-import org.bana.wechat.qy.common.Constants;
+import org.bana.wechat.cp.common.Constants;
 import org.bana.wechat.qy.kefu.param.KefuParam;
 import org.bana.wechat.qy.message.param.text.TextMessage;
 

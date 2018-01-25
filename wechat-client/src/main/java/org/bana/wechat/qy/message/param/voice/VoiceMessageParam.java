@@ -8,7 +8,7 @@
 */ 
 package org.bana.wechat.qy.message.param.voice;
 
-import org.bana.wechat.qy.common.Constants;
+import org.bana.wechat.cp.common.Constants;
 import org.bana.wechat.qy.message.param.MessageParam;
 
 /** 

@@ -12,11 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bana.common.util.basic.BeanToMapUtil;
+import org.bana.wechat.cp.common.Constants;
 import org.bana.wechat.cp.token.domain.AccessToken;
 import org.bana.wechat.qy.agent.domain.AgentInfo;
 import org.bana.wechat.qy.agent.domain.User;
 import org.bana.wechat.qy.common.BanaWeChatException;
-import org.bana.wechat.qy.common.Constants;
 import org.bana.wechat.qy.common.WeChatConnection;
 import org.bana.wechat.qy.suite.domain.Agent;
 import org.bana.wechat.qy.suite.domain.AuthCorpInfo;

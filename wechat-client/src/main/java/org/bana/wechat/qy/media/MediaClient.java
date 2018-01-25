@@ -8,15 +8,15 @@
 */ 
 package org.bana.wechat.qy.media;
 
-import net.sf.json.JSONObject;
-
+import org.bana.wechat.cp.common.Constants;
 import org.bana.wechat.qy.common.BanaWeChatException;
-import org.bana.wechat.qy.common.Constants;
 import org.bana.wechat.qy.common.WeChatConnection;
 import org.bana.wechat.qy.media.domain.UploadResult;
 import org.bana.wechat.qy.media.param.UploadParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.json.JSONObject;
 
 /** 
  * @ClassName: MediaClient 

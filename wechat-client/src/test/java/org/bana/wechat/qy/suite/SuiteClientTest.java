@@ -14,19 +14,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-import net.sf.json.util.PropertyFilter;
-
 import org.bana.common.util.basic.ClonePojoUtil;
 import org.bana.wechat.BaseTestCase;
+import org.bana.wechat.cp.common.Constants;
 import org.bana.wechat.cp.token.domain.AccessToken;
-import org.bana.wechat.cp.token.domain.SuiteAccessToken;
 import org.bana.wechat.qy.agent.domain.AgentInfo;
 import org.bana.wechat.qy.common.BanaWeChatException;
-import org.bana.wechat.qy.common.Constants;
 import org.bana.wechat.qy.common.WeChatConnection;
-import org.bana.wechat.qy.connection.GetToken;
 import org.bana.wechat.qy.suite.domain.Agent;
 import org.bana.wechat.qy.suite.domain.Department;
 import org.bana.wechat.qy.suite.domain.PermanentCode;
@@ -41,6 +35,9 @@ import org.bana.wechat.qy.suite.param.PreAuthCodeParam;
 import org.bana.wechat.qy.suite.param.SetAgentParam;
 import org.junit.Before;
 import org.junit.Test;
+
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 /** 
  * @ClassName: SuiteClientTest 

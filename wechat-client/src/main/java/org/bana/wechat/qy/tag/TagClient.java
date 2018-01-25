@@ -13,14 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-import net.sf.json.util.PropertyFilter;
-
 import org.bana.common.util.basic.BeanToMapUtil;
+import org.bana.wechat.cp.common.Constants;
 import org.bana.wechat.qy.common.BanaWeChatException;
-import org.bana.wechat.qy.common.Constants;
 import org.bana.wechat.qy.common.WeChatConnection;
 import org.bana.wechat.qy.common.WeChatParam;
 import org.bana.wechat.qy.tag.domain.GetTagUserResult;
@@ -34,6 +29,11 @@ import org.bana.wechat.qy.user.domain.SimpleUser;
 import org.bana.wechat.qy.user.domain.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.PropertyFilter;
 
 /** 
  * @ClassName: TagClient 

@@ -10,15 +10,15 @@ package org.bana.wechat.qy.invite;
 
 import java.util.Map;
 
-import net.sf.json.JSONObject;
-
 import org.bana.common.util.basic.BeanToMapUtil;
+import org.bana.wechat.cp.common.Constants;
 import org.bana.wechat.qy.common.BanaWeChatException;
-import org.bana.wechat.qy.common.Constants;
 import org.bana.wechat.qy.common.WeChatConnection;
 import org.bana.wechat.qy.invite.param.InviteSendParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.json.JSONObject;
 
 /**
  * @ClassName: InviteClient

@@ -11,18 +11,18 @@ package org.bana.wechat.qy.shakearound;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-
 import org.bana.common.util.basic.BeanToMapUtil;
+import org.bana.wechat.cp.common.Constants;
 import org.bana.wechat.qy.common.BanaWeChatException;
-import org.bana.wechat.qy.common.Constants;
 import org.bana.wechat.qy.common.WeChatConnection;
 import org.bana.wechat.qy.shakearound.domain.BeaconInfo;
 import org.bana.wechat.qy.shakearound.domain.ShakeInfoDomain;
 import org.bana.wechat.qy.shakearound.param.GetShakeInfoParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 
 /** 
  * @ClassName: ShakeAroundClient 
