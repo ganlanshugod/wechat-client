@@ -14,20 +14,21 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-import net.sf.json.util.PropertyFilter;
-
 import org.bana.common.util.basic.BeanXmlUtil;
 import org.bana.common.util.basic.StringUtils;
 import org.bana.common.util.http.RestClient;
 import org.bana.wechat.common.log.WechatLogger;
 import org.bana.wechat.common.log.WechatLoggerFactory;
+import org.bana.wechat.cp.common.Constants;
 import org.bana.wechat.pay.common.HttpsRequest;
 import org.bana.wechat.pay.common.WechatPayResult;
 import org.bana.wechat.qy.media.param.UploadParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.PropertyFilter;
 
 /** 
  * @ClassName: WeChatConnection 
