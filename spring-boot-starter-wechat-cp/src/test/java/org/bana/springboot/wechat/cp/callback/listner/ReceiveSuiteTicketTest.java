@@ -6,13 +6,16 @@
  * @date 2018年1月26日 上午10:36:39
  * @version V1.0
  */
-package org.bana.springboot.wechat.cp;
+package org.bana.springboot.wechat.cp.callback.listner;
 
 import java.io.IOException;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.bana.springboot.wechat.cp.WechatCpAutoConfiguration;
+import org.bana.springboot.wechat.cp.WechatCpProperties;
+import org.bana.springboot.wechat.cp.WechatCpTestConfig;
 import org.bana.wechat.common.util.BeanXmlUtil;
 import org.bana.wechat.cp.app.WechatAppManager;
 import org.bana.wechat.cp.app.WechatCorpSuiteConfig;

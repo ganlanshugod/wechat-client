@@ -8,7 +8,7 @@
  */
 package org.bana.springboot.wechat.cp;
 
-import org.bana.wechat.common.listener.WechatEventPublisher;
+import org.bana.springboot.wechat.cp.callback.listener.WechatSpringCpEventPublisher;
 import org.bana.wechat.common.util.StringUtils;
 import org.bana.wechat.cp.app.CorpAppType;
 import org.bana.wechat.cp.app.WechatAppManager;
@@ -88,12 +88,26 @@ public class WechatCpAutoConfiguration {
 		return userService;
 	}
 	
+	/**
+	 * Description: 各监听器的配置
+	 * @author Liu Wenjie
+	 * @date 2018年1月26日 下午6:16:35
+	 * @return
+	 */
 	@Bean
 	@ConditionalOnMissingBean(WechatCpEventPublisher.class)
 	public WechatCpEventPublisher wechatEventPublish(){
-		return new WechatCpEventPublisher();
+		return new WechatSpringCpEventPublisher();
 	}
 	
+	/**
+	 * Description: 默认的回调类配置
+	 * @author Liu Wenjie
+	 * @date 2018年1月26日 下午6:16:01
+	 * @param wechatAppManager
+	 * @param wechatEventPublisher
+	 * @return
+	 */
 	@Bean
 	@ConditionalOnMissingBean(WechatCpCallbackHandler.class)
 	public WechatCpCallbackHandler wechatCpCallbackHandler(WechatAppManager wechatAppManager,WechatCpEventPublisher wechatEventPublisher){
@@ -102,5 +116,7 @@ public class WechatCpAutoConfiguration {
 		callBackHandlerImpl.setWechatEventPublisher(wechatEventPublisher);
 		return callBackHandlerImpl;
 	}
+	
+	
 	
 }

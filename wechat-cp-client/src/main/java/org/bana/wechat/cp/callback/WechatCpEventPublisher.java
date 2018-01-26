@@ -21,8 +21,6 @@ import org.bana.wechat.cp.callback.listener.SuiteTicketEventListener;
  */
 public class WechatCpEventPublisher extends BaseWechatEventPublisher {
 
-	private SuiteTicketEventListener SuiteTicketEventListener;
-	
 	/**
 	 * <p>Description: </p>
 	 * @author Liu Wenjie
@@ -41,11 +39,8 @@ public class WechatCpEventPublisher extends BaseWechatEventPublisher {
 	}
 
 	public SuiteTicketEventListener getSuiteTicketEventListener() {
-		return SuiteTicketEventListener;
+		return null;
 	}
-
-	public void setSuiteTicketEventListener(SuiteTicketEventListener suiteTicketEventListener) {
-		SuiteTicketEventListener = suiteTicketEventListener;
-	}
+	
 
 }

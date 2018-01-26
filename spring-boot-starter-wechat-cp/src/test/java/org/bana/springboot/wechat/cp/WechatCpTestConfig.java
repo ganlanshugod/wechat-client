@@ -8,6 +8,9 @@
  */
 package org.bana.springboot.wechat.cp;
 
+import org.bana.springboot.wechat.cp.callback.listner.TestSuiteTicketEventListener;
+import org.bana.wechat.cp.callback.listener.SuiteTicketEventListener;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
@@ -20,4 +23,8 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource(value={"classpath:/wechat.properties"})
 public class WechatCpTestConfig {
 
+	@Bean
+	public SuiteTicketEventListener suiteTicketListener(){
+		return new TestSuiteTicketEventListener();
+	}
 }
