@@ -14,9 +14,9 @@ import java.util.Map;
 
 import org.bana.common.util.basic.BeanToMapUtil;
 import org.bana.wechat.cp.common.Constants;
+import org.bana.wechat.cp.department.domain.Department;
 import org.bana.wechat.qy.common.BanaWeChatException;
 import org.bana.wechat.qy.common.WeChatConnection;
-import org.bana.wechat.qy.department.domain.Department;
 import org.bana.wechat.qy.department.param.DepartmentDeleteParam;
 import org.bana.wechat.qy.department.param.DepartmentListParam;
 import org.bana.wechat.qy.department.param.DepartmentModifyParam;
