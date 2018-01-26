@@ -6,7 +6,7 @@
 * @date 2015-5-13 上午10:03:18 
 * @version V1.0   
 */ 
-package org.bana.wechat.cp.suite.domain;
+package org.bana.wechat.qy.suite.domain;
 
 /** 
  * @ClassName: ReceiveSuiteToken 

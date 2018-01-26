@@ -11,9 +11,9 @@ package org.bana.wechat.qy.suite;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import org.bana.wechat.cp.suite.domain.ReceiveSuitResult;
-import org.bana.wechat.cp.suite.domain.ReceiveSuiteTicket;
 import org.bana.wechat.qy.suite.domain.CallBackResult;
+import org.bana.wechat.qy.suite.domain.ReceiveSuitResult;
+import org.bana.wechat.qy.suite.domain.ReceiveSuiteTicket;
 import org.junit.Test;
 
 /** 

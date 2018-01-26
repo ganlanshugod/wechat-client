@@ -6,7 +6,7 @@
 * @date 2015-5-13 下午2:32:44 
 * @version V1.0   
 */ 
-package org.bana.wechat.cp.callback.result;
+package org.bana.wechat.qy.suite.domain;
 
 import java.io.Serializable;
 

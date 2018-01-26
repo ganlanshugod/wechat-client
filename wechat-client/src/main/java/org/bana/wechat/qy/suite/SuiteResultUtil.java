@@ -16,8 +16,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.bana.common.util.basic.BeanXmlUtil;
 import org.bana.common.util.basic.StringUtils;
-import org.bana.wechat.cp.suite.domain.ReceiveSuitResult;
-import org.bana.wechat.cp.suite.domain.ReceiveSuiteTicket;
 import org.bana.wechat.qy.common.BanaWeChatException;
 import org.bana.wechat.qy.kefu.param.Receiver;
 import org.bana.wechat.qy.suite.domain.CallBackResult;
@@ -25,6 +23,8 @@ import org.bana.wechat.qy.suite.domain.ContactChangeResult;
 import org.bana.wechat.qy.suite.domain.ContactSyncResult;
 import org.bana.wechat.qy.suite.domain.KefuCallBackResult;
 import org.bana.wechat.qy.suite.domain.MessageItem;
+import org.bana.wechat.qy.suite.domain.ReceiveSuitResult;
+import org.bana.wechat.qy.suite.domain.ReceiveSuiteTicket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
