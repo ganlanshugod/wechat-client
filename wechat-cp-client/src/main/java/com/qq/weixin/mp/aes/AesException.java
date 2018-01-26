@@ -1,10 +1,13 @@
-﻿package com.qq.weixin.mp.aes;
+package com.qq.weixin.mp.aes;
 
 import org.bana.wechat.cp.common.WechatCpException;
 
-@SuppressWarnings("serial")
-public class AesException extends WechatCpException {
-
+public class AesException extends WechatCpException{
+	
+	/**
+	 * @Fields serialVersionUID : 
+	 */
+	private static final long serialVersionUID = -8396845297912138175L;
 	public final static int OK = 0;
 	public final static int ValidateSignatureError = -40001;
 	public final static int ParseXmlError = -40002;
@@ -19,6 +22,11 @@ public class AesException extends WechatCpException {
 	//public final static int GenReturnXmlError = -40011;
 
 	private int code;
+
+	AesException(int code) {
+		super(String.valueOf(code),getMessage(code));
+		this.code = code;
+	}
 
 	private static String getMessage(int code) {
 		switch (code) {
@@ -51,11 +59,6 @@ public class AesException extends WechatCpException {
 
 	public int getCode() {
 		return code;
-	}
-
-	AesException(int code) {
-		super(String.valueOf(code),getMessage(code));
-		this.code = code;
 	}
 
 }
