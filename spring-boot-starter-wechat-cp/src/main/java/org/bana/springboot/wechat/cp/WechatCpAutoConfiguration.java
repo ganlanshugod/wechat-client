@@ -8,11 +8,16 @@
  */
 package org.bana.springboot.wechat.cp;
 
+import org.bana.wechat.common.listener.WechatEventPublisher;
+import org.bana.wechat.common.listener.impl.BaseWechatEventPublisher;
 import org.bana.wechat.common.util.StringUtils;
 import org.bana.wechat.cp.app.CorpAppType;
 import org.bana.wechat.cp.app.WechatAppManager;
 import org.bana.wechat.cp.app.WechatCorpAppConfig;
+import org.bana.wechat.cp.app.WechatCorpSuiteConfig;
 import org.bana.wechat.cp.app.impl.MemoryWechatAppManager;
+import org.bana.wechat.cp.callback.BaseWechatCpCallbackHandler;
+import org.bana.wechat.cp.callback.WechatCpCallbackHandler;
 import org.bana.wechat.cp.common.WechatCpException;
 import org.bana.wechat.cp.token.AccessTokenService;
 import org.bana.wechat.cp.token.impl.SimpleAccessTokenServiceImpl;
@@ -32,6 +37,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties(WechatCpProperties.class)
 public class WechatCpAutoConfiguration {
+	
 	
 	@Bean
 	@ConditionalOnMissingBean(AccessTokenService.class)
@@ -62,6 +68,13 @@ public class WechatCpAutoConfiguration {
 		wechatCorpConfig.setCorpId(corpId);
 		wechatCorpConfig.setSecret(secret);
 		manager.addAppConfig(wechatCorpConfig);
+		
+		WechatCorpSuiteConfig suiteConfig = new WechatCorpSuiteConfig();
+		suiteConfig.setSuiteId(wechatCpProperties.getSuiteId());
+		suiteConfig.setEncodingAesKey(wechatCpProperties.getEncodingAesKey());
+		suiteConfig.setSuiteSecret(wechatCpProperties.getSuiteSecret());
+		suiteConfig.setToken(wechatCpProperties.getSuiteToken());
+		manager.addSuiteConfig(suiteConfig);
 		return manager;
 	}
 	
@@ -71,6 +84,21 @@ public class WechatCpAutoConfiguration {
 		UserCPServiceImpl userService = new UserCPServiceImpl();
 		userService.setAccessTokenService(accessTokenService);
 		return userService;
+	}
+	
+	@Bean
+	@ConditionalOnMissingBean(WechatEventPublisher.class)
+	public WechatEventPublisher wechatEventPublish(){
+		return new BaseWechatEventPublisher();
+	}
+	
+	@Bean
+	@ConditionalOnMissingBean(WechatCpCallbackHandler.class)
+	public WechatCpCallbackHandler wechatCpCallbackHandler(WechatAppManager wechatAppManager,WechatEventPublisher wechatEventPublisher){
+		BaseWechatCpCallbackHandler callBackHandlerImpl = new BaseWechatCpCallbackHandler();
+		callBackHandlerImpl.setWechatAppManager(wechatAppManager);
+		callBackHandlerImpl.setWechatEventPublisher(wechatEventPublisher);
+		return callBackHandlerImpl;
 	}
 	
 }

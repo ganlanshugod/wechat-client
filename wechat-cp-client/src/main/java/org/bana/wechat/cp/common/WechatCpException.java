@@ -19,6 +19,11 @@ public class WechatCpException extends WechatException {
 	
 	public static final String PARAM_ERROR = "CP-001";
 	
+	public static final String CALLBACK_NO_SUITE = "CB_001";
+	public static final String CALLBACK_NO_SUITE_CONFIG = "CB_002";
+	public static final String CALLBACK_GETPOST = "CB_003";
+	public static final String CALLBACK_HandleException = "CB_005";
+	public static final String CALLBACK_ParseTypeException = "CB_006";
 	
 	public static final String APP_PARAM_ERROR1 = "CP-a001";
 	public static final String APP_PARAM_ERROR2 = "CP-a002";

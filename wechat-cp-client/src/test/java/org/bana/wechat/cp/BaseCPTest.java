@@ -10,6 +10,7 @@ package org.bana.wechat.cp;
 
 import org.bana.wechat.cp.app.CorpAppType;
 import org.bana.wechat.cp.app.WechatCorpAppConfig;
+import org.bana.wechat.cp.app.WechatCorpSuiteConfig;
 import org.bana.wechat.cp.app.impl.MemoryWechatAppManager;
 import org.bana.wechat.cp.token.impl.SimpleAccessTokenServiceImpl;
 import org.junit.BeforeClass;
@@ -22,10 +23,13 @@ import org.junit.BeforeClass;
 public class BaseCPTest {
 	
 	protected static SimpleAccessTokenServiceImpl tokenService;
+	protected static MemoryWechatAppManager wechatAppManager;
 	
 	protected static String corpId = "ww3dd9e376336105bf";
 
 	protected static String agentId = "-1";
+	
+	protected static String suiteId = "wwc4869e05df46f0d5";
 	
 	@BeforeClass
 	public static void beforeClass(){
@@ -34,10 +38,18 @@ public class BaseCPTest {
 		appConfig.setAgentId(agentId);
 		appConfig.setCorpAppType(CorpAppType.通讯录管理API);
 		appConfig.setSecret("MXBIDelnTGVfItVno8UdO7JxSS9sicviwfXeRbUbZPg");
-		MemoryWechatAppManager wechatAppManager = new MemoryWechatAppManager();
+		wechatAppManager = new MemoryWechatAppManager();
 		wechatAppManager.addAppConfig(appConfig);
 		tokenService = new SimpleAccessTokenServiceImpl();
 		tokenService.setWechatAppManager(wechatAppManager);
+		
+		WechatCorpSuiteConfig suiteConfig = new WechatCorpSuiteConfig();
+		suiteConfig.setSuiteId(suiteId);
+		suiteConfig.setEncodingAesKey("vx8rQi8dXszcyU9WBimSFLNdc3AAEL1Kn3twYnybd1U");
+		suiteConfig.setSuiteSecret("SqI67zMSSyi2uhY6_weE6UEykwjC0Qlus_BBJfVjwck");
+		suiteConfig.setToken("VDwLCrGDTJVWledn");
+		wechatAppManager.addSuiteConfig(suiteConfig);
 	}
+	
 	
 }

@@ -18,6 +18,8 @@ public class WechatCorpSuiteConfig {
 	private String suiteId;
 	private String suiteSecret;
 	private String suiteTicket;
+	private String token;
+	private String encodingAesKey;
 	/**
 	 * @Description: 属性 suiteId 的get方法 
 	 * @return suiteId
@@ -59,6 +61,18 @@ public class WechatCorpSuiteConfig {
 	 */
 	public void setSuiteTicket(String suiteTicket) {
 		this.suiteTicket = suiteTicket;
+	}
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
+	public String getEncodingAesKey() {
+		return encodingAesKey;
+	}
+	public void setEncodingAesKey(String encodingAesKey) {
+		this.encodingAesKey = encodingAesKey;
 	} 
 	
 }

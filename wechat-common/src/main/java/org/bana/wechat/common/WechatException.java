@@ -17,6 +17,7 @@ package org.bana.wechat.common;
 public class WechatException extends RuntimeException {
 	
 	public static final String LOG_ERROR = "l-001";
+	public static final String XML_ERROR = "X-001";
 
 	/**
 	 * @Fields serialVersionUID : 

@@ -25,6 +25,15 @@ public class WechatCpProperties {
 	private String secret;
 	
 	private String agentId;
+	
+	private String suiteId;
+	
+	private String suiteToken;
+	
+	private String encodingAesKey;
+	
+	private String suiteSecret;
+	
 
 	public String getCorpId() {
 		return corpId;
@@ -48,6 +57,38 @@ public class WechatCpProperties {
 
 	public void setAgentId(String agentId) {
 		this.agentId = agentId;
+	}
+
+	public String getSuiteId() {
+		return suiteId;
+	}
+
+	public void setSuiteId(String suiteId) {
+		this.suiteId = suiteId;
+	}
+
+	public String getSuiteToken() {
+		return suiteToken;
+	}
+
+	public void setSuiteToken(String suiteToken) {
+		this.suiteToken = suiteToken;
+	}
+
+	public String getEncodingAesKey() {
+		return encodingAesKey;
+	}
+
+	public void setEncodingAesKey(String encodingAesKey) {
+		this.encodingAesKey = encodingAesKey;
+	}
+
+	public String getSuiteSecret() {
+		return suiteSecret;
+	}
+
+	public void setSuiteSecret(String suiteSecret) {
+		this.suiteSecret = suiteSecret;
 	}
 	
 }

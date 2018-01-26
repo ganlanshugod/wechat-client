@@ -24,5 +24,25 @@
 	  		<artifactId>spring-boot-autoconfigure</artifactId>
 	  		<version>${spring.boot.version}</version>
 	  	</dependency>
+	  	
+	  	<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	  	
+	  	<dependency>
+	  		<groupId>org.springframework.boot</groupId>
+	  		<artifactId>spring-boot-starter-test</artifactId>
+	  		<version>${spring.boot.version}</version>
+	  	</dependency>
+	  	
+	  	<!-- 日志的API配置系统 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 </project>

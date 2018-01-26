@@ -34,8 +34,13 @@
 		</dependency>
 		<!-- =======================log4j 组件的依赖 end ================= -->
 		
-		<!-- =======================上传文件 组件的依赖 begin ================= -->
-		<!-- =======================上传文件 组件的依赖 end ================= -->
+		<!-- =======================servlet api begin ================= -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- =======================servlet api end ================= -->
 		
 		<!-- *********************************************************** -->
 		<!-- ========end======系统正式运行需要的jar报配置依赖====end========== -->
@@ -49,6 +54,11 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.easymock</groupId>
+		    <artifactId>easymock</artifactId>
+		    <scope>test</scope>
 		</dependency>
 		<!-- junit 测试依赖 end -->
 		<!-- *********************************************************** -->
