@@ -19,6 +19,7 @@ public class WechatCorpSuiteConfig {
 	private String suiteSecret;
 	private String token;
 	private String encodingAesKey;
+	private String corpId; //套件所在的corpId
 	/**
 	 * @Description: 属性 suiteId 的get方法 
 	 * @return suiteId
@@ -58,6 +59,12 @@ public class WechatCorpSuiteConfig {
 	}
 	public void setEncodingAesKey(String encodingAesKey) {
 		this.encodingAesKey = encodingAesKey;
+	}
+	public String getCorpId() {
+		return corpId;
+	}
+	public void setCorpId(String corpId) {
+		this.corpId = corpId;
 	} 
 	
 }

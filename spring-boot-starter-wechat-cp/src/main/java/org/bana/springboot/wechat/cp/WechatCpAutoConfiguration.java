@@ -74,6 +74,7 @@ public class WechatCpAutoConfiguration {
 		suiteConfig.setEncodingAesKey(wechatCpProperties.getEncodingAesKey());
 		suiteConfig.setSuiteSecret(wechatCpProperties.getSuiteSecret());
 		suiteConfig.setToken(wechatCpProperties.getSuiteToken());
+		suiteConfig.setCorpId(corpId);
 		manager.addSuiteConfig(suiteConfig);
 		
 		manager.setSuiteTicket(wechatCpProperties.getSuiteTicket());

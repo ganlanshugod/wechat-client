@@ -19,7 +19,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.lang.StringUtils;
-import org.bana.wechat.common.listener.WechatEventPublisher;
 import org.bana.wechat.common.util.BeanXmlUtil;
 import org.bana.wechat.cp.app.WechatAppManager;
 import org.bana.wechat.cp.app.WechatCorpSuiteConfig;
@@ -77,19 +76,26 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 		if(suiteConfig == null){
 			throw new WechatCpException(WechatCpException.CALLBACK_NO_SUITE_CONFIG,"没有找到suiteId="+suiteId+" 对应的配置信息");
 		}
-		WXBizMsgCrypt wxcpt = getWxcpt(suiteConfig);
 		String msgSignature = request.getParameter(PARAM_SIGNATURE);
 		String timeStamp = request.getParameter(PARAM_TIMESTAMP);
 		String nonce = request.getParameter(PARAM_NONCE);
 		String echoStr = request.getParameter(PARAM_ECHOSTR);
+		LOG.info("推送参数为msgSignature=" + msgSignature
+				+",timeStamp="+timeStamp
+				+",nonce="+nonce
+				+",echoStr="+echoStr);
 		if(StringUtils.isNotBlank(echoStr)){
+			WXBizMsgCrypt wxcpt = getFirstWxcpt(suiteConfig);
 			LOG.warn("suite" + suiteId + "首次推送成功");
 			return wxcpt.VerifyURL(msgSignature, timeStamp, nonce, echoStr);
 		}
 		
+		WXBizMsgCrypt wxcpt = getWxcpt(suiteConfig);
+		
 		try {
 			InputStream is = request.getInputStream();
 			String postData = getPostData(is);
+			LOG.info("解密前的解密字符串为：" + postData);
 			String decryptMsg = wxcpt.DecryptMsg(msgSignature, timeStamp, nonce, postData);
 			LOG.info("获取到的解密字符串为：" + decryptMsg);
 			ResultType msgType = getMsgType(decryptMsg);
@@ -100,6 +106,17 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 		}
 	}
 	
+	/**
+	 * Description: TODO (这里用一句话描述这个方法的作用)
+	 * @author Liu Wenjie
+	 * @date 2018年1月26日 下午8:12:16
+	 * @param suiteConfig
+	 * @return
+	 */
+	private WXBizMsgCrypt getFirstWxcpt(WechatCorpSuiteConfig suiteConfig) {
+		return new WXBizMsgCrypt(suiteConfig.getToken(), suiteConfig.getEncodingAesKey(), suiteConfig.getCorpId());
+	}
+
 	/**
 	 * Description: 实际处理返回结果数据
 	 * @author Liu Wenjie
