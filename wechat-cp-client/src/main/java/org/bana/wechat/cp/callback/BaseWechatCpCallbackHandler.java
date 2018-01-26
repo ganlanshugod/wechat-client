@@ -46,7 +46,7 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 
 	private WechatAppManager wechatAppManager;
 	
-	private WechatEventPublisher wechatEventPublisher;
+	private WechatCpEventPublisher wechatEventPublisher;
 	
 	public static final String PARAM_SIGNATURE = "msg_signature";
 	
@@ -169,7 +169,7 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 		this.wechatAppManager = wechatAppManager;
 	}
 
-	public void setWechatEventPublisher(WechatEventPublisher wechatEventPublisher) {
+	public void setWechatEventPublisher(WechatCpEventPublisher wechatEventPublisher) {
 		this.wechatEventPublisher = wechatEventPublisher;
 	}
 	

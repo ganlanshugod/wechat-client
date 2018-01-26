@@ -20,6 +20,7 @@ import org.bana.wechat.cp.common.WechatCpResultHandler;
 import org.bana.wechat.cp.token.AccessTokenService;
 import org.bana.wechat.cp.token.domain.AccessToken;
 import org.bana.wechat.cp.token.domain.SuiteAccessToken;
+import org.bana.wechat.cp.token.param.SuiteTokenParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -87,7 +88,15 @@ public class SimpleAccessTokenServiceImpl implements AccessTokenService {
 		if(suiteConfig==null){
 			throw new WechatCpException(WechatCpException.SUITE_PARAM_ERROR2, "没有找到suiteId="+suiteId+"的套件信息");
 		}
-		JSONObject httpPost = httpHelper.httpPost(Constants.获取SuiteToken.getValue(), suiteConfig);
+		String suiteTicket = wechatAppManager.getSuiteTicket(suiteId);
+		if(StringUtils.isBlank(suiteTicket)){
+			throw new WechatCpException(WechatCpException.SUITE_PARAM_ERROR3, "没有找到suiteId" + suiteId + "对应的suiteTicket");
+		}
+		SuiteTokenParam suiteParam = new SuiteTokenParam();
+		suiteParam.setSuiteId(suiteId);
+		suiteParam.setSuiteSecret(suiteConfig.getSuiteSecret());
+		suiteParam.setSuiteTicket(suiteTicket);
+		JSONObject httpPost = httpHelper.httpPost(Constants.获取SuiteToken.getValue(), suiteParam);
 		SuiteAccessToken suiteAccessToken = WechatCpResultHandler.handleResult(httpPost,SuiteAccessToken.class);
 		return suiteAccessToken.getSuiteAccessToken();
 	}

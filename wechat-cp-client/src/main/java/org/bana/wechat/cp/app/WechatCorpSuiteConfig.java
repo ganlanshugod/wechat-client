@@ -17,7 +17,6 @@ public class WechatCorpSuiteConfig {
 
 	private String suiteId;
 	private String suiteSecret;
-	private String suiteTicket;
 	private String token;
 	private String encodingAesKey;
 	/**
@@ -47,20 +46,6 @@ public class WechatCorpSuiteConfig {
 	 */
 	public void setSuiteSecret(String suiteSecret) {
 		this.suiteSecret = suiteSecret;
-	}
-	/**
-	 * @Description: 属性 suiteTicket 的get方法 
-	 * @return suiteTicket
-	 */
-	public String getSuiteTicket() {
-		return suiteTicket;
-	}
-	/**
-	 * @Description: 属性 suiteTicket 的set方法 
-	 * @param suiteTicket
-	 */
-	public void setSuiteTicket(String suiteTicket) {
-		this.suiteTicket = suiteTicket;
 	}
 	public String getToken() {
 		return token;

@@ -9,7 +9,6 @@
 package org.bana.springboot.wechat.cp;
 
 import org.bana.wechat.common.listener.WechatEventPublisher;
-import org.bana.wechat.common.listener.impl.BaseWechatEventPublisher;
 import org.bana.wechat.common.util.StringUtils;
 import org.bana.wechat.cp.app.CorpAppType;
 import org.bana.wechat.cp.app.WechatAppManager;
@@ -18,6 +17,7 @@ import org.bana.wechat.cp.app.WechatCorpSuiteConfig;
 import org.bana.wechat.cp.app.impl.MemoryWechatAppManager;
 import org.bana.wechat.cp.callback.BaseWechatCpCallbackHandler;
 import org.bana.wechat.cp.callback.WechatCpCallbackHandler;
+import org.bana.wechat.cp.callback.WechatCpEventPublisher;
 import org.bana.wechat.cp.common.WechatCpException;
 import org.bana.wechat.cp.token.AccessTokenService;
 import org.bana.wechat.cp.token.impl.SimpleAccessTokenServiceImpl;
@@ -75,6 +75,8 @@ public class WechatCpAutoConfiguration {
 		suiteConfig.setSuiteSecret(wechatCpProperties.getSuiteSecret());
 		suiteConfig.setToken(wechatCpProperties.getSuiteToken());
 		manager.addSuiteConfig(suiteConfig);
+		
+		manager.setSuiteTicket(wechatCpProperties.getSuiteTicket());
 		return manager;
 	}
 	
@@ -87,14 +89,14 @@ public class WechatCpAutoConfiguration {
 	}
 	
 	@Bean
-	@ConditionalOnMissingBean(WechatEventPublisher.class)
-	public WechatEventPublisher wechatEventPublish(){
-		return new BaseWechatEventPublisher();
+	@ConditionalOnMissingBean(WechatCpEventPublisher.class)
+	public WechatCpEventPublisher wechatEventPublish(){
+		return new WechatCpEventPublisher();
 	}
 	
 	@Bean
 	@ConditionalOnMissingBean(WechatCpCallbackHandler.class)
-	public WechatCpCallbackHandler wechatCpCallbackHandler(WechatAppManager wechatAppManager,WechatEventPublisher wechatEventPublisher){
+	public WechatCpCallbackHandler wechatCpCallbackHandler(WechatAppManager wechatAppManager,WechatCpEventPublisher wechatEventPublisher){
 		BaseWechatCpCallbackHandler callBackHandlerImpl = new BaseWechatCpCallbackHandler();
 		callBackHandlerImpl.setWechatAppManager(wechatAppManager);
 		callBackHandlerImpl.setWechatEventPublisher(wechatEventPublisher);

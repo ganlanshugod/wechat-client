@@ -25,6 +25,9 @@ public class MemoryWechatAppManager implements WechatAppManager {
 	private Map<String,WechatCorpAppConfig> appConfigMap = new HashMap<String,WechatCorpAppConfig>();
 	private Map<String,WechatCorpSuiteConfig> suiteConfigMap = new HashMap<String,WechatCorpSuiteConfig>();
 	
+	private String suiteTicket;
+	
+	
 	/**
 	 * <p>Description: </p>
 	 * @author Liu Wenjie
@@ -62,6 +65,23 @@ public class MemoryWechatAppManager implements WechatAppManager {
 	
 	public void addSuiteConfig(WechatCorpSuiteConfig suiteConfig){
 		suiteConfigMap.put(suiteConfig.getSuiteId(), suiteConfig);
+	}
+	
+	/**
+	 * <p>Description: </p>
+	 * @author Liu Wenjie
+	 * @date 2018年1月26日 下午5:03:29
+	 * @param suiteId
+	 * @return
+	 * @see org.bana.wechat.cp.app.WechatAppManager#getSuiteTicket(java.lang.String)
+	 */
+	@Override
+	public String getSuiteTicket(String suiteId) {
+		return suiteTicket;
+	}
+
+	public void setSuiteTicket(String suiteTicket) {
+		this.suiteTicket = suiteTicket;
 	}
 	
 }

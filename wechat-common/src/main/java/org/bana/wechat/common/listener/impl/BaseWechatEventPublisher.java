@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
  * @Description: 一个标准的事件发布类
  * @author Liu Wenjie
  */
-public class BaseWechatEventPublisher implements WechatEventPublisher,WechatListenerFactory {
+public abstract class BaseWechatEventPublisher implements WechatEventPublisher,WechatListenerFactory {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(BaseWechatEventPublisher.class);
 
@@ -44,9 +44,7 @@ public class BaseWechatEventPublisher implements WechatEventPublisher,WechatList
 	 * @see org.bana.wechat.common.listener.WechatListenerFactory#getWechatListener(java.lang.Class)
 	 */
 	@Override
-	public <T extends WechatEvent> WechatListener<T> getWechatListener(Class<T> cls) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public abstract <T extends WechatEvent> WechatListener<T> getWechatListener(Class<T> cls);
+	
 	
 }

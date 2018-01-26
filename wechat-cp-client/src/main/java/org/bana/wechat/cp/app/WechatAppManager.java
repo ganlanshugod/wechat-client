@@ -33,4 +33,14 @@ public interface WechatAppManager {
 	 * @return
 	 */
 	WechatCorpSuiteConfig getSuiteConfig(String suiteId);
+	
+	
+	/**
+	 * Description: 获取suiteId对应的ticket信息，存储方式有实现决定
+	 * @author Liu Wenjie
+	 * @date 2018年1月26日 下午5:02:49
+	 * @param suiteId
+	 * @return
+	 */
+	String getSuiteTicket(String suiteId);
 }

@@ -28,6 +28,8 @@ public class WechatCpProperties {
 	
 	private String suiteId;
 	
+	private String suiteTicket;
+	
 	private String suiteToken;
 	
 	private String encodingAesKey;
@@ -89,6 +91,14 @@ public class WechatCpProperties {
 
 	public void setSuiteSecret(String suiteSecret) {
 		this.suiteSecret = suiteSecret;
+	}
+
+	public String getSuiteTicket() {
+		return suiteTicket;
+	}
+
+	public void setSuiteTicket(String suiteTicket) {
+		this.suiteTicket = suiteTicket;
 	}
 	
 }
