@@ -33,7 +33,7 @@ public class SuiteTokenParam implements Serializable{
 	private String suiteId;
 	@JSONField(name="suite_secret")
 	private String suiteSecret;
-	@JSONField(name="suite_secret")
+	@JSONField(name="suite_ticket")
 	private String suiteTicket;
 	public String getSuiteId() {
 		return suiteId;
