@@ -19,6 +19,8 @@ import org.bana.wechat.cp.callback.BaseWechatCpCallbackHandler;
 import org.bana.wechat.cp.callback.WechatCpCallbackHandler;
 import org.bana.wechat.cp.callback.WechatCpEventPublisher;
 import org.bana.wechat.cp.common.WechatCpException;
+import org.bana.wechat.cp.suite.SuiteCPService;
+import org.bana.wechat.cp.suite.impl.SuiteCPServiceImpl;
 import org.bana.wechat.cp.token.AccessTokenService;
 import org.bana.wechat.cp.token.impl.SimpleAccessTokenServiceImpl;
 import org.bana.wechat.cp.user.UserCPService;
@@ -87,6 +89,14 @@ public class WechatCpAutoConfiguration {
 		UserCPServiceImpl userService = new UserCPServiceImpl();
 		userService.setAccessTokenService(accessTokenService);
 		return userService;
+	}
+	
+	@Bean
+	@ConditionalOnMissingBean(SuiteCPService.class)
+	public SuiteCPService suiteCPService(AccessTokenService accessTokenService){
+		SuiteCPServiceImpl suiteCPService = new SuiteCPServiceImpl();
+		suiteCPService.setAccessTokenService(accessTokenService);
+		return suiteCPService;
 	}
 	
 	/**
