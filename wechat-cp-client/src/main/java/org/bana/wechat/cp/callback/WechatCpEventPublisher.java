@@ -12,6 +12,7 @@ import org.bana.wechat.common.listener.WechatEvent;
 import org.bana.wechat.common.listener.WechatListener;
 import org.bana.wechat.common.listener.impl.BaseWechatEventPublisher;
 import org.bana.wechat.cp.callback.event.SuiteTicketEvent;
+import org.bana.wechat.cp.callback.listener.AuthCreateEventListener;
 import org.bana.wechat.cp.callback.listener.SuiteTicketEventListener;
 
 /**
@@ -39,6 +40,10 @@ public class WechatCpEventPublisher extends BaseWechatEventPublisher {
 	}
 
 	public SuiteTicketEventListener getSuiteTicketEventListener() {
+		return null;
+	}
+	
+	public AuthCreateEventListener getAuthCreateEventListener() {
 		return null;
 	}
 	

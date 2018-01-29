@@ -9,6 +9,7 @@
 package org.bana.springboot.wechat.cp.callback.listener;
 
 import org.bana.wechat.cp.callback.WechatCpEventPublisher;
+import org.bana.wechat.cp.callback.listener.AuthCreateEventListener;
 import org.bana.wechat.cp.callback.listener.SuiteTicketEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,6 +23,8 @@ public class WechatSpringCpEventPublisher extends WechatCpEventPublisher {
 	@Autowired(required=false)
 	private SuiteTicketEventListener suiteTicketEventListener;
 	
+	@Autowired(required=false)
+	private AuthCreateEventListener authCreateEventListener;
 	
 	/**
 	 * <p>Description: </p>
@@ -34,5 +37,16 @@ public class WechatSpringCpEventPublisher extends WechatCpEventPublisher {
 	public SuiteTicketEventListener getSuiteTicketEventListener() {
 		return suiteTicketEventListener;
 	}
-
+	
+	/**
+	 * <p>Description: </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年1月29日 下午6:16:49
+	 * @return
+	 * @see org.bana.wechat.cp.callback.WechatCpEventPublisher#getAuthCreateEventListener()
+	 */
+	@Override
+	public AuthCreateEventListener getAuthCreateEventListener() {
+		return authCreateEventListener;
+	}
 }
