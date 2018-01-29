@@ -22,7 +22,9 @@ import org.apache.commons.lang.StringUtils;
 import org.bana.wechat.common.util.BeanXmlUtil;
 import org.bana.wechat.cp.app.WechatAppManager;
 import org.bana.wechat.cp.app.WechatCorpSuiteConfig;
+import org.bana.wechat.cp.callback.event.AuthCreateEvent;
 import org.bana.wechat.cp.callback.event.SuiteTicketEvent;
+import org.bana.wechat.cp.callback.result.auth.AuthCreate;
 import org.bana.wechat.cp.callback.result.ticket.SuiteTicket;
 import org.bana.wechat.cp.common.WechatCpException;
 import org.slf4j.Logger;
@@ -130,6 +132,10 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 		case 推送suite_ticket协议:
 			SuiteTicket suiteTicket = BeanXmlUtil.xmlToBean(decryptMsg, SuiteTicket.class);
 			wechatEventPublisher.publishEvent(new SuiteTicketEvent(suiteTicket));
+			break;
+		case 推送授权回调:
+			AuthCreate authCreate = BeanXmlUtil.xmlToBean(decryptMsg, AuthCreate.class);
+			wechatEventPublisher.publishEvent(new AuthCreateEvent(authCreate));
 			break;
 		default:
 			throw new WechatCpException(WechatCpException.CALLBACK_HandleException,"没有实现的msgType类型["+msgType.getType()+"]");
