@@ -46,6 +46,19 @@ public abstract class WechatCpService {
 		return getHttpHelper().httpPost(addAccessToken(url, param),param);
 	}
 	
+	/**
+	 * Description: post 提交参数（第三方套件接口相关）
+	 * @author Zhang Zhichao
+	 * @date 2018年1月29日 下午1:29:34
+	 * @param url
+	 * @param param
+	 * @return
+	 */
+	protected JSONObject post(String url,WeChatCPSuiteParam param){
+		return getHttpHelper().httpPost(addSuiteAccessToken(url, param),param);
+	}
+	
+	
 	private String addAccessToken(String url,WeChatCPParam param){
 		String accessToken = accessTokenService.getAccessToken(param.getCorpId(), param.getAgentId());
 		if(url.contains("?")){
@@ -54,6 +67,25 @@ public abstract class WechatCpService {
 			url += "?";
 		}
 		url+="access_token="+accessToken;
+		return url;
+	}
+	
+	/**
+	 * Description: 获取suite_access_token
+	 * @author Zhang Zhichao
+	 * @date 2018年1月29日 下午1:30:22
+	 * @param url
+	 * @param param
+	 * @return
+	 */
+	private String addSuiteAccessToken(String url,WeChatCPSuiteParam param){
+		String suiteAccessToken = accessTokenService.getSuiteAccessToken(param.getSuiteId());
+		if(url.contains("?")){
+			url += "&";
+		}else{
+			url += "?";
+		}
+		url+="suite_access_token="+suiteAccessToken;
 		return url;
 	}
 	
