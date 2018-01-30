@@ -34,4 +34,14 @@ public interface AccessTokenService {
 	 */
 	String getSuiteAccessToken(String suiteId);
 	
+	
+	/**
+	 * Description: 根据企业微信的corpId和agentId获取对应的jsApiTicket
+	 * @author Liu Wenjie
+	 * @date 2018年1月30日 下午3:38:33
+	 * @param corpId
+	 * @param agentId
+	 * @return
+	 */
+	String getJsApiTicket(String corpId,String agentId);
 }

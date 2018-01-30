@@ -22,6 +22,8 @@ import org.bana.wechat.cp.common.WechatCpException;
 import org.bana.wechat.cp.suite.SuiteCPService;
 import org.bana.wechat.cp.suite.impl.SuiteCPServiceImpl;
 import org.bana.wechat.cp.token.AccessTokenService;
+import org.bana.wechat.cp.token.JSApiCpService;
+import org.bana.wechat.cp.token.impl.JSApiCpServiceImpl;
 import org.bana.wechat.cp.token.impl.SimpleAccessTokenServiceImpl;
 import org.bana.wechat.cp.user.UserCPService;
 import org.bana.wechat.cp.user.impl.UserCPServiceImpl;
@@ -47,6 +49,14 @@ public class WechatCpAutoConfiguration {
 		SimpleAccessTokenServiceImpl tokenService = new SimpleAccessTokenServiceImpl();
 		tokenService.setWechatAppManager(wechatAppManager);
 		return tokenService;
+	}
+	
+	@Bean
+	@ConditionalOnMissingBean(JSApiCpService.class)
+	public JSApiCpService jsapiTicketService(AccessTokenService accessTokenService){
+		JSApiCpServiceImpl jsApiTicketService = new JSApiCpServiceImpl();
+		jsApiTicketService.setAccessTokenService(accessTokenService);
+		return jsApiTicketService;
 	}
 	
 	

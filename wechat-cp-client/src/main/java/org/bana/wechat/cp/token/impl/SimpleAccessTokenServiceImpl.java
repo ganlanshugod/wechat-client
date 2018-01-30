@@ -128,5 +128,24 @@ public class SimpleAccessTokenServiceImpl implements AccessTokenService {
 		this.wechatAppManager = wechatAppManager;
 	}
 
+	/**
+	 * <p>Description: </p>
+	 * @author Liu Wenjie
+	 * @date 2018年1月30日 下午3:40:19
+	 * @param corpId
+	 * @param agentId
+	 * @return
+	 * @see org.bana.wechat.cp.token.AccessTokenService#getJsApiTicket(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public String getJsApiTicket(String corpId, String agentId) {
+		String accessToken = this.getAccessToken(corpId, agentId);
+		String url = Constants.获取JsApiTicket.getValue() + "?access_token=" + accessToken;
+		JSONObject httpGet = httpHelper.httpGet(url);
+		WechatCpResultHandler.handleResult(httpGet);
+		String ticket = httpGet.getString("ticket");
+		return ticket;
+	}
+
 	
 }

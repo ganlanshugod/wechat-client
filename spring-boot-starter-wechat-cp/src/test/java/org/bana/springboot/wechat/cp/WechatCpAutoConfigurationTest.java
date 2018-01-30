@@ -31,4 +31,5 @@ public class WechatCpAutoConfigurationTest {
 		System.out.println(wechatCpPropertes.getAgentId());
 	}
 
+	
 }
