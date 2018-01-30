@@ -69,7 +69,7 @@ public class WechatCpResultHandler {
 	public static boolean isSuccess(JSONObject json){
 		try {
 			String errcode = json.getString(Constants.返回码.getValue());
-			return isSuccess(errcode);
+			return errcode == null || isSuccess(errcode);
 		} catch (RuntimeException e) {
 			LOG.info("没有返回码，认为执行成功",e.getMessage());
 			return true;

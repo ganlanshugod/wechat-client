@@ -9,13 +9,13 @@
 package org.bana.wechat.cp.callback.listener;
 
 import org.bana.wechat.common.listener.WechatListener;
-import org.bana.wechat.cp.callback.result.auth.AuthCreate;
+import org.bana.wechat.cp.callback.event.AuthCreateEvent;
 
 /**
  * @ClassName: AuthCreateEventListener
  * @Description: 第三方应用授权成功事件监听
  * @author Zhang Zhichao
  */
-public interface AuthCreateEventListener extends WechatListener<AuthCreate> {
+public interface AuthCreateEventListener extends WechatListener<AuthCreateEvent> {
 
 }

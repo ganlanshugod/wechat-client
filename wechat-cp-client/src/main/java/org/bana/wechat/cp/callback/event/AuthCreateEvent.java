@@ -22,45 +22,46 @@ public class AuthCreateEvent implements WechatEvent {
 	/**
 	 * @Fields receiveSuitResult : 应用授权回调信息
 	 */
-	private AuthCreate receiveSuitResult;
+	private AuthCreate authCreate;
 
 	/**
 	 * <p>Description: </p>
 	 * @author Zhang Zhichao
-	 * @date 2018年1月29日 上午10:39:04
-	 * @param receiveSuitResult
+	 * @date 2018年1月29日 下午7:33:22
+	 * @param authCreate
 	 */
-	public AuthCreateEvent(AuthCreate receiveSuitResult) {
+	public AuthCreateEvent(AuthCreate authCreate) {
 		super();
-		this.receiveSuitResult = receiveSuitResult;
+		this.authCreate = authCreate;
 	}
 
 	/**
-	 * @Description: 属性 receiveSuitResult 的get方法 
-	 * @return receiveSuitResult
+	 * @Description: 属性 authCreate 的get方法 
+	 * @return authCreate
 	 */
-	public AuthCreate getReceiveSuitResult() {
-		return receiveSuitResult;
+	public AuthCreate getAuthCreate() {
+		return authCreate;
 	}
 
 	/**
-	 * @Description: 属性 receiveSuitResult 的set方法 
-	 * @param receiveSuitResult
+	 * @Description: 属性 authCreate 的set方法 
+	 * @param authCreate
 	 */
-	public void setReceiveSuitResult(AuthCreate receiveSuitResult) {
-		this.receiveSuitResult = receiveSuitResult;
+	public void setAuthCreate(AuthCreate authCreate) {
+		this.authCreate = authCreate;
 	}
 
 	/**
 	 * <p>Description: </p>
 	 * @author Zhang Zhichao
-	 * @date 2018年1月29日 上午10:39:17
+	 * @date 2018年1月29日 下午7:33:30
 	 * @return
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "AuthCreateEvent [receiveSuitResult=" + receiveSuitResult + "]";
+		return "AuthCreateEvent [authCreate=" + authCreate + "]";
 	}
+
 	
 }
