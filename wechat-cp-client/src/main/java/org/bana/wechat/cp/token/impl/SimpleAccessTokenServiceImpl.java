@@ -50,6 +50,7 @@ public class SimpleAccessTokenServiceImpl implements AccessTokenService {
 	 */
 	@Override
 	public String getAccessToken(String corpId, String agentId) {
+		LOG.info("=====调用了获取getAccessToken的方法===========,corpId="+corpId+",agentId="+agentId);
 		WechatCorpAppConfig appConfig = wechatAppManager.getAppConfig(corpId, agentId);
 		if(appConfig == null){
 			throw new WechatCpException(WechatCpException.APP_PARAM_ERROR1, "没有找到corpId="+corpId+",agentId=" + agentId +"的应用配置");
@@ -83,6 +84,7 @@ public class SimpleAccessTokenServiceImpl implements AccessTokenService {
 	 */
 	@Override
 	public String getSuiteAccessToken(String suiteId) {
+		LOG.info("=====调用了获取getSuiteAccessToken的方法===========,suiteId="+suiteId);
 		// 获取套件信息
 		WechatCorpSuiteConfig suiteConfig = wechatAppManager.getSuiteConfig(suiteId);
 		if(suiteConfig==null){
@@ -109,7 +111,7 @@ public class SimpleAccessTokenServiceImpl implements AccessTokenService {
 	 * @param secret
 	 * @return
 	 */
-	public AccessToken getAccessTokenBySecret(String corpId,String secret){
+	private AccessToken getAccessTokenBySecret(String corpId,String secret){
 		if(StringUtils.isBlank(corpId,secret)){
 			throw new WechatCpException(WechatCpException.PARAM_ERROR,"获取AccessToken时参数不能为空,corpId="+corpId+",secret="+secret);
 		}
@@ -139,7 +141,12 @@ public class SimpleAccessTokenServiceImpl implements AccessTokenService {
 	 */
 	@Override
 	public String getJsApiTicket(String corpId, String agentId) {
+		LOG.info("=====调用了获取getJsApiTicket的方法===========,corpId="+corpId+",agentId="+agentId);
 		String accessToken = this.getAccessToken(corpId, agentId);
+		return getJsApiTicket(accessToken);
+	}
+	
+	protected String getJsApiTicket(String accessToken){
 		String url = Constants.获取JsApiTicket.getValue() + "?access_token=" + accessToken;
 		JSONObject httpGet = httpHelper.httpGet(url);
 		WechatCpResultHandler.handleResult(httpGet);

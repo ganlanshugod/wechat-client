@@ -8,7 +8,11 @@
  */
 package org.bana.springboot.wechat.cp;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.bana.springboot.wechat.cp.callback.listener.WechatSpringCpEventPublisher;
+import org.bana.springboot.wechat.cp.token.impl.CacheAccessTokenServiceImpl;
 import org.bana.wechat.common.util.StringUtils;
 import org.bana.wechat.cp.app.CorpAppType;
 import org.bana.wechat.cp.app.WechatAppManager;
@@ -24,13 +28,19 @@ import org.bana.wechat.cp.suite.impl.SuiteCPServiceImpl;
 import org.bana.wechat.cp.token.AccessTokenService;
 import org.bana.wechat.cp.token.JSApiCpService;
 import org.bana.wechat.cp.token.impl.JSApiCpServiceImpl;
-import org.bana.wechat.cp.token.impl.SimpleAccessTokenServiceImpl;
 import org.bana.wechat.cp.user.UserCPService;
 import org.bana.wechat.cp.user.impl.UserCPServiceImpl;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * @ClassName: WechatCpAutoConfiguration
@@ -40,13 +50,25 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableConfigurationProperties(WechatCpProperties.class)
+@EnableCaching
+@AutoConfigureAfter(RedisAutoConfiguration.class)
+@ConditionalOnBean(RedisTemplate.class)
 public class WechatCpAutoConfiguration {
 	
-	
+	@Bean
+	public CacheManager cacheManager(RedisTemplate<Object, Object> redisTemplate) {
+	    RedisCacheManager cacheManager= new RedisCacheManager(redisTemplate);
+	    cacheManager.setDefaultExpiration(60); //单位秒
+	    Map<String,Long> expiresMap=new HashMap<String,Long>();
+	    expiresMap.put("CPToken",3600L);
+	    cacheManager.setExpires(expiresMap);
+	    return cacheManager;
+	}
+
 	@Bean
 	@ConditionalOnMissingBean(AccessTokenService.class)
 	public AccessTokenService accessToken(WechatAppManager wechatAppManager){
-		SimpleAccessTokenServiceImpl tokenService = new SimpleAccessTokenServiceImpl();
+		CacheAccessTokenServiceImpl tokenService = new CacheAccessTokenServiceImpl();
 		tokenService.setWechatAppManager(wechatAppManager);
 		return tokenService;
 	}
