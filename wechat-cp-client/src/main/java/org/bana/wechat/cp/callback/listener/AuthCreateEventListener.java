@@ -17,5 +17,5 @@ import org.bana.wechat.cp.callback.event.AuthCreateEvent;
  * @author Zhang Zhichao
  */
 public interface AuthCreateEventListener extends WechatListener<AuthCreateEvent> {
-
+	
 }

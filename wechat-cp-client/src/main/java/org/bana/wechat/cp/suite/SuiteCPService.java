@@ -9,6 +9,7 @@
 package org.bana.wechat.cp.suite;
 
 import org.bana.wechat.cp.suite.domain.PermanentCode;
+import org.bana.wechat.cp.suite.domain.PreAuthCode;
 import org.bana.wechat.cp.suite.param.PermanentCodeParam;
 
 /**
@@ -26,4 +27,13 @@ public interface SuiteCPService {
 	 * @return
 	 */
 	PermanentCode getPermanentCode(PermanentCodeParam param);
+	
+	/**
+	 * Description: 获取预授权码
+	 * @author Zhang Zhichao
+	 * @date 2018年1月30日 下午5:37:23
+	 * @param suiteId
+	 * @return
+	 */
+	PreAuthCode getPreAuthCode(String suiteId);
 }

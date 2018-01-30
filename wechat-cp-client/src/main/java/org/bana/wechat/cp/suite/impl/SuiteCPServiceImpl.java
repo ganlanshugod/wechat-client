@@ -9,10 +9,12 @@
 package org.bana.wechat.cp.suite.impl;
 
 import org.bana.wechat.cp.common.Constants;
+import org.bana.wechat.cp.common.WeChatCPSuiteParam;
 import org.bana.wechat.cp.common.WechatCpResultHandler;
 import org.bana.wechat.cp.common.WechatCpService;
 import org.bana.wechat.cp.suite.SuiteCPService;
 import org.bana.wechat.cp.suite.domain.PermanentCode;
+import org.bana.wechat.cp.suite.domain.PreAuthCode;
 import org.bana.wechat.cp.suite.param.PermanentCodeParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,5 +44,23 @@ public class SuiteCPServiceImpl extends WechatCpService implements SuiteCPServic
 		PermanentCode permanentCode = WechatCpResultHandler.handleResult(result,PermanentCode.class);
 		LOG.info("获取到的永久授权码为： " + permanentCode);
 		return permanentCode;
+	}
+	
+	/**
+	 * <p>Description:获取预授权码 </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年1月30日 下午5:38:36
+	 * @param suiteId
+	 * @return
+	 * @see org.bana.wechat.cp.suite.SuiteCPService#getPreAuthCode(java.lang.String)
+	 */
+	@Override
+	public PreAuthCode getPreAuthCode(String suiteId) {
+		WeChatCPSuiteParam param = new WeChatCPSuiteParam();
+		param.setSuiteId(suiteId);
+		JSONObject result = this.get(Constants.获取预授权码.getValue(), param);
+		PreAuthCode preAuthCode = WechatCpResultHandler.handleResult(result, PreAuthCode.class);
+		LOG.info("获取到的永久授权码为： " + preAuthCode.toString());
+		return preAuthCode;
 	}
 }

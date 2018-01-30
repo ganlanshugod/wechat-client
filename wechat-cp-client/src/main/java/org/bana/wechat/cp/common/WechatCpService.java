@@ -35,6 +35,18 @@ public abstract class WechatCpService {
 	}
 	
 	/**
+	 * Description: 返回通用的http工具类对象（第三方套件接口相关）
+	 * @author Zhang Zhichao
+	 * @date 2018年1月30日 下午5:41:18
+	 * @param url
+	 * @param param
+	 * @return
+	 */
+	protected JSONObject get(String url,WeChatCPSuiteParam param){
+		return getHttpHelper().httpGet(addSuiteAccessToken(url, param));
+	}
+	
+	/**
 	 * Description: post 提交参数
 	 * @author Liu Wenjie
 	 * @date 2018年1月19日 下午1:35:54
