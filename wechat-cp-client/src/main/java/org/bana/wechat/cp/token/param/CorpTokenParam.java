@@ -27,6 +27,7 @@ public class CorpTokenParam implements Serializable{
 	@JSONField(name="auth_corpid")
 	private String authCorpId;
 	
+	@JSONField(name="permanent_code")
     private String permanentCode;
     
     

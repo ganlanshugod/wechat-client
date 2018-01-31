@@ -15,5 +15,29 @@ package org.bana.wechat.cp.app;
  */
 public enum CorpAppType {
 
-	自建应用,通讯录管理API,第三方托管,第三方通讯录;
+	自建应用("102"),
+	通讯录管理API("104"),
+	第三方托管("101"),
+	第三方通讯录("103");
+	
+	private String type;
+	private CorpAppType(String type) {
+		this.type = type;
+	}
+	/**
+	 * @Description: 属性 type 的get方法 
+	 * @return type
+	 */
+	public String getType() {
+		return type;
+	}
+	
+	public static CorpAppType instance(String type){
+		for (CorpAppType appType : values()) {
+			if(appType.getType().equals(type)){
+				return appType;
+			}
+		}
+		return null;
+	}
 }
