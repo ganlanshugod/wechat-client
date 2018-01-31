@@ -94,5 +94,16 @@ public class AuthUserInfo implements Serializable {
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
-	
+	/**
+	 * <p>Description: </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年1月31日 下午4:40:44
+	 * @return
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "AuthUserInfo [email=" + email + ", mobile=" + mobile + ", userid=" + userid + ", name=" + name
+				+ ", avatar=" + avatar + "]";
+	}
 }

@@ -9,6 +9,7 @@
 package org.bana.wechat.cp.suite.domain;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
@@ -161,5 +162,19 @@ public class Privilege implements Serializable {
 	public void setExtraTag(Integer[] extraTag) {
 		this.extraTag = extraTag;
 	}
-	
+
+	/**
+	 * <p>Description: </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年1月31日 下午4:41:19
+	 * @return
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Privilege [level=" + level + ", allowParty=" + Arrays.toString(allowParty) + ", allowUser="
+				+ Arrays.toString(allowUser) + ", allowTag=" + Arrays.toString(allowTag) + ", extraParty="
+				+ Arrays.toString(extraParty) + ", extraUser=" + Arrays.toString(extraUser) + ", extraTag="
+				+ Arrays.toString(extraTag) + "]";
+	}
 }

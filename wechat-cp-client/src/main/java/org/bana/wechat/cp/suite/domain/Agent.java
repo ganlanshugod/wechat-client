@@ -133,5 +133,18 @@ public class Agent implements Serializable {
 	public void setPrivilege(Privilege privilege) {
 		this.privilege = privilege;
 	}
+
+	/**
+	 * <p>Description: </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年1月31日 下午4:40:06
+	 * @return
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Agent [agentId=" + agentId + ", name=" + name + ", squareLogoUrl=" + squareLogoUrl + ", roundLogoUrl="
+				+ roundLogoUrl + ", appId=" + appId + ", privilege=" + privilege + "]";
+	}
 	
 }

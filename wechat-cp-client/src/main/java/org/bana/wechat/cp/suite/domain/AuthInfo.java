@@ -41,5 +41,16 @@ public class AuthInfo implements Serializable {
 	public void setAgent(List<Agent> agent) {
 		this.agent = agent;
 	}
-	
+
+	/**
+	 * <p>Description: </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年1月31日 下午4:40:27
+	 * @return
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "AuthInfo [agent=" + agent + "]";
+	}
 }

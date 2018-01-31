@@ -107,5 +107,17 @@ public class PermanentCode extends AccessToken {
 	public void setAuthUserInfo(AuthUserInfo authUserInfo) {
 		this.authUserInfo = authUserInfo;
 	}
-	
+
+	/**
+	 * <p>Description: </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年1月31日 下午4:41:01
+	 * @return
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "PermanentCode [permanentCode=" + permanentCode + ", authCorpInfo=" + authCorpInfo + ", authInfo="
+				+ authInfo + ", authUserInfo=" + authUserInfo + "]";
+	}
 }
