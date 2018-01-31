@@ -8,8 +8,10 @@
  */
 package org.bana.wechat.cp.suite;
 
+import org.bana.wechat.cp.suite.domain.CorpAuthDomain;
 import org.bana.wechat.cp.suite.domain.PermanentCode;
 import org.bana.wechat.cp.suite.domain.PreAuthCode;
+import org.bana.wechat.cp.suite.param.AuthCorpInfoParam;
 import org.bana.wechat.cp.suite.param.PermanentCodeParam;
 
 /**
@@ -36,4 +38,13 @@ public interface SuiteCPService {
 	 * @return
 	 */
 	PreAuthCode getPreAuthCode(String suiteId);
+	
+	/**
+	 * Description: 获取企业授权信息
+	 * @author Zhang Zhichao
+	 * @date 2018年1月31日 上午10:59:30
+	 * @param param
+	 * @return
+	 */
+	CorpAuthDomain getAuthCorpInfo(AuthCorpInfoParam param);
 }

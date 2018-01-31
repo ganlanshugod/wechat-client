@@ -9,6 +9,8 @@
 package org.bana.springboot.wechat.cp.callback.listener;
 
 import org.bana.wechat.cp.callback.WechatCpEventPublisher;
+import org.bana.wechat.cp.callback.listener.AuthCancelEventListener;
+import org.bana.wechat.cp.callback.listener.AuthChangeEventListener;
 import org.bana.wechat.cp.callback.listener.AuthCreateEventListener;
 import org.bana.wechat.cp.callback.listener.SuiteTicketEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,12 @@ public class WechatSpringCpEventPublisher extends WechatCpEventPublisher {
 	
 	@Autowired(required=false)
 	private AuthCreateEventListener authCreateEventListener;
+	
+	@Autowired(required=false)
+	private AuthChangeEventListener authChangeEventListener;
+	
+	@Autowired(required=false)
+	private AuthCancelEventListener authCancelEventListener;
 	
 	/**
 	 * <p>Description: </p>
@@ -48,5 +56,29 @@ public class WechatSpringCpEventPublisher extends WechatCpEventPublisher {
 	@Override
 	public AuthCreateEventListener getAuthCreateEventListener() {
 		return authCreateEventListener;
+	}
+	
+	/**
+	 * <p>Description: </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年1月31日 上午9:51:12
+	 * @return
+	 * @see org.bana.wechat.cp.callback.WechatCpEventPublisher#getAuthChangeEventListener()
+	 */
+	@Override
+	public AuthChangeEventListener getAuthChangeEventListener() {
+		return authChangeEventListener;
+	}
+	
+	/**
+	 * <p>Description: </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年1月31日 下午1:41:12
+	 * @return
+	 * @see org.bana.wechat.cp.callback.WechatCpEventPublisher#getAuthCancelEventListener()
+	 */
+	@Override
+	public AuthCancelEventListener getAuthCancelEventListener() {
+		return authCancelEventListener;
 	}
 }

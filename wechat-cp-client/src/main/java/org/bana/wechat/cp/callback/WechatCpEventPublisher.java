@@ -11,8 +11,12 @@ package org.bana.wechat.cp.callback;
 import org.bana.wechat.common.listener.WechatEvent;
 import org.bana.wechat.common.listener.WechatListener;
 import org.bana.wechat.common.listener.impl.BaseWechatEventPublisher;
+import org.bana.wechat.cp.callback.event.AuthCancelEvent;
+import org.bana.wechat.cp.callback.event.AuthChangeEvent;
 import org.bana.wechat.cp.callback.event.AuthCreateEvent;
 import org.bana.wechat.cp.callback.event.SuiteTicketEvent;
+import org.bana.wechat.cp.callback.listener.AuthCancelEventListener;
+import org.bana.wechat.cp.callback.listener.AuthChangeEventListener;
 import org.bana.wechat.cp.callback.listener.AuthCreateEventListener;
 import org.bana.wechat.cp.callback.listener.SuiteTicketEventListener;
 
@@ -40,6 +44,12 @@ public class WechatCpEventPublisher extends BaseWechatEventPublisher {
 		if(cls.isAssignableFrom(AuthCreateEvent.class)){
 			return (WechatListener<T>)getAuthCreateEventListener();
 		}
+		if(cls.isAssignableFrom(AuthChangeEvent.class)){
+			return (WechatListener<T>)getAuthChangeEventListener();
+		}
+		if(cls.isAssignableFrom(AuthCancelEvent.class)){
+			return (WechatListener<T>)getAuthCancelEventListener();
+		}
 		return null;
 	}
 
@@ -51,5 +61,12 @@ public class WechatCpEventPublisher extends BaseWechatEventPublisher {
 		return null;
 	}
 	
+	public AuthChangeEventListener getAuthChangeEventListener() {
+		return null;
+	}
+	
+	public AuthCancelEventListener getAuthCancelEventListener() {
+		return null;
+	}
 
 }
