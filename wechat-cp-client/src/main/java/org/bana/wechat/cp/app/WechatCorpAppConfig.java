@@ -18,7 +18,9 @@ public class WechatCorpAppConfig {
 	private String corpId;
 	private String agentId;
 	private CorpAppType corpAppType; 
-	private String secret;
+	private String secret; //自建类型会有的属性
+	private String permanentCode;//第三方授权的应用存在属性
+	private String suiteId; //存在的属性
 	
 	public String getCorpId() {
 		return corpId;
@@ -43,6 +45,23 @@ public class WechatCorpAppConfig {
 	}
 	public void setAgentId(String agentId) {
 		this.agentId = agentId;
+	}
+	public String getPermanentCode() {
+		return permanentCode;
+	}
+	public void setPermanentCode(String permanentCode) {
+		this.permanentCode = permanentCode;
+	}
+	public String getSuiteId() {
+		return suiteId;
+	}
+	public void setSuiteId(String suiteId) {
+		this.suiteId = suiteId;
+	}
+	@Override
+	public String toString() {
+		return "WechatCorpAppConfig [corpId=" + corpId + ", agentId=" + agentId + ", corpAppType=" + corpAppType
+				+ ", secret=" + secret + ", permanentCode=" + permanentCode + ", suiteId=" + suiteId + "]";
 	}
 	
 }

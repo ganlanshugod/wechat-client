@@ -10,6 +10,7 @@ package org.bana.wechat.cp.common;
 
 import org.bana.wechat.common.HttpHelper;
 import org.bana.wechat.cp.token.AccessTokenService;
+import org.bana.wechat.cp.token.SuiteAccessTokenService;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -23,7 +24,8 @@ public abstract class WechatCpService {
 	private HttpHelper httpHelper = new HttpHelper();
 	
 	private AccessTokenService accessTokenService;
-
+	
+	private SuiteAccessTokenService suiteAccessTokenService;
 	/**
 	 * Description: 返回通用的http工具类对象
 	 * @author Liu Wenjie
@@ -91,7 +93,7 @@ public abstract class WechatCpService {
 	 * @return
 	 */
 	private String addSuiteAccessToken(String url,WeChatCPSuiteParam param){
-		String suiteAccessToken = accessTokenService.getSuiteAccessToken(param.getSuiteId());
+		String suiteAccessToken = suiteAccessTokenService.getSuiteAccessToken(param.getSuiteId());
 		if(url.contains("?")){
 			url += "&";
 		}else{
@@ -116,6 +118,10 @@ public abstract class WechatCpService {
 
 	public void setAccessTokenService(AccessTokenService accessTokenService) {
 		this.accessTokenService = accessTokenService;
+	}
+
+	public void setSuiteAccessTokenService(SuiteAccessTokenService suiteAccessTokenService) {
+		this.suiteAccessTokenService = suiteAccessTokenService;
 	}
 	
 }

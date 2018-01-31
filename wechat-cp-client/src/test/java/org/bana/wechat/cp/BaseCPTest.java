@@ -13,6 +13,7 @@ import org.bana.wechat.cp.app.WechatCorpAppConfig;
 import org.bana.wechat.cp.app.WechatCorpSuiteConfig;
 import org.bana.wechat.cp.app.impl.MemoryWechatAppManager;
 import org.bana.wechat.cp.token.impl.SimpleAccessTokenServiceImpl;
+import org.bana.wechat.cp.token.impl.SimpleJsApiTicketService;
 import org.junit.BeforeClass;
 
 /**
@@ -23,6 +24,7 @@ import org.junit.BeforeClass;
 public class BaseCPTest {
 	
 	protected static SimpleAccessTokenServiceImpl tokenService;
+	protected static SimpleJsApiTicketService jsApiTicketService ;
 	protected static MemoryWechatAppManager wechatAppManager;
 	
 	protected static String corpId = "ww3dd9e376336105bf";
@@ -42,6 +44,9 @@ public class BaseCPTest {
 		wechatAppManager.addAppConfig(appConfig);
 		tokenService = new SimpleAccessTokenServiceImpl();
 		tokenService.setWechatAppManager(wechatAppManager);
+		
+		jsApiTicketService = new SimpleJsApiTicketService();
+		jsApiTicketService.setAccessTokenService(tokenService);
 		
 		WechatCorpSuiteConfig suiteConfig = new WechatCorpSuiteConfig();
 		suiteConfig.setSuiteId(suiteId);

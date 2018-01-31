@@ -27,7 +27,7 @@ public class JSApiCpServiceTest extends BaseCPTest{
 	@Before
 	public void init(){
 		JSApiCpServiceImpl jsApiCpServiceImpl = new JSApiCpServiceImpl();
-		jsApiCpServiceImpl.setAccessTokenService(tokenService);
+		jsApiCpServiceImpl.setJsApiTicketService(jsApiTicketService);
 		jsApiCpService = jsApiCpServiceImpl;
 	}
 

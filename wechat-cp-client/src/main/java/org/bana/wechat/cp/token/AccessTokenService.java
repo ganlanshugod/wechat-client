@@ -25,23 +25,4 @@ public interface AccessTokenService {
 	 */
 	String getAccessToken(String corpId,String agentId);
 	
-	/**
-	 * Description: 根据企业微信的suiteId获取套件的suite_access_token
-	 * @author Zhang Zhichao
-	 * @date 2018年1月25日 下午2:16:55
-	 * @param suiteId
-	 * @return
-	 */
-	String getSuiteAccessToken(String suiteId);
-	
-	
-	/**
-	 * Description: 根据企业微信的corpId和agentId获取对应的jsApiTicket
-	 * @author Liu Wenjie
-	 * @date 2018年1月30日 下午3:38:33
-	 * @param corpId
-	 * @param agentId
-	 * @return
-	 */
-	String getJsApiTicket(String corpId,String agentId);
 }

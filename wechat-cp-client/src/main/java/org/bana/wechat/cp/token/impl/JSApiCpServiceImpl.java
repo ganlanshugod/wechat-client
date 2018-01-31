@@ -14,8 +14,8 @@ import java.util.Date;
 
 import org.bana.wechat.common.util.StringUtils;
 import org.bana.wechat.cp.common.WechatCpException;
-import org.bana.wechat.cp.token.AccessTokenService;
 import org.bana.wechat.cp.token.JSApiCpService;
+import org.bana.wechat.cp.token.JsApiTicketService;
 import org.bana.wechat.cp.token.domain.JSSDKCpConfig;
 import org.bana.wechat.cp.token.param.JsSdkParam;
 
@@ -26,7 +26,7 @@ import org.bana.wechat.cp.token.param.JsSdkParam;
  */
 public class JSApiCpServiceImpl implements JSApiCpService {
 	
-	private AccessTokenService accessTokenService;
+	private JsApiTicketService jsApiTicketService;
 
 	/**
 	 * <p>Description: </p>
@@ -43,7 +43,7 @@ public class JSApiCpServiceImpl implements JSApiCpService {
 		}
 		String corpId = jsSkdParam.getCorpId();
 		String agentId = jsSkdParam.getAgentId();
-		String ticket = accessTokenService.getJsApiTicket(corpId, agentId);
+		String ticket = jsApiTicketService.getJsApiTicket(corpId, agentId);
 		String url = jsSkdParam.getUrl();
 		String timestamp = String.valueOf(new Date().getTime()/1000);
 		String noncestr = StringUtils.getRandomStr();
@@ -88,9 +88,8 @@ public class JSApiCpServiceImpl implements JSApiCpService {
 		}
 	}
 
-	
-	public void setAccessTokenService(AccessTokenService accessTokenService) {
-		this.accessTokenService = accessTokenService;
+	public void setJsApiTicketService(JsApiTicketService jsApiTicketService) {
+		this.jsApiTicketService = jsApiTicketService;
 	}
 
 }
