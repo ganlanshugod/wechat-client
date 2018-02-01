@@ -34,7 +34,7 @@ public class OAuthCpServiceImpl extends WechatCpService implements OAuthCpServic
 	 */
 	@Override
 	public UserCpInfo getUserInfo(UserCpInfoParam userInfoParam) {
-		JSONObject post = this.post(Constants.根据code获取成员信息.getValue(), userInfoParam);
+		JSONObject post = this.get(Constants.根据code获取成员信息.getValue()+"?code="+userInfoParam.getCode(), userInfoParam);
 		return WechatCpResultHandler.handleResult(post, UserCpInfo.class);
 	}
 
