@@ -58,4 +58,11 @@ public class WechatException extends RuntimeException {
 		super(message,t);
 		this.code = code;
 	}
+	/**
+	 * @Description: 属性 code 的get方法 
+	 * @return code
+	 */
+	public String getCode() {
+		return code;
+	}
 }

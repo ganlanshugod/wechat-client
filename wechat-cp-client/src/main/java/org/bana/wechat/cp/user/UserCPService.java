@@ -8,7 +8,11 @@
  */
 package org.bana.wechat.cp.user;
 
+import java.util.List;
+
+import org.bana.wechat.cp.user.domain.User;
 import org.bana.wechat.cp.user.param.UserCreateParam;
+import org.bana.wechat.cp.user.param.UserListParam;
 
 /**
  * @ClassName: UserService
@@ -24,4 +28,13 @@ public interface UserCPService {
 	 * @param createParam
 	 */
 	public void create(UserCreateParam createParam);
+	
+	/**
+	 * Description:获取成员列表
+	 * @author Zhang Zhichao
+	 * @date 2018年2月2日 下午2:30:40
+	 * @param userListParam
+	 * @return
+	 */
+	public List<User> findUserList(UserListParam userListParam);
 }

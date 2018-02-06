@@ -8,7 +8,9 @@
  */
 package org.bana.wechat.common.util;
 
+import java.util.Map;
 import java.util.Random;
+
 
 /**
  * @ClassName: StringUtils
@@ -44,6 +46,34 @@ public class StringUtils extends org.apache.commons.lang.StringUtils{
 	*/ 
 	public static String getRandomStr() {
 		return getRandomStr(16);
+	}
+	
+	/** 
+	* @Description: 将map转换成url
+	* @author Liu Wenjie   
+	* @date 2015-5-9 下午5:07:22 
+	* @param map
+	* @return  
+	*/ 
+	public static String getUrlParamsByMap(Map<String, Object> map) {
+		if (map == null) {
+			return "";
+		}
+		StringBuffer sb = new StringBuffer();
+		for (Map.Entry<String, Object> entry : map.entrySet()) {
+			Object value = entry.getValue();
+			if(value != null){
+				if(!(value instanceof String) || !StringUtils.isBlank((String)value)){
+					sb.append(entry.getKey() + "=" + String.valueOf(entry.getValue()));
+					sb.append("&");
+				}
+			}
+		}
+		String s = sb.toString();
+		if (s.endsWith("&")) {
+			s = substringBeforeLast(s, "&");
+		}
+		return s;
 	}
 	
 	/** 

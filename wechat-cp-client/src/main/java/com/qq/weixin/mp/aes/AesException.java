@@ -57,7 +57,7 @@ public class AesException extends WechatCpException{
 		}
 	}
 
-	public int getCode() {
+	public int getWxCode() {
 		return code;
 	}
 

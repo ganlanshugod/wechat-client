@@ -58,6 +58,46 @@ public class SuiteAccessToken implements Serializable{
 	public void setExpiresIn(String expiresIn) {
 		this.expiresIn = expiresIn;
 	}
+	
+	
+	/**
+	 * <p>Description: </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年1月31日 下午5:35:04
+	 * @return
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((suiteAccessToken == null) ? 0 : suiteAccessToken.hashCode());
+		return result;
+	}
+	/**
+	 * <p>Description: </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年1月31日 下午5:35:04
+	 * @param obj
+	 * @return
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SuiteAccessToken other = (SuiteAccessToken) obj;
+		if (suiteAccessToken == null) {
+			if (other.suiteAccessToken != null)
+				return false;
+		} else if (!suiteAccessToken.equals(other.suiteAccessToken))
+			return false;
+		return true;
+	}
 	/**
 	 * <p>Description: </p>
 	 * @author Zhang Zhichao

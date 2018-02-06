@@ -8,10 +8,14 @@
  */
 package org.bana.wechat.cp.common;
 
+import java.util.Map;
+
 import org.bana.wechat.common.HttpHelper;
+import org.bana.wechat.common.util.StringUtils;
 import org.bana.wechat.cp.token.AccessTokenService;
 import org.bana.wechat.cp.token.SuiteAccessTokenService;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 /**
@@ -33,6 +37,16 @@ public abstract class WechatCpService {
 	 * @return
 	 */
 	protected JSONObject get(String url,WeChatCPParam param){
+		String paramStr = JSON.toJSONString(param);
+		Map<String,Object> map = JSON.parseObject(paramStr, Map.class);
+		String paramUrl = StringUtils.getUrlParamsByMap(map);
+		if(!StringUtils.isBlank(paramUrl)){
+			if(url.contains("?")){
+				url += "&" + paramUrl;
+			}else{
+				url += "?" + paramUrl;
+			}
+		}
 		return getHttpHelper().httpGet(addAccessToken(url, param));
 	}
 	
