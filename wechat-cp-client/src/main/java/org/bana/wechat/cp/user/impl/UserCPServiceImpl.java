@@ -17,6 +17,7 @@ import org.bana.wechat.cp.user.UserCPService;
 import org.bana.wechat.cp.user.domain.User;
 import org.bana.wechat.cp.user.param.UserCreateParam;
 import org.bana.wechat.cp.user.param.UserListParam;
+import org.bana.wechat.cp.user.param.UserParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +42,22 @@ public class UserCPServiceImpl extends WechatCpService implements UserCPService{
 		JSONObject result = this.post(Constants.创建成员.getValue(), createParam);
 		WechatCpResultHandler.handleResult(result);
 		LOG.info("创建成功 " + createParam);
+	}
+	
+	/**
+	 * <p>Description: 获取单个成员</p>
+	 * @author Zhang Zhichao
+	 * @date 2018年2月6日 下午1:28:41
+	 * @param userParam
+	 * @return
+	 * @see org.bana.wechat.cp.user.UserCPService#getUser(org.bana.wechat.cp.user.param.UserParam)
+	 */
+	@Override
+	public User findUser(UserParam userParam) {
+		JSONObject result = this.get(Constants.获取成员.getValue(), userParam);
+		User user = WechatCpResultHandler.handleResult(result, User.class);
+		LOG.info("获取成员成功： " + user.toString());
+		return user;
 	}
 	
 	/**
