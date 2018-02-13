@@ -31,6 +31,14 @@ public interface UserCPService {
 	public void create(UserCreateParam createParam);
 	
 	/**
+	 * Description: 更新用户
+	 * @author Zhang Zhichao
+	 * @date 2018年2月12日 上午11:38:40
+	 * @param updateParam
+	 */
+	public void updateUser(UserCreateParam updateParam);
+	
+	/**
 	 * Description: 获取单个成员
 	 * @author Zhang Zhichao
 	 * @date 2018年2月6日 下午1:28:15

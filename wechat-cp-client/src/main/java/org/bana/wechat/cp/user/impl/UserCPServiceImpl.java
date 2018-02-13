@@ -45,6 +45,20 @@ public class UserCPServiceImpl extends WechatCpService implements UserCPService{
 	}
 	
 	/**
+	 * <p>Description: 更新用户</p>
+	 * @author Zhang Zhichao
+	 * @date 2018年2月12日 上午11:39:28
+	 * @param updateParam
+	 * @see org.bana.wechat.cp.user.UserCPService#updateUser(org.bana.wechat.cp.user.param.UserCreateParam)
+	 */
+	@Override
+	public void updateUser(UserCreateParam updateParam) {
+		JSONObject result = this.post(Constants.更新成员.getValue(), updateParam);
+		WechatCpResultHandler.handleResult(result);
+		LOG.info("创建成功 " + updateParam);
+	}
+	
+	/**
 	 * <p>Description: 获取单个成员</p>
 	 * @author Zhang Zhichao
 	 * @date 2018年2月6日 下午1:28:41
