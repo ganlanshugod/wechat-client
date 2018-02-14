@@ -43,6 +43,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 public class TokenServiceAutoConfig {
 
 	@Bean
+	@ConditionalOnMissingBean(CacheManager.class)
 	public CacheManager cacheManager(RedisTemplate<Object, Object> redisTemplate) {
 	    RedisCacheManager cacheManager= new RedisCacheManager(redisTemplate);
 	    cacheManager.setDefaultExpiration(60); //单位秒
