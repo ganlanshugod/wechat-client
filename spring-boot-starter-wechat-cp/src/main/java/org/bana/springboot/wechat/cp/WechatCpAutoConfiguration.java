@@ -16,6 +16,8 @@ import org.bana.wechat.cp.callback.WechatCpCallbackHandler;
 import org.bana.wechat.cp.callback.WechatCpEventPublisher;
 import org.bana.wechat.cp.department.DepartmentCPService;
 import org.bana.wechat.cp.department.impl.DepartmentCPServiceImpl;
+import org.bana.wechat.cp.media.MediaCPService;
+import org.bana.wechat.cp.media.impl.MediaCPServiceImpl;
 import org.bana.wechat.cp.message.MessageCPService;
 import org.bana.wechat.cp.message.impl.MessageCPServiceImpl;
 import org.bana.wechat.cp.oauth.OAuthCpService;
@@ -95,6 +97,15 @@ public class WechatCpAutoConfiguration {
 		messageCPService.setAccessTokenService(accessTokenService);
 		messageCPService.setSuiteAccessTokenService(suiteTokenService);
 		return messageCPService;
+	}
+	
+	@Bean
+	@ConditionalOnMissingBean(MediaCPService.class)
+	public MediaCPService mediaCPService(AccessTokenService accessTokenService,SuiteAccessTokenService suiteTokenService){
+		MediaCPServiceImpl mediaCPService = new MediaCPServiceImpl();
+		mediaCPService.setAccessTokenService(accessTokenService);
+		mediaCPService.setSuiteAccessTokenService(suiteTokenService);
+		return mediaCPService;
 	}
 	/**
 	 * Description: 各监听器的配置
