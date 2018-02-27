@@ -46,4 +46,12 @@ public interface DepartmentCPService {
 	 * @param param
 	 */
 	void updateDepartment(DepartmentCreateParam param);
+	
+	/**
+	 * Description: 删除部门
+	 * @author Zhang Zhichao
+	 * @date 2018年2月27日 上午11:09:11
+	 * @param param
+	 */
+	void deleteDepartment(DepartmentListParam param);
 }

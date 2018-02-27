@@ -55,4 +55,12 @@ public interface UserCPService {
 	 * @return
 	 */
 	public List<User> findUserList(UserListParam userListParam);
+	
+	/**
+	 * Description: 删除成员
+	 * @author Zhang Zhichao
+	 * @date 2018年2月27日 下午2:11:59
+	 * @param userParam
+	 */
+	public void deleteUser(UserParam userParam);
 }

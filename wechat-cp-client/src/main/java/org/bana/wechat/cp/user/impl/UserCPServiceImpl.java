@@ -75,6 +75,19 @@ public class UserCPServiceImpl extends WechatCpService implements UserCPService{
 	}
 	
 	/**
+	 * <p>Description: 删除成员</p>
+	 * @author Zhang Zhichao
+	 * @date 2018年2月27日 下午2:13:14
+	 * @param userParam
+	 * @see org.bana.wechat.cp.user.UserCPService#deleteUser(org.bana.wechat.cp.user.param.UserParam)
+	 */
+	@Override
+	public void deleteUser(UserParam userParam) {
+		JSONObject result = this.get(Constants.删除成员.getValue(), userParam);
+		WechatCpResultHandler.handleResult(result);
+	}
+	
+	/**
 	 * <p>Description: 获取成员列表</p>
 	 * @author Zhang Zhichao
 	 * @date 2018年2月2日 下午2:31:22

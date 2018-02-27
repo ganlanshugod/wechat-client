@@ -75,4 +75,17 @@ public class DepartmentCPServiceImpl extends WechatCpService implements Departme
 		JSONObject result = this.post(Constants.更新部门.getValue(), param);
 		WechatCpResultHandler.handleResult(result);
 	}
+	
+	/**
+	 * <p>Description:删除部门 </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年2月27日 上午11:09:52
+	 * @param param
+	 * @see org.bana.wechat.cp.department.DepartmentCPService#deleteDepartment(org.bana.wechat.cp.department.param.DepartmentListParam)
+	 */
+	@Override
+	public void deleteDepartment(DepartmentListParam param) {
+		JSONObject result = this.get(Constants.删除部门.getValue(), param);
+		WechatCpResultHandler.handleResult(result);
+	}
 }
