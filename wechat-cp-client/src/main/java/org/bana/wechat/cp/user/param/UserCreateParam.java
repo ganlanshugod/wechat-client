@@ -36,6 +36,8 @@ public class UserCreateParam extends WeChatCPParam {
 	@JSONField(name="avatar_mediaid")
 	private String avatarMediaId;//": "2-G6nrLmr5EC3MNb_-zL1dDdzkd0p7cNliYu9V5w7o8K0",//成员头像的mediaid，通过素材管理接口上传图片获得的mediaid
 	private String telephone;//": "020-123456"，	//座机。由1-64位的纯数字或’-‘号组成。
+	@JSONField(name="to_invite")
+	private boolean toInvite; //是否发送邀请短信
 	
 	public String getUserId() {
 		return userId;
@@ -122,13 +124,33 @@ public class UserCreateParam extends WeChatCPParam {
 		this.telephone = telephone;
 	}
 	
+	/**
+	 * @Description: 属性 toInvite 的get方法 
+	 * @return toInvite
+	 */
+	public boolean isToInvite() {
+		return toInvite;
+	}
+	/**
+	 * @Description: 属性 toInvite 的set方法 
+	 * @param toInvite
+	 */
+	public void setToInvite(boolean toInvite) {
+		this.toInvite = toInvite;
+	}
+	/**
+	 * <p>Description: </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年3月6日 下午2:26:28
+	 * @return
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "UserCreateParam [userId=" + userId + ", name=" + name + ", department=" + department + ", position="
-				+ position + ", mobile=" + mobile + ", email=" + email + ", extattr=" + extattr + ", englishName="
-				+ englishName + ", order=" + order + ", gender=" + gender + ", isleader=" + isleader + ", enable="
-				+ enable + ", avatarMediaId=" + avatarMediaId + ", telephone=" + telephone + ", corpId=" + corpId
-				+ ", agentId=" + agentId + "]";
+		return String.format(
+				"UserCreateParam [userId=%s, name=%s, department=%s, position=%s, mobile=%s, email=%s, extattr=%s, englishName=%s, order=%s, gender=%s, isleader=%s, enable=%s, avatarMediaId=%s, telephone=%s, toInvite=%s]",
+				userId, name, department, position, mobile, email, extattr, englishName, order, gender, isleader,
+				enable, avatarMediaId, telephone, toInvite);
 	}
 	
 }
