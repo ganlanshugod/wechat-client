@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.bana</groupId>
 	<artifactId>wechat-parent</artifactId>
-	<version>0.4.0-SNAPSHOT</version>
+	<version>0.4.1-SNAPSHOT</version>
 	<name>wechat-parent</name>
 	<packaging>pom</packaging>
 	<description>wechat-parent</description>
@@ -121,6 +121,11 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>  
+			  <groupId>org.apache.maven.plugins</groupId>  
+			  <artifactId>maven-release-plugin</artifactId>  
+			  <version>2.5.3</version>   
 			</plugin>
 		</plugins>
 		<resources>
