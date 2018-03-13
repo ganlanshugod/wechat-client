@@ -11,7 +11,7 @@ package org.bana.wechat.cp.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.bana.wechat.common.util.StringUtils;
 
 /** 
  * @ClassName: WeChatExtAttr 

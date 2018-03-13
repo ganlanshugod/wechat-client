@@ -13,7 +13,7 @@
 	<properties>
 		<httpclient.version>4.5.3</httpclient.version>
 		<bana.version>0.1.4-SNAPSHOT</bana.version>
-		<common.util.version>1.0.5-SNAPSHOT</common.util.version>
+		<common.util.version>1.1.0-SNAPSHOT</common.util.version>
 		<spring.boot.version>1.5.2.RELEASE</spring.boot.version>
 		<slf4j.version>1.7.7</slf4j.version>
 	</properties>
@@ -30,9 +30,9 @@
 		<dependencies>
 			<!-- =======================通用commont-util的依赖 begin ================= -->
 			<dependency>
-				<groupId>commons-lang</groupId>
-				<artifactId>commons-lang</artifactId>
-				<version>2.6</version>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-lang3</artifactId>
+			    <version>3.7</version>
 			</dependency>
 			<!-- =======================通用commont-util的依赖 end ================= -->
 			<!-- =======================wechat 的统一工具类 begin ================= -->

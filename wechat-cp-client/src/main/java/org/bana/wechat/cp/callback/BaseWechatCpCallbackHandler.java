@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.commons.lang.StringUtils;
 import org.bana.wechat.common.util.BeanXmlUtil;
+import org.bana.wechat.common.util.StringUtils;
 import org.bana.wechat.cp.app.WechatAppManager;
 import org.bana.wechat.cp.app.WechatCorpSuiteConfig;
 import org.bana.wechat.cp.callback.event.AuthCancelEvent;

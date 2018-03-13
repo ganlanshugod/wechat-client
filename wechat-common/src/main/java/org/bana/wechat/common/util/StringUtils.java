@@ -17,7 +17,7 @@ import java.util.Random;
  * @Description: StringUtils扩展方法
  * @author Liu Wenjie
  */
-public class StringUtils extends org.apache.commons.lang.StringUtils{
+public class StringUtils extends org.apache.commons.lang3.StringUtils{
 
 	/** 
 	* @Description: 判断一组字符串是否为空白，有一个为空白则返回true
@@ -31,7 +31,7 @@ public class StringUtils extends org.apache.commons.lang.StringUtils{
 			return true;
 		}
 		for (String string : strs) {
-			if(org.apache.commons.lang.StringUtils.isBlank(string)){
+			if(org.apache.commons.lang3.StringUtils.isBlank(string)){
 				return true;
 			}
 		}

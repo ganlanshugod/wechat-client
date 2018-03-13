@@ -20,8 +20,8 @@
 		<!-- *********************************************************** -->
 		<!-- =======================通用commont-util的依赖 begin ================= -->
 		<dependency>
-		    <groupId>commons-lang</groupId>
-		    <artifactId>commons-lang</artifactId>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
 		</dependency>
 		<!-- =======================通用commont-util的依赖 end ================= -->
 		<!-- =======================json 组件的依赖 begin ================= -->
