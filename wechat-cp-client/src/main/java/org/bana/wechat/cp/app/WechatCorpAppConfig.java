@@ -19,8 +19,10 @@ public class WechatCorpAppConfig {
 	private String agentId;
 	private CorpAppType corpAppType; 
 	private String secret; //自建类型会有的属性
+	private String token; // 自建应用接收消息的token
+	private String encodingAeskey; // 自建应用接收消息的encoding_aes_key
 	private String permanentCode;//第三方授权的应用存在属性
-	private String suiteId; //存在的属性
+	private String suiteId; //第三方授权的应用存在的属性
 	
 	public String getCorpId() {
 		return corpId;
@@ -58,10 +60,46 @@ public class WechatCorpAppConfig {
 	public void setSuiteId(String suiteId) {
 		this.suiteId = suiteId;
 	}
+	/**
+	 * @Description: 属性 token 的get方法 
+	 * @return token
+	 */
+	public String getToken() {
+		return token;
+	}
+	/**
+	 * @Description: 属性 token 的set方法 
+	 * @param token
+	 */
+	public void setToken(String token) {
+		this.token = token;
+	}
+	/**
+	 * @Description: 属性 encodingAeskey 的get方法 
+	 * @return encodingAeskey
+	 */
+	public String getEncodingAeskey() {
+		return encodingAeskey;
+	}
+	/**
+	 * @Description: 属性 encodingAeskey 的set方法 
+	 * @param encodingAeskey
+	 */
+	public void setEncodingAeskey(String encodingAeskey) {
+		this.encodingAeskey = encodingAeskey;
+	}
+	/**
+	 * <p>Description: </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年4月9日 下午3:02:08
+	 * @return
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "WechatCorpAppConfig [corpId=" + corpId + ", agentId=" + agentId + ", corpAppType=" + corpAppType
-				+ ", secret=" + secret + ", permanentCode=" + permanentCode + ", suiteId=" + suiteId + "]";
+				+ ", secret=" + secret + ", token=" + token + ", encodingAeskey=" + encodingAeskey + ", permanentCode="
+				+ permanentCode + ", suiteId=" + suiteId + "]";
 	}
 	
 }

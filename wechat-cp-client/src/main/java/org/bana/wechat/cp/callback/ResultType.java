@@ -16,6 +16,8 @@ public enum ResultType {
 	触发的事件("event"), 
 	推送授权回调("create_auth"), 
 	普通消息("text", "image", "voice", "video", "shortvideo", "location", "link"), 
+	成员关注("subscribe"),
+	成员取消关注("unsubscribe"),
 	不支持("");
 
 	private String[] type;

@@ -21,13 +21,17 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.bana.wechat.common.util.BeanXmlUtil;
 import org.bana.wechat.common.util.StringUtils;
 import org.bana.wechat.cp.app.WechatAppManager;
+import org.bana.wechat.cp.app.WechatCorpAppConfig;
 import org.bana.wechat.cp.app.WechatCorpSuiteConfig;
 import org.bana.wechat.cp.callback.event.AuthCancelEvent;
 import org.bana.wechat.cp.callback.event.AuthChangeEvent;
 import org.bana.wechat.cp.callback.event.AuthCreateEvent;
+import org.bana.wechat.cp.callback.event.SubscribeEvent;
 import org.bana.wechat.cp.callback.event.SuiteTicketEvent;
+import org.bana.wechat.cp.callback.event.UnsubscribeEvent;
 import org.bana.wechat.cp.callback.result.auth.AuthChange;
 import org.bana.wechat.cp.callback.result.auth.AuthCreate;
+import org.bana.wechat.cp.callback.result.event.CommonEvent;
 import org.bana.wechat.cp.callback.result.ticket.SuiteTicket;
 import org.bana.wechat.cp.common.WechatCpException;
 import org.slf4j.Logger;
@@ -60,6 +64,7 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 	
 	public static final String PARAM_ECHOSTR = "echostr";
 	
+	public static final String EVENT_TYPE = "Event";
 	
 	
 	
@@ -112,6 +117,61 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 	}
 	
 	/**
+	 * <p>Description: 企业微信自建应用回调消息内容</p>
+	 * @author Zhang Zhichao
+	 * @date 2018年4月9日 下午1:40:54
+	 * @param corpId
+	 * @param agentId
+	 * @param request
+	 * @return
+	 * @see org.bana.wechat.cp.callback.WechatCpCallbackHandler#handleCorpMessage(java.lang.String, java.lang.String, javax.servlet.http.HttpServletRequest)
+	 */
+	@Override
+	public String handleCorpMessage(String corpId, String agentId, HttpServletRequest request) {
+		// 非空校验
+		if(StringUtils.isBlank(corpId)){
+			throw new WechatCpException(WechatCpException.CALLBACK_NO_CORPID,"没有指定对应的corpId");
+		}
+		if(StringUtils.isBlank(agentId)){
+			throw new WechatCpException(WechatCpException.CALLBACK_NO_AGENTID,"没有指定对应的agentId");
+		}
+		// 查询应用信息
+		WechatCorpAppConfig corpAppConfig = wechatAppManager.getAppConfig(corpId, agentId);
+		if(corpAppConfig==null){
+			throw new WechatCpException(WechatCpException.CALLBACK_NO_APP_CONFIG,"没有找到corpId="+corpId+"，agentId="+agentId+" 对应的配置信息");
+		}
+		String msgSignature = request.getParameter(PARAM_SIGNATURE);
+		String timeStamp = request.getParameter(PARAM_TIMESTAMP);
+		String nonce = request.getParameter(PARAM_NONCE);
+		String echoStr = request.getParameter(PARAM_ECHOSTR);
+		LOG.info("自建应用接收消息：推送参数为msgSignature=" + msgSignature
+				+",timeStamp="+timeStamp
+				+",nonce="+nonce
+				+",echoStr="+echoStr);
+		if(StringUtils.isNotBlank(echoStr)){
+			WXBizMsgCrypt wxcpt = new WXBizMsgCrypt(corpAppConfig.getToken(), corpAppConfig.getEncodingAeskey(), corpId);
+			LOG.warn("自建应用接收消息：corpId=" + corpId + "，agentId="+agentId+"首次推送成功");
+			return wxcpt.VerifyURL(msgSignature, timeStamp, nonce, echoStr);
+		}
+		
+		WXBizMsgCrypt wxcpt = new WXBizMsgCrypt(corpAppConfig.getToken(), corpAppConfig.getEncodingAeskey(), corpId);
+		
+		try {
+			InputStream is = request.getInputStream();
+			String postData = getPostData(is);
+			LOG.info("自建应用接收消息：解密前的解密字符串为：" + postData);
+			String decryptMsg = wxcpt.DecryptMsg(msgSignature, timeStamp, nonce, postData);
+			LOG.info("自建应用接收消息：获取到的解密字符串为：" + decryptMsg);
+			// 消息类型MsgType，此时固定为：event，通过Event区分不同的事件
+			ResultType msgType = getDecryptMsgInfo(decryptMsg,EVENT_TYPE);
+			return handleMessage(msgType,decryptMsg);
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new WechatCpException(WechatCpException.CALLBACK_GETPOST, "获取回调内的postData异常",e);
+		}
+	}
+	
+	/**
 	 * Description: TODO (这里用一句话描述这个方法的作用)
 	 * @author Liu Wenjie
 	 * @date 2018年1月26日 下午8:12:16
@@ -148,6 +208,14 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 			AuthChange authCancel = BeanXmlUtil.xmlToBean(decryptMsg, AuthChange.class);
 			wechatEventPublisher.publishEvent(new AuthCancelEvent(authCancel));
 			break;
+		case 成员关注:
+			CommonEvent subsEvent = BeanXmlUtil.xmlToBean(decryptMsg, CommonEvent.class);
+			wechatEventPublisher.publishEvent(new SubscribeEvent(subsEvent));
+			break;
+		case 成员取消关注:
+			CommonEvent unsubsEvent = BeanXmlUtil.xmlToBean(decryptMsg, CommonEvent.class);
+			wechatEventPublisher.publishEvent(new UnsubscribeEvent(unsubsEvent));
+			break;
 		default:
 			throw new WechatCpException(WechatCpException.CALLBACK_HandleException,"没有实现的msgType类型["+msgType.getType()+"]");
 		}
@@ -168,6 +236,35 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 			Document document = db.parse(new InputSource(new StringReader(decryptMsg)));
 			Element root = document.getDocumentElement();
 			NodeList nodelist1 = root.getElementsByTagName("InfoType");
+			if(nodelist1 == null || nodelist1.getLength() == 0 ){
+				nodelist1 = root.getElementsByTagName("MsgType");
+				if(nodelist1 == null || nodelist1.getLength() == 0){
+					return ResultType.不支持;
+				}
+			}
+			String textContent = nodelist1.item(0).getTextContent();
+			return ResultType.getInstance(StringUtils.trim(textContent));
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new WechatCpException(WechatCpException.CALLBACK_ParseTypeException, "解析返回值的类型异常",e);
+		} 
+	}
+	
+	/**
+	 * Description: 根据解码的消息体获取对应xml节点的信息
+	 * @author Zhang Zhichao
+	 * @date 2018年4月9日 下午3:41:52
+	 * @param decryptMsg
+	 * @param msgNode
+	 * @return
+	 */
+	private static ResultType getDecryptMsgInfo(String decryptMsg,String msgNode){
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document document = db.parse(new InputSource(new StringReader(decryptMsg)));
+			Element root = document.getDocumentElement();
+			NodeList nodelist1 = root.getElementsByTagName(msgNode);
 			if(nodelist1 == null || nodelist1.getLength() == 0 ){
 				nodelist1 = root.getElementsByTagName("MsgType");
 				if(nodelist1 == null || nodelist1.getLength() == 0){

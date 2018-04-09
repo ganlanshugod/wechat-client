@@ -32,6 +32,10 @@ public class WechatCpException extends WechatException {
 	public static final String SUITE_PARAM_ERROR1 = "CP-s001";
 	public static final String SUITE_PARAM_ERROR2 = "CP-s002";
 	public static final String SUITE_PARAM_ERROR3 = "CP-s002";
+	
+	public static final String CALLBACK_NO_CORPID = "CC_001";
+	public static final String CALLBACK_NO_AGENTID = "CC_002";
+	public static final String CALLBACK_NO_APP_CONFIG = "CC_003";
 
 	/**
 	 * @Fields serialVersionUID : 
