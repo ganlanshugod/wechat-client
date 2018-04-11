@@ -9,7 +9,10 @@ import java.util.Arrays;
  */
 public enum ResultType {
 	通讯录变更通知("contact_sync"), 
-	企业微信通讯录变更通知("change_contact"), 
+	企业微信通讯录变更通知("change_contact"),
+	新增成员事件("create_user"),
+	更新成员事件("update_user"),
+	删除成员事件("delete_user"),
 	推送suite_ticket协议("suite_ticket"), 
 	变更授权的通知("change_auth"), 
 	取消授权的通知("cancel_auth"), 

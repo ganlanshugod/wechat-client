@@ -9,7 +9,7 @@
 package org.bana.wechat.cp.callback.event;
 
 import org.bana.wechat.common.listener.WechatEvent;
-import org.bana.wechat.cp.callback.result.event.CommonEvent;
+import org.bana.wechat.cp.callback.result.event.AgentMsg;
 
 /**
  * @ClassName: UnsubscribeEvent
@@ -20,45 +20,45 @@ public class UnsubscribeEvent implements WechatEvent {
 	/**
 	 * @Fields unsubscribeEvent : 成员取消关注事件消息体
 	 */
-	private CommonEvent unsubscribeEvent;
-	
+	private AgentMsg unsubscribeMsg;
+
 	/**
 	 * <p>Description: </p>
 	 * @author Zhang Zhichao
-	 * @date 2018年4月9日 下午4:23:40
-	 * @param unsubscribeEvent
+	 * @date 2018年4月11日 上午10:45:55
+	 * @param unsubscribeMsg
 	 */
-	public UnsubscribeEvent(CommonEvent unsubscribeEvent) {
+	public UnsubscribeEvent(AgentMsg unsubscribeMsg) {
 		super();
-		this.unsubscribeEvent = unsubscribeEvent;
+		this.unsubscribeMsg = unsubscribeMsg;
 	}
 
 	/**
-	 * @Description: 属性 unsubscribeEvent 的get方法 
-	 * @return unsubscribeEvent
+	 * @Description: 属性 unsubscribeMsg 的get方法 
+	 * @return unsubscribeMsg
 	 */
-	public CommonEvent getUnsubscribeEvent() {
-		return unsubscribeEvent;
+	public AgentMsg getUnsubscribeMsg() {
+		return unsubscribeMsg;
 	}
 
 	/**
-	 * @Description: 属性 unsubscribeEvent 的set方法 
-	 * @param unsubscribeEvent
+	 * @Description: 属性 unsubscribeMsg 的set方法 
+	 * @param unsubscribeMsg
 	 */
-	public void setUnsubscribeEvent(CommonEvent unsubscribeEvent) {
-		this.unsubscribeEvent = unsubscribeEvent;
+	public void setUnsubscribeMsg(AgentMsg unsubscribeMsg) {
+		this.unsubscribeMsg = unsubscribeMsg;
 	}
 
 	/**
 	 * <p>Description: </p>
 	 * @author Zhang Zhichao
-	 * @date 2018年4月9日 下午4:22:17
+	 * @date 2018年4月11日 上午10:46:08
 	 * @return
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "UnsubscribeEvent [unsubscribeEvent=" + unsubscribeEvent + "]";
+		return "UnsubscribeEvent [unsubscribeMsg=" + unsubscribeMsg + "]";
 	}
 	
 }

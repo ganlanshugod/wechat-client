@@ -14,12 +14,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @ClassName: CommonEvent
+ * @ClassName: CommonMsg
  * @Description: 公共的事件消息体
  * @author Zhang Zhichao
  */
 @XmlRootElement(name="xml")
-public class CommonEvent implements Serializable {
+public class CommonMsg implements Serializable {
 
 	private static final long serialVersionUID = -4248231517163933548L;
 	
@@ -43,14 +43,6 @@ public class CommonEvent implements Serializable {
 	 * @Fields event : 事件类型
 	 */
 	private String event;
-	/**
-	 * @Fields eventKey : 事件KEY值
-	 */
-	private String eventKey;
-	/**
-	 * @Fields agentID : 企业应用的id，整型
-	 */
-	private Integer agentID;
 	
 	/*=======================get,set=========================================*/
 	/**
@@ -129,46 +121,16 @@ public class CommonEvent implements Serializable {
 		this.event = event;
 	}
 	/**
-	 * @Description: 属性 eventKey 的get方法 
-	 * @return eventKey
-	 */
-	@XmlElement(name="EventKey")
-	public String getEventKey() {
-		return eventKey;
-	}
-	/**
-	 * @Description: 属性 eventKey 的set方法 
-	 * @param eventKey
-	 */
-	public void setEventKey(String eventKey) {
-		this.eventKey = eventKey;
-	}
-	/**
-	 * @Description: 属性 agentID 的get方法 
-	 * @return agentID
-	 */
-	@XmlElement(name="AgentID")
-	public Integer getAgentID() {
-		return agentID;
-	}
-	/**
-	 * @Description: 属性 agentID 的set方法 
-	 * @param agentID
-	 */
-	public void setAgentID(Integer agentID) {
-		this.agentID = agentID;
-	}
-	/**
 	 * <p>Description: </p>
 	 * @author Zhang Zhichao
-	 * @date 2018年4月9日 下午4:05:27
+	 * @date 2018年4月11日 上午9:54:26
 	 * @return
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "CommonEvent [toUserName=" + toUserName + ", fromUserName=" + fromUserName + ", createTime=" + createTime
-				+ ", msgType=" + msgType + ", event=" + event + ", eventKey=" + eventKey + ", agentID=" + agentID + "]";
+				+ ", msgType=" + msgType + ", event=" + event + "]";
 	}
 	
 }

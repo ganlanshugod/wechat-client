@@ -26,12 +26,14 @@ import org.bana.wechat.cp.app.WechatCorpSuiteConfig;
 import org.bana.wechat.cp.callback.event.AuthCancelEvent;
 import org.bana.wechat.cp.callback.event.AuthChangeEvent;
 import org.bana.wechat.cp.callback.event.AuthCreateEvent;
+import org.bana.wechat.cp.callback.event.CreateUpdateUserEvent;
 import org.bana.wechat.cp.callback.event.SubscribeEvent;
 import org.bana.wechat.cp.callback.event.SuiteTicketEvent;
 import org.bana.wechat.cp.callback.event.UnsubscribeEvent;
 import org.bana.wechat.cp.callback.result.auth.AuthChange;
 import org.bana.wechat.cp.callback.result.auth.AuthCreate;
-import org.bana.wechat.cp.callback.result.event.CommonEvent;
+import org.bana.wechat.cp.callback.result.event.AgentMsg;
+import org.bana.wechat.cp.callback.result.event.CreateUpdateUser;
 import org.bana.wechat.cp.callback.result.ticket.SuiteTicket;
 import org.bana.wechat.cp.common.WechatCpException;
 import org.slf4j.Logger;
@@ -64,7 +66,8 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 	
 	public static final String PARAM_ECHOSTR = "echostr";
 	
-	public static final String EVENT_TYPE = "Event";
+	public static final String EVENT = "Event";
+	public static final String CHANGE_TYPE = "ChangeType";
 	
 	
 	
@@ -163,7 +166,7 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 			String decryptMsg = wxcpt.DecryptMsg(msgSignature, timeStamp, nonce, postData);
 			LOG.info("自建应用接收消息：获取到的解密字符串为：" + decryptMsg);
 			// 消息类型MsgType，此时固定为：event，通过Event区分不同的事件
-			ResultType msgType = getDecryptMsgInfo(decryptMsg,EVENT_TYPE);
+			ResultType msgType = getDecryptMsgInfo(decryptMsg,CHANGE_TYPE);
 			return handleMessage(msgType,decryptMsg);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -209,12 +212,17 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 			wechatEventPublisher.publishEvent(new AuthCancelEvent(authCancel));
 			break;
 		case 成员关注:
-			CommonEvent subsEvent = BeanXmlUtil.xmlToBean(decryptMsg, CommonEvent.class);
-			wechatEventPublisher.publishEvent(new SubscribeEvent(subsEvent));
+			AgentMsg subscribe = BeanXmlUtil.xmlToBean(decryptMsg, AgentMsg.class);
+			wechatEventPublisher.publishEvent(new SubscribeEvent(subscribe));
 			break;
 		case 成员取消关注:
-			CommonEvent unsubsEvent = BeanXmlUtil.xmlToBean(decryptMsg, CommonEvent.class);
-			wechatEventPublisher.publishEvent(new UnsubscribeEvent(unsubsEvent));
+			AgentMsg unsubscribe = BeanXmlUtil.xmlToBean(decryptMsg, AgentMsg.class);
+			wechatEventPublisher.publishEvent(new UnsubscribeEvent(unsubscribe));
+			break;
+		case 新增成员事件:
+		case 更新成员事件:
+			CreateUpdateUser createUpdateUser = BeanXmlUtil.xmlToBean(decryptMsg, CreateUpdateUser.class);
+			wechatEventPublisher.publishEvent(new CreateUpdateUserEvent(createUpdateUser));
 			break;
 		default:
 			throw new WechatCpException(WechatCpException.CALLBACK_HandleException,"没有实现的msgType类型["+msgType.getType()+"]");
@@ -266,9 +274,14 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 			Element root = document.getDocumentElement();
 			NodeList nodelist1 = root.getElementsByTagName(msgNode);
 			if(nodelist1 == null || nodelist1.getLength() == 0 ){
-				nodelist1 = root.getElementsByTagName("MsgType");
+				// 查找event信息
+				nodelist1 = root.getElementsByTagName(EVENT);
 				if(nodelist1 == null || nodelist1.getLength() == 0){
-					return ResultType.不支持;
+					// 查找MsgType信息
+					nodelist1 = root.getElementsByTagName("MsgType");
+					if(nodelist1 == null || nodelist1.getLength() == 0){
+						return ResultType.不支持;
+					}
 				}
 			}
 			String textContent = nodelist1.item(0).getTextContent();

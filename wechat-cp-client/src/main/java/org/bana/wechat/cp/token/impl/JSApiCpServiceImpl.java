@@ -50,7 +50,7 @@ public class JSApiCpServiceImpl implements JSApiCpService {
 		StringBuffer sb = new StringBuffer("jsapi_ticket=").append(ticket)
 				.append("&noncestr=").append(noncestr)
 				.append("&timestamp=").append(timestamp)
-				.append("url=").append(url);
+				.append("&url=").append(url);
 		String signature = getSHA1(sb.toString());
 		JSSDKCpConfig jssdkConfing = new JSSDKCpConfig();
 		jssdkConfing.setAppId(corpId);

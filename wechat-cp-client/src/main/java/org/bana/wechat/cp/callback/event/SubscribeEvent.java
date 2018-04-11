@@ -9,7 +9,7 @@
 package org.bana.wechat.cp.callback.event;
 
 import org.bana.wechat.common.listener.WechatEvent;
-import org.bana.wechat.cp.callback.result.event.CommonEvent;
+import org.bana.wechat.cp.callback.result.event.AgentMsg;
 
 /**
  * @ClassName: SubscribeEvent
@@ -20,45 +20,45 @@ public class SubscribeEvent implements WechatEvent {
 	/**
 	 * @Fields subscribeEvent : 成员关注事件消息体
 	 */
-	private CommonEvent subscribeEvent;
+	private AgentMsg subscribeMsg;
 
 	/**
 	 * <p>Description: </p>
 	 * @author Zhang Zhichao
-	 * @date 2018年4月9日 下午4:23:27
-	 * @param subscribeEvent
+	 * @date 2018年4月11日 上午10:45:15
+	 * @param subscribeMsg
 	 */
-	public SubscribeEvent(CommonEvent subscribeEvent) {
+	public SubscribeEvent(AgentMsg subscribeMsg) {
 		super();
-		this.subscribeEvent = subscribeEvent;
+		this.subscribeMsg = subscribeMsg;
 	}
 
 	/**
-	 * @Description: 属性 subscribeEvent 的get方法 
-	 * @return subscribeEvent
+	 * @Description: 属性 subscribeMsg 的get方法 
+	 * @return subscribeMsg
 	 */
-	public CommonEvent getSubscribeEvent() {
-		return subscribeEvent;
+	public AgentMsg getSubscribeMsg() {
+		return subscribeMsg;
 	}
 
 	/**
-	 * @Description: 属性 subscribeEvent 的set方法 
-	 * @param subscribeEvent
+	 * @Description: 属性 subscribeMsg 的set方法 
+	 * @param subscribeMsg
 	 */
-	public void setSubscribeEvent(CommonEvent subscribeEvent) {
-		this.subscribeEvent = subscribeEvent;
+	public void setSubscribeMsg(AgentMsg subscribeMsg) {
+		this.subscribeMsg = subscribeMsg;
 	}
 
 	/**
 	 * <p>Description: </p>
 	 * @author Zhang Zhichao
-	 * @date 2018年4月9日 下午4:19:30
+	 * @date 2018年4月11日 上午10:45:26
 	 * @return
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "SubscribeEvent [subscribeEvent=" + subscribeEvent + "]";
+		return "SubscribeEvent [subscribeMsg=" + subscribeMsg + "]";
 	}
-	
+
 }
