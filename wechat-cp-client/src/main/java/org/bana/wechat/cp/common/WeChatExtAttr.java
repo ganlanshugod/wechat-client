@@ -9,9 +9,13 @@
 package org.bana.wechat.cp.common;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bana.wechat.common.util.StringUtils;
+
+import com.alibaba.fastjson.JSONObject;
 
 /** 
  * @ClassName: WeChatExtAttr 
@@ -84,7 +88,14 @@ public class WeChatExtAttr {
 	*/ 
 	@Override
 	public String toString() {
-		return "WeChatExtAttr [attrs=" + attrs + "]";
+		Map<String,List<AttrObject>> map = new HashMap<String,List<AttrObject>>();
+		if(this.attrs==null || this.attrs.isEmpty()){
+			map.put("attrs", new ArrayList<AttrObject>());
+		}else{
+			map.put("attrs", this.attrs);
+		}
+		Object  jsonObj = JSONObject.toJSON(map);
+		return jsonObj.toString();
 	}
 	
 	public WeChatExtAttr append(String name,String value){
