@@ -8,6 +8,7 @@
  */
 package org.bana.wechat.cp.callback.result.event;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -19,10 +20,30 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Zhang Zhichao
  */
 @XmlRootElement(name="xml")
-public class CreateUpdateUser extends CommonMsg{
+public class CreateUpdateUser implements Serializable{
 
 	private static final long serialVersionUID = 3162478952441322413L;
 	
+	/**
+	 * @Fields toUserName : 企业微信CorpID
+	 */
+	private String toUserName;
+	/**
+	 * @Fields fromUserName : 成员UserID
+	 */
+	private String fromUserName;
+	/**
+	 * @Fields createTime : 消息创建时间（整型）
+	 */
+	private Integer createTime;
+	/**
+	 * @Fields msgType : 消息类型
+	 */
+	private String msgType;
+	/**
+	 * @Fields event : 事件类型
+	 */
+	private String event;
 	/**
 	 * @Fields changeType : create_user或者delete_user
 	 */
@@ -85,6 +106,81 @@ public class CreateUpdateUser extends CommonMsg{
 	private List<ExtAttrMsg> extAttr;
 	
 	/*=======================get,set=========================================*/
+	/**
+	 * @Description: 属性 toUserName 的get方法 
+	 * @return toUserName
+	 */
+	@XmlElement(name="ToUserName")
+	public String getToUserName() {
+		return toUserName;
+	}
+	/**
+	 * @Description: 属性 toUserName 的set方法 
+	 * @param toUserName
+	 */
+	public void setToUserName(String toUserName) {
+		this.toUserName = toUserName;
+	}
+	/**
+	 * @Description: 属性 fromUserName 的get方法 
+	 * @return fromUserName
+	 */
+	@XmlElement(name="FromUserName")
+	public String getFromUserName() {
+		return fromUserName;
+	}
+	/**
+	 * @Description: 属性 fromUserName 的set方法 
+	 * @param fromUserName
+	 */
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+	/**
+	 * @Description: 属性 createTime 的get方法 
+	 * @return createTime
+	 */
+	@XmlElement(name="CreateTime")
+	public Integer getCreateTime() {
+		return createTime;
+	}
+	/**
+	 * @Description: 属性 createTime 的set方法 
+	 * @param createTime
+	 */
+	public void setCreateTime(Integer createTime) {
+		this.createTime = createTime;
+	}
+	/**
+	 * @Description: 属性 msgType 的get方法 
+	 * @return msgType
+	 */
+	@XmlElement(name="MsgType")
+	public String getMsgType() {
+		return msgType;
+	}
+	/**
+	 * @Description: 属性 msgType 的set方法 
+	 * @param msgType
+	 */
+	public void setMsgType(String msgType) {
+		this.msgType = msgType;
+	}
+	/**
+	 * @Description: 属性 event 的get方法 
+	 * @return event
+	 */
+	@XmlElement(name="Event")
+	public String getEvent() {
+		return event;
+	}
+	/**
+	 * @Description: 属性 event 的set方法 
+	 * @param event
+	 */
+	public void setEvent(String event) {
+		this.event = event;
+	}
 	/**
 	 * @Description: 属性 changeType 的get方法 
 	 * @return changeType
@@ -313,17 +409,18 @@ public class CreateUpdateUser extends CommonMsg{
 	/**
 	 * <p>Description: </p>
 	 * @author Zhang Zhichao
-	 * @date 2018年4月11日 上午10:28:53
+	 * @date 2018年4月12日 上午9:30:07
 	 * @return
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "CreateUpdateUserEvent [changeType=" + changeType + ", userID=" + userID + ", newUserID=" + newUserID
-				+ ", name=" + name + ", department=" + department + ", mobile=" + mobile + ", position=" + position
-				+ ", gender=" + gender + ", email=" + email + ", status=" + status + ", avatar=" + avatar
-				+ ", englishName=" + englishName + ", isLeader=" + isLeader + ", telephone=" + telephone + ", extAttr="
-				+ extAttr + "]";
+		return "CreateUpdateUser [toUserName=" + toUserName + ", fromUserName=" + fromUserName + ", createTime="
+				+ createTime + ", msgType=" + msgType + ", event=" + event + ", changeType=" + changeType + ", userID="
+				+ userID + ", newUserID=" + newUserID + ", name=" + name + ", department=" + department + ", mobile="
+				+ mobile + ", position=" + position + ", gender=" + gender + ", email=" + email + ", status=" + status
+				+ ", avatar=" + avatar + ", englishName=" + englishName + ", isLeader=" + isLeader + ", telephone="
+				+ telephone + ", extAttr=" + extAttr + "]";
 	}
 	
 }
