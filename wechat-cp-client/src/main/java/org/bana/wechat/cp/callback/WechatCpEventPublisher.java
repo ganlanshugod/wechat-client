@@ -14,11 +14,15 @@ import org.bana.wechat.common.listener.impl.BaseWechatEventPublisher;
 import org.bana.wechat.cp.callback.event.AuthCancelEvent;
 import org.bana.wechat.cp.callback.event.AuthChangeEvent;
 import org.bana.wechat.cp.callback.event.AuthCreateEvent;
+import org.bana.wechat.cp.callback.event.CreateUpdateUserEvent;
 import org.bana.wechat.cp.callback.event.SuiteTicketEvent;
 import org.bana.wechat.cp.callback.listener.AuthCancelEventListener;
 import org.bana.wechat.cp.callback.listener.AuthChangeEventListener;
 import org.bana.wechat.cp.callback.listener.AuthCreateEventListener;
+import org.bana.wechat.cp.callback.listener.CrtUdpUserEventListener;
+import org.bana.wechat.cp.callback.listener.SubscribeEventListener;
 import org.bana.wechat.cp.callback.listener.SuiteTicketEventListener;
+import org.bana.wechat.cp.callback.listener.UnsubscribeEventListener;
 
 /**
  * @ClassName: WechatCpEventPublisher
@@ -50,6 +54,18 @@ public class WechatCpEventPublisher extends BaseWechatEventPublisher {
 		if(cls.isAssignableFrom(AuthCancelEvent.class)){
 			return (WechatListener<T>)getAuthCancelEventListener();
 		}
+		// 成员关注事件
+		if(cls.isAssignableFrom(SubscribeEventListener.class)){
+			return (WechatListener<T>)getSubscribeEventListener();
+		}
+		// 成员取消关注事件
+		if(cls.isAssignableFrom(UnsubscribeEventListener.class)){
+			return (WechatListener<T>)getUnsubscribeEventListener();
+		}
+		// 成员新增、修改事件
+		if(cls.isAssignableFrom(CreateUpdateUserEvent.class)){
+			return (WechatListener<T>)getCrtUdpUserEventListener();
+		}
 		return null;
 	}
 
@@ -66,6 +82,18 @@ public class WechatCpEventPublisher extends BaseWechatEventPublisher {
 	}
 	
 	public AuthCancelEventListener getAuthCancelEventListener() {
+		return null;
+	}
+	
+	public SubscribeEventListener getSubscribeEventListener() {
+		return null;
+	}
+	
+	public UnsubscribeEventListener getUnsubscribeEventListener() {
+		return null;
+	}
+	
+	public CrtUdpUserEventListener getCrtUdpUserEventListener() {
 		return null;
 	}
 

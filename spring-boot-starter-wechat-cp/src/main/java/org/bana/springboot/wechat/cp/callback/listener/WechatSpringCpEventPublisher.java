@@ -12,7 +12,10 @@ import org.bana.wechat.cp.callback.WechatCpEventPublisher;
 import org.bana.wechat.cp.callback.listener.AuthCancelEventListener;
 import org.bana.wechat.cp.callback.listener.AuthChangeEventListener;
 import org.bana.wechat.cp.callback.listener.AuthCreateEventListener;
+import org.bana.wechat.cp.callback.listener.CrtUdpUserEventListener;
+import org.bana.wechat.cp.callback.listener.SubscribeEventListener;
 import org.bana.wechat.cp.callback.listener.SuiteTicketEventListener;
+import org.bana.wechat.cp.callback.listener.UnsubscribeEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -33,6 +36,15 @@ public class WechatSpringCpEventPublisher extends WechatCpEventPublisher {
 	
 	@Autowired(required=false)
 	private AuthCancelEventListener authCancelEventListener;
+	
+	@Autowired(required=false)
+	private CrtUdpUserEventListener crtUdpUserEventListener;
+	
+	@Autowired(required=false)
+	private SubscribeEventListener subscribeEventListener;
+	
+	@Autowired(required=false)
+	private UnsubscribeEventListener unsubscribeEventListener;
 	
 	/**
 	 * <p>Description: </p>
@@ -80,5 +92,41 @@ public class WechatSpringCpEventPublisher extends WechatCpEventPublisher {
 	@Override
 	public AuthCancelEventListener getAuthCancelEventListener() {
 		return authCancelEventListener;
+	}
+	
+	/**
+	 * <p>Description: </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年4月12日 上午9:52:18
+	 * @return
+	 * @see org.bana.wechat.cp.callback.WechatCpEventPublisher#getCrtUdpUserEventListener()
+	 */
+	@Override
+	public CrtUdpUserEventListener getCrtUdpUserEventListener() {
+		return crtUdpUserEventListener;
+	}
+	
+	/**
+	 * <p>Description: </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年4月12日 上午10:00:34
+	 * @return
+	 * @see org.bana.wechat.cp.callback.WechatCpEventPublisher#getSubscribeEventListener()
+	 */
+	@Override
+	public SubscribeEventListener getSubscribeEventListener() {
+		return subscribeEventListener;
+	}
+	
+	/**
+	 * <p>Description: </p>
+	 * @author Zhang Zhichao
+	 * @date 2018年4月12日 上午10:03:58
+	 * @return
+	 * @see org.bana.wechat.cp.callback.WechatCpEventPublisher#getUnsubscribeEventListener()
+	 */
+	@Override
+	public UnsubscribeEventListener getUnsubscribeEventListener() {
+		return unsubscribeEventListener;
 	}
 }
