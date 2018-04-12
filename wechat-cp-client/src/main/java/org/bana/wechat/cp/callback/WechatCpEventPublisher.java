@@ -15,7 +15,9 @@ import org.bana.wechat.cp.callback.event.AuthCancelEvent;
 import org.bana.wechat.cp.callback.event.AuthChangeEvent;
 import org.bana.wechat.cp.callback.event.AuthCreateEvent;
 import org.bana.wechat.cp.callback.event.CreateUpdateUserEvent;
+import org.bana.wechat.cp.callback.event.SubscribeEvent;
 import org.bana.wechat.cp.callback.event.SuiteTicketEvent;
+import org.bana.wechat.cp.callback.event.UnsubscribeEvent;
 import org.bana.wechat.cp.callback.listener.AuthCancelEventListener;
 import org.bana.wechat.cp.callback.listener.AuthChangeEventListener;
 import org.bana.wechat.cp.callback.listener.AuthCreateEventListener;
@@ -55,11 +57,11 @@ public class WechatCpEventPublisher extends BaseWechatEventPublisher {
 			return (WechatListener<T>)getAuthCancelEventListener();
 		}
 		// 成员关注事件
-		if(cls.isAssignableFrom(SubscribeEventListener.class)){
+		if(cls.isAssignableFrom(SubscribeEvent.class)){
 			return (WechatListener<T>)getSubscribeEventListener();
 		}
 		// 成员取消关注事件
-		if(cls.isAssignableFrom(UnsubscribeEventListener.class)){
+		if(cls.isAssignableFrom(UnsubscribeEvent.class)){
 			return (WechatListener<T>)getUnsubscribeEventListener();
 		}
 		// 成员新增、修改事件
