@@ -22,7 +22,9 @@
 		<module>wechat-common</module>
 		<module>wechat-client</module>
 		<module>wechat-cp-client</module>
+		<module>wechat-mp-client</module>
 		<module>spring-boot-starter-wechat-cp</module>
+		<module>spring-boot-starter-wechat-mp</module>
 		<module>spring-boot-starter-wechat</module>
 	</modules>
 
@@ -44,6 +46,11 @@
 			<dependency>
 				<groupId>org.bana</groupId>
 				<artifactId>wechat-cp-client</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.bana</groupId>
+				<artifactId>wechat-mp-client</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<!-- =======================wechat 的统一工具类end ================= -->
