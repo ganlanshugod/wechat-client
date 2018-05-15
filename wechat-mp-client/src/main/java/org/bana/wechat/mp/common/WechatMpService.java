@@ -63,7 +63,7 @@ public abstract class WechatMpService {
 	}
 	
 	private String addAccessToken(String url,WeChatMpParam param){
-		String accessToken = accessTokenService.getAccessToken(param.getAppId(), param.getSecret());
+		String accessToken = accessTokenService.getAccessToken(param.getAppId());
 		if(url.contains("?")){
 			url += "&";
 		}else{

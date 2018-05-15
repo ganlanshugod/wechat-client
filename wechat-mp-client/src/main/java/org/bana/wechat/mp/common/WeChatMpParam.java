@@ -23,7 +23,6 @@ public class WeChatMpParam implements Serializable{
 	private static final long serialVersionUID = -3568410719417107194L;
 
 	private String appId;
-	private String secret;
 	
 	public String getAppId() {
 		return appId;
@@ -31,15 +30,10 @@ public class WeChatMpParam implements Serializable{
 	public void setAppId(String appId) {
 		this.appId = appId;
 	}
-	public String getSecret() {
-		return secret;
-	}
-	public void setSecret(String secret) {
-		this.secret = secret;
-	}
+	
 	@Override
 	public String toString() {
-		return "WeChatMpParam [appId=" + appId + ", secret=" + secret + "]";
+		return "WeChatMpParam [appId=" + appId + "]";
 	}
 	
 }

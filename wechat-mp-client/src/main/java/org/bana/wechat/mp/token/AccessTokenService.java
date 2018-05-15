@@ -26,7 +26,7 @@ public interface AccessTokenService {
 	* @param secret
 	* @return  
 	*/ 
-	String getAccessToken(String appId,String secret);
+	String getAccessToken(String appId);
 	
 	/**
 	 * Description: 获取网页端授权的authToken，authToken中包含openId字段
@@ -35,5 +35,5 @@ public interface AccessTokenService {
 	 * @param appId
 	 * @return
 	 */
-	WebAuthAccessToken getWebAuthAccessToken(String appId,String secret,String code);
+	WebAuthAccessToken getWebAuthAccessToken(String appId,String code);
 }

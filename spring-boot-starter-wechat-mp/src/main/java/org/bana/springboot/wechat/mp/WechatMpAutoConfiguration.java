@@ -13,6 +13,7 @@ import org.bana.springboot.wechat.mp.token.MpTokenServiceAutoConfig;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -28,6 +29,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 @ConditionalOnBean(RedisTemplate.class)
 @Import({MpTokenServiceAutoConfig.class,OAuthAutoConfig.class})
+@EnableConfigurationProperties(WechatMpProperties.class)
 public class WechatMpAutoConfiguration {
 
 	

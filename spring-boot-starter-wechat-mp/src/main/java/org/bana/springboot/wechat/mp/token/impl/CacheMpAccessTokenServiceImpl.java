@@ -28,9 +28,9 @@ public class CacheMpAccessTokenServiceImpl extends SimpleAccessTokenServiceImpl 
 	 * @see org.bana.wechat.cp.token.impl.SimpleAccessTokenServiceImpl#getAccessToken(java.lang.String, java.lang.String)
 	 */
 	@Override
-	@Cacheable(value="MPToken",key="methodName+#appId+#secret")
-	public String getAccessToken(String appId, String secret) {
-		return super.getAccessToken(appId, secret);
+	@Cacheable(value="MPToken",key="methodName+#appId")
+	public String getAccessToken(String appId) {
+		return super.getAccessToken(appId);
 	}
 	
 }

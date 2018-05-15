@@ -8,6 +8,9 @@
  */
 package org.bana.wechat.mp;
 
+import org.bana.wechat.mp.app.WechatMpConfig;
+import org.bana.wechat.mp.app.WechatMpManager;
+import org.bana.wechat.mp.app.impl.InmemeryWechatMpManager;
 import org.bana.wechat.mp.token.impl.SimpleAccessTokenServiceImpl;
 import org.junit.BeforeClass;
 
@@ -24,8 +27,20 @@ public class BaseMpTest {
 
 	protected static String secret = "d6fadb9f2aad175b7e2bcc35048b35ab";
 	
+	protected static WechatMpManager wechatMpManager;
+	
 	@BeforeClass
 	public static void beforeClass(){
-		tokenService =  new SimpleAccessTokenServiceImpl();
+		InmemeryWechatMpManager wechatMpManagerImpl = new InmemeryWechatMpManager();
+		WechatMpConfig appConfig = new WechatMpConfig();
+		appConfig.setAppId(appId);
+		appConfig.setSecret(secret);
+		wechatMpManagerImpl.addAppConfig(appConfig);
+		wechatMpManagerImpl.addAppConfig(appConfig);
+		SimpleAccessTokenServiceImpl tokenServiceImpl =  new SimpleAccessTokenServiceImpl();
+		tokenServiceImpl.setWechatMpManager(wechatMpManagerImpl);
+		
+		tokenService = tokenServiceImpl;
+		wechatMpManager = wechatMpManagerImpl;
 	}
 }

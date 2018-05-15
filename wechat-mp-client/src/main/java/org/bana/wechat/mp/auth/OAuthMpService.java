@@ -8,7 +8,6 @@
  */
 package org.bana.wechat.mp.auth;
 
-import org.bana.wechat.mp.auth.param.UserMpInfoParam;
 import org.bana.wechat.mp.auth.result.UserMpInfo;
 
 /**
