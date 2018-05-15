@@ -71,7 +71,7 @@ public class SimpleAccessTokenServiceImpl implements AccessTokenService {
 				AccessToken accessTokenSuite = getAccessTokenByPermanentCode(appConfig.getCorpId(),appConfig.getPermanentCode(),appConfig.getSuiteId());
 				return accessTokenSuite.getAccessToken();
 			default:
-				throw new RuntimeException("位置的AppType"+corpAppType);
+				throw new RuntimeException("未知的AppType"+corpAppType);
 		}
 		
 	}
@@ -118,8 +118,6 @@ public class SimpleAccessTokenServiceImpl implements AccessTokenService {
 	public void setWechatAppManager(WechatAppManager wechatAppManager) {
 		this.wechatAppManager = wechatAppManager;
 	}
-
-
 
 	public void setSuiteAccessTokenService(SuiteAccessTokenService suiteAccessTokenService) {
 		this.suiteAccessTokenService = suiteAccessTokenService;

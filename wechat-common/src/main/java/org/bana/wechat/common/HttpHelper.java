@@ -19,6 +19,7 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.protocol.BasicHttpContext;
+import org.bana.wechat.common.http.StringResponseHandler;
 import org.bana.wechat.common.log.WechatLogDomain;
 import org.bana.wechat.common.log.WechatLogger;
 import org.bana.wechat.common.log.WechatLoggerFactory;
@@ -54,7 +55,7 @@ public class HttpHelper {
 		try {
 			httpPost.setEntity(requestEntity);
 			response = httpClient.execute(httpPost,new BasicHttpContext());
-			BasicResponseHandler handler = new BasicResponseHandler();
+			StringResponseHandler handler = new StringResponseHandler();
 			String result = handler.handleResponse(response);
 			//LOG 内容
 			domain.setWechatResult(result);
@@ -90,7 +91,7 @@ public class HttpHelper {
 		httpGet.setConfig(requestConfig);
 		try {
 			response = httpClient.execute(httpGet, new BasicHttpContext());
-			BasicResponseHandler handler = new BasicResponseHandler();
+			StringResponseHandler handler = new StringResponseHandler();
 			String result = handler.handleResponse(response);
 			LOG.getWechatLogDomain().setWechatResult(result);
 			return JSON.parseObject(result);
