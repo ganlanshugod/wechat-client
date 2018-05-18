@@ -12,4 +12,13 @@ public enum UploadType {
 		return type;
 	}
 	
+	public static UploadType getInstance(String type){
+		for (UploadType uploadType : values()) {
+			if(uploadType.type.equals(type)){
+				return uploadType;
+			}
+		}
+		return null;
+	}
+	
 }
