@@ -12,11 +12,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bana.springboot.wechat.mp.WechatMpProperties;
+import org.bana.springboot.wechat.mp.token.impl.CacheJsApiTicketMpServiceImpl;
 import org.bana.springboot.wechat.mp.token.impl.CacheMpAccessTokenServiceImpl;
 import org.bana.wechat.mp.app.WechatMpConfig;
 import org.bana.wechat.mp.app.WechatMpManager;
 import org.bana.wechat.mp.app.impl.InmemeryWechatMpManager;
 import org.bana.wechat.mp.token.AccessTokenService;
+import org.bana.wechat.mp.token.JSApiMpService;
+import org.bana.wechat.mp.token.JsApiTicketMpService;
+import org.bana.wechat.mp.token.impl.JSApiMpServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +38,7 @@ import org.springframework.util.Assert;
 @Configuration
 public class MpTokenServiceAutoConfig {
 	
-	@Bean
+	/*@Bean
 	@ConditionalOnMissingBean(CacheManager.class)
 	public CacheManager cacheManager(RedisTemplate<Object, Object> redisTemplate) {
 	    RedisCacheManager cacheManager= new RedisCacheManager(redisTemplate);
@@ -43,7 +47,7 @@ public class MpTokenServiceAutoConfig {
 	    expiresMap.put("MPToken",3600L);
 	    cacheManager.setExpires(expiresMap);
 	    return cacheManager;
-	}
+	}*/
 
 	/**
 	 * Description: AcsseccTOkenService
@@ -74,4 +78,22 @@ public class MpTokenServiceAutoConfig {
 		wechatMpManagerImpl.addAppConfig(appConfig);
 		return wechatMpManagerImpl;
 	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	public JsApiTicketMpService jsApiTicketMpService(AccessTokenService accessTokenService){
+		CacheJsApiTicketMpServiceImpl jsApiTicket = new CacheJsApiTicketMpServiceImpl();
+		jsApiTicket.setAccessTokenService(accessTokenService);
+		return jsApiTicket;
+	}
+	
+	
+	@Bean
+	@ConditionalOnMissingBean(JSApiMpService.class)
+	public JSApiMpService jSApiMpService(JsApiTicketMpService jsApiTicketService){
+		JSApiMpServiceImpl jSApiMpServiceImpl = new JSApiMpServiceImpl();
+		jSApiMpServiceImpl.setJsApiTicketMpService(jsApiTicketService);;
+		return jSApiMpServiceImpl;
+	}
+	
 }
