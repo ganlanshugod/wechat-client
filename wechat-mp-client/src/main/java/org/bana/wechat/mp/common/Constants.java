@@ -38,7 +38,7 @@ public enum Constants {
 	创建卡券(接口根路径.value +  "/card/create"),
 	投放卡券_生成二维码(接口根路径.value + "/card/qrcode/create"),
 	/*上传媒体文件*/
-	上传媒体文件(接口根路径.value + "/cgi-bin/media/upload?access_token=ACCESS_TOKEN&type=TYPE"),
+	上传媒体文件(接口根路径.value + "/cgi-bin/media/upload"),
 	上传图文消息素材(接口根路径.value + "/cgi-bin/media/uploadnews"),
 	上传图文消息内容图片(接口根路径.value + "/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN&type=TYPE"),
 	/*收发消息*/

@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.bana.wechat.common.HttpHelper;
 import org.bana.wechat.common.util.StringUtils;
+import org.bana.wechat.mp.media.param.WechatMpUploadParam;
 import org.bana.wechat.mp.token.AccessTokenService;
 
 import com.alibaba.fastjson.JSON;
@@ -71,6 +72,21 @@ public abstract class WechatMpService {
 		}
 		url+="access_token="+accessToken;
 		return url;
+	}
+	
+	/**
+	 * 上传文件的post接口
+	 * @param url
+	 * @param param
+	 * @return
+	 */
+	protected JSONObject postMedia(String url,WechatMpUploadParam param){
+		url = addAccessToken(url, param);
+		if(param.getType() == null){
+			throw new WeChatMpException(WeChatMpException.PARAM_ERROR, "必须指定type属性");
+		}
+		url+= "&type="+param.getType().getType();
+		return getHttpHelper().uploadMedia(url, param.getFile());
 	}
 	
 	/*========== getter and setter =============*/

@@ -8,14 +8,18 @@
  */
 
 package org.bana.wechat.common;
+import java.io.File;
 import java.io.IOException;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.protocol.BasicHttpContext;
@@ -82,7 +86,7 @@ public class HttpHelper {
 	
 	public JSONObject httpGet(String url) {
 		// 记录开始信息内容
-		LOG.logBegin(url, null, HTTP_GET);
+		LOG.logBegin(url, null, HTTP_POST);
 		HttpGet httpGet = new HttpGet(url);
 		CloseableHttpResponse response = null;
 		CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -91,6 +95,49 @@ public class HttpHelper {
 		httpGet.setConfig(requestConfig);
 		try {
 			response = httpClient.execute(httpGet, new BasicHttpContext());
+			StringResponseHandler handler = new StringResponseHandler();
+			String result = handler.handleResponse(response);
+			LOG.getWechatLogDomain().setWechatResult(result);
+			return JSON.parseObject(result);
+		} catch (IOException e) {
+			LOG.logException(e);
+			throw new WechatException("500",e.getMessage(),e);
+		} finally {
+			LOG.logEnd();
+			if (response != null) {
+				LOG.getWechatLogDomain().setStatusCode(String.valueOf(response.getStatusLine().getStatusCode()));
+				try {
+					response.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			LOG.saveLog();
+		}
+	}
+	
+	
+	public JSONObject uploadMedia(String url, File file){
+		// 记录开始信息内容
+		LOG.logBegin(url, null, HTTP_GET);
+		HttpPost httpPost = new HttpPost(url);
+		CloseableHttpResponse response = null;
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		RequestConfig requestConfig = RequestConfig.custom()
+				.setSocketTimeout(2000).setConnectTimeout(2000).build();
+		httpPost.setConfig(requestConfig);
+
+		HttpEntity requestEntity = MultipartEntityBuilder
+				.create()
+				.addPart(
+						"media",
+						new FileBody(file,
+								ContentType.APPLICATION_OCTET_STREAM, file
+										.getName())).build();
+		httpPost.setEntity(requestEntity);
+
+		try {
+			response = httpClient.execute(httpPost, new BasicHttpContext());
 			StringResponseHandler handler = new StringResponseHandler();
 			String result = handler.handleResponse(response);
 			LOG.getWechatLogDomain().setWechatResult(result);
