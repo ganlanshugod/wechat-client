@@ -27,6 +27,8 @@ public class WeChatMpException extends WechatException {
 	// APP
 	public static final String APP_PARAM_ERROR1 = "MP-APP-001";
 	
+	public static final String JSSKD_ERROR1="js-001";
+	
 	/**
 	 * <p>Description: </p>
 	 * @author Liu Wenjie
