@@ -28,7 +28,7 @@ public class CacheJsApiTicketMpServiceImpl extends SimpleJsApiTicketMpService {
 	 * @see org.bana.wechat.cp.token.impl.SimpleAccessTokenServiceImpl#getJsApiTicket(java.lang.String, java.lang.String)
 	 */
 	@Override
-	// @Cacheable(value="MPToken",key="methodName+#appId")
+	@Cacheable(value="MPToken",key="methodName+#appId")
 	public String getJsApiTicket(String appId) {
 		return super.getJsApiTicket(appId);
 	}
