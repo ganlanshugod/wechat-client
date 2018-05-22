@@ -21,6 +21,7 @@ import org.bana.wechat.mp.token.impl.JSApiMpServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.util.Assert;
 
 /**
@@ -30,6 +31,7 @@ import org.springframework.util.Assert;
  */
 
 @Configuration
+@Import(MpTokenCacheConfig.class)
 public class MpTokenServiceAutoConfig {
 	
 	/**
