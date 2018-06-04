@@ -67,6 +67,19 @@
 			</dependency>
 			
 			<!-- =======================http 组件的依赖 end ================= -->
+			<!-- ======json-lib 包，主要用xml相关转化功能 begin=========-->
+			<dependency>
+				<groupId>net.sf.json-lib</groupId>
+				<artifactId>json-lib</artifactId>
+				<classifier>jdk15</classifier>
+				<version>2.4</version>
+			</dependency>
+			<dependency>
+				<groupId>xom</groupId>
+				<artifactId>xom</artifactId>
+				<version>1.1</version>
+			</dependency>
+			<!-- ======json-lib 包，主要用xml相关转化功能 end=========-->
 
 			<!-- 日志的API配置系统 being -->
 			<dependency>

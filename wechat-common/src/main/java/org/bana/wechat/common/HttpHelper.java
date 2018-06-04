@@ -52,7 +52,7 @@ public class HttpHelper {
 		HttpPost httpPost = new HttpPost(url);
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		RequestConfig requestConfig = RequestConfig.custom()
-				.setSocketTimeout(2000).setConnectTimeout(2000).build();
+				.setSocketTimeout(4000).setConnectTimeout(4000).build();
 		httpPost.setConfig(requestConfig);
 		httpPost.addHeader("Content-Type", "application/json");
 		CloseableHttpResponse response = null;
@@ -91,7 +91,7 @@ public class HttpHelper {
 		CloseableHttpResponse response = null;
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		RequestConfig requestConfig = RequestConfig.custom()
-				.setSocketTimeout(2000).setConnectTimeout(2000).build();
+				.setSocketTimeout(4000).setConnectTimeout(4000).build();
 		httpGet.setConfig(requestConfig);
 		try {
 			response = httpClient.execute(httpGet, new BasicHttpContext());
@@ -124,7 +124,7 @@ public class HttpHelper {
 		CloseableHttpResponse response = null;
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		RequestConfig requestConfig = RequestConfig.custom()
-				.setSocketTimeout(2000).setConnectTimeout(2000).build();
+				.setSocketTimeout(4000).setConnectTimeout(4000).build();
 		httpPost.setConfig(requestConfig);
 
 		HttpEntity requestEntity = MultipartEntityBuilder
