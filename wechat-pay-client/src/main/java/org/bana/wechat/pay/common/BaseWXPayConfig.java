@@ -1,8 +1,6 @@
 package org.bana.wechat.pay.common;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 import com.github.wxpay.sdk.WXPayConfig;
@@ -13,9 +11,8 @@ public abstract class BaseWXPayConfig implements WXPayConfig{
 
     public BaseWXPayConfig() throws Exception {
         String certPath = "/cert/apiclient_cert.p12";
-        File file = new File(BaseWXPayConfig.class.getResource(certPath).getFile());
-        InputStream certStream = new FileInputStream(file);
-        this.certData = new byte[(int) file.length()];
+        InputStream certStream = BaseWXPayConfig.class.getResourceAsStream(certPath);
+        this.certData = new byte[(int) certStream.available()];
         certStream.read(this.certData);
         certStream.close();
     }
