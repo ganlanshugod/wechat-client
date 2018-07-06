@@ -46,7 +46,7 @@ public class UserMpInfo implements Serializable {
 	private String[] privilege;//:[ PRIVILEGE1 PRIVILEGE2     ],
 	@JSONField(name="unionid")
 	private String unionId;//: o6_bmasdasdsad6_2sgVt7hMZOPfL;
-	
+	private String subscribe;
 	
 	public String getOpenId() {
 		return openId;
@@ -101,6 +101,13 @@ public class UserMpInfo implements Serializable {
 	}
 	public void setUnionId(String unionId) {
 		this.unionId = unionId;
+	}
+	
+	public String getSubscribe() {
+		return subscribe;
+	}
+	public void setSubscribe(String subscribe) {
+		this.subscribe = subscribe;
 	}
 	@Override
 	public String toString() {
