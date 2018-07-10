@@ -70,4 +70,17 @@ public class OAuthMpServiceImpl implements OAuthMpService {
 		return this.getUserInfo(accessToken, openId, DEFAULT_LANG);
 	}
 	
+	@Override
+	public UserMpInfo getUserInfoAll(String accessToken, String openId) {
+		if(StringUtils.isBlank(accessToken,openId)){
+			throw new WeChatMpException(WeChatMpException.PARAM_ERROR,"getUserInfoAll时参数不能为空,accessToken,openId=,"+accessToken+","+openId);
+		}
+		StringBuffer url = new StringBuffer(Constants.获取用户基本信息.getValue())
+				.append("?access_token=").append(accessToken)
+				.append("&openid=").append(openId)
+				.append("&lang=").append(DEFAULT_LANG);
+		JSONObject post = httpHelper.httpGet(url.toString());
+		return WechatMpResultHandler.handleResult(post, UserMpInfo.class);
+	}
+
 }

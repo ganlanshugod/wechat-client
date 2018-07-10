@@ -37,4 +37,14 @@ public interface OAuthMpService {
 	 * @return
 	 */
 	UserMpInfo getUserInfo(String accessToken,String openId);
+	
+	/** 
+	* @Description: 微信用户基本信息
+	* @author Huang Nana   
+	* @date 2018年7月10日 下午6:08:25 
+	* @param accessToken
+	* @param openId
+	* @return  
+	*/ 
+	UserMpInfo getUserInfoAll(String accessToken, String openId);
 }

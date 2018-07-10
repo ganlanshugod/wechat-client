@@ -113,7 +113,7 @@ public class UserMpInfo implements Serializable {
 	public String toString() {
 		return "UserMpInfo [openId=" + openId + ", nickname=" + nickname + ", sex=" + sex + ", province=" + province
 				+ ", city=" + city + ", country=" + country + ", headimgurl=" + headimgurl + ", privilege="
-				+ Arrays.toString(privilege) + ", unionId=" + unionId + "]";
+				+ Arrays.toString(privilege) + ", unionId=" + unionId + ",subscribe="+subscribe+"]";
 	}
 	
 }
