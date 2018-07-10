@@ -16,6 +16,7 @@ import org.bana.wechat.mp.token.AccessTokenService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -31,7 +32,8 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes={WechatMpTestConfig.class,WechatMpAutoConfiguration.class})
-@PropertySource(value={"classpath:/wechat.properties"})
+//@PropertySource(value={"classpath:/wechat.properties"})
+@EnableConfigurationProperties(WechatMpProperties.class)
 public class WechatMpAutoConfigurationTest {
 
 	@Autowired private AccessTokenService accessTokenService;
@@ -49,6 +51,7 @@ public class WechatMpAutoConfigurationTest {
 		assertNotNull(oauthMpService);
 		assertNotNull(mediaMpService);
 		assertNotNull(wechatCpPropertes);
+		System.out.println(wechatCpPropertes);
 	}
 
 }

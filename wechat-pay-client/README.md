@@ -1,4 +1,4 @@
-微信支付 Java SDK
+﻿微信支付 Java SDK
 ------
 
 对[微信支付开发者文档](https://pay.weixin.qq.com/wiki/doc/api/index.html)中给出的API进行了封装。
@@ -19,22 +19,17 @@ com.github.wxpay.sdk.WXPay类下提供了对应的方法：
 |shortUrl|转换短链接|
 |authCodeToOpenid|授权码查询openid|
 
-* 参数为`Map<String, String>`对象，返回类型也是`Map<String, String>`。
-* 方法内部会将参数会转换成含有`appid`、`mch_id`、`nonce_str`、`sign\_type`和`sign`的XML；
-* 默认使用MD5进行签名；
-* 通过HTTPS请求得到返回数据后会对其做必要的处理（例如验证签名，签名错误则抛出异常）。
-* 对于downloadBill，无论是否成功都返回Map，且都含有`return_code`和`return_msg`。若成功，其中`return_code`为`SUCCESS`，另外`data`对应对账单数据。
+* 注意:
+* 证书文件不能放在web服务器虚拟目录，应放在有访问权限控制的目录中，防止被他人下载
+* 建议将证书文件名改为复杂且不容易猜测的文件名
+* 商户服务器要做好病毒和木马防护工作，不被非法侵入者窃取证书文件
+* 请妥善保管商户支付密钥、公众帐号SECRET，避免密钥泄露
+* 参数为`Map<String, String>`对象，返回类型也是`Map<String, String>`
+* 方法内部会将参数会转换成含有`appid`、`mch_id`、`nonce_str`、`sign\_type`和`sign`的XML
+* 可选HMAC-SHA256算法和MD5算法签名
+* 通过HTTPS请求得到返回数据后会对其做必要的处理（例如验证签名，签名错误则抛出异常）
+* 对于downloadBill，无论是否成功都返回Map，且都含有`return_code`和`return_msg`，若成功，其中`return_code`为`SUCCESS`，另外`data`对应对账单数据
 
-
-## 安装
-maven:
-```
-<dependency>
-    <groupId>com.github.wxpay</groupId>
-    <artifactId>wxpay-sdk</artifactId>
-    <version>0.0.3</version>
-</dependency>
-```
 
 ## 示例
 配置类MyConfig:
@@ -271,7 +266,7 @@ public class WXPayExample {
 }
 ```
 
-HTTPS请求默认使用MD5算法签名，若需要使用HMAC-SHA256：
+HTTPS请求可选HMAC-SHA256算法和MD5算法签名：
 ```
 import com.github.wxpay.sdk.WXPay;
 import com.github.wxpay.sdk.WXPayConstants;
@@ -301,6 +296,3 @@ public class WXPayExample {
 
 }
 ```
-
-## License
-BSD

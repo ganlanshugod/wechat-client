@@ -17,7 +17,7 @@ import org.springframework.context.annotation.PropertySource;
  * @author Liu Wenjie
  */
 @Configuration
-@PropertySource(value={"classpath:/application.properties"})
+@PropertySource(value={"classpath:/application.yml"})
 public class WechatMpTestConfig {
 
 }

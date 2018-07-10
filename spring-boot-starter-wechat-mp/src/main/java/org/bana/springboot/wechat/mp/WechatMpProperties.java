@@ -8,6 +8,8 @@
  */
 package org.bana.springboot.wechat.mp;
 
+import java.util.Arrays;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -23,6 +25,9 @@ public class WechatMpProperties {
 	private String appId;
 	
 	private String secret;
+	
+	private String[] otherApp;
+	
 
 	public String getAppId() {
 		return appId;
@@ -39,5 +44,20 @@ public class WechatMpProperties {
 	public void setSecret(String secret) {
 		this.secret = secret;
 	}
+
+	public String[] getOtherApp() {
+		return otherApp;
+	}
+
+	public void setOtherApp(String[] otherApp) {
+		this.otherApp = otherApp;
+	}
+
+	@Override
+	public String toString() {
+		return "WechatMpProperties [appId=" + appId + ", secret=" + secret + ", otherApp=" + Arrays.toString(otherApp)
+				+ "]";
+	}
+	
 	
 }

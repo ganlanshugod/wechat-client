@@ -27,6 +27,9 @@ public class WebAuthAccessToken extends AccessToken {
 	@JSONField(name="openid")
 	private String openId; // 用户唯一标识，请注意，在未关注公众号时，用户访问公众号的网页，也会产生一个用户和公众号唯一的OpenID
 	private String scope; //
+	@JSONField(name="unionid")
+	private String unionId; // 用户在开发平台上的unionId字段
+	
 	public String getRefreshToken() {
 		return refreshToken;
 	}
@@ -44,6 +47,12 @@ public class WebAuthAccessToken extends AccessToken {
 	}
 	public void setScope(String scope) {
 		this.scope = scope;
+	}
+	public String getUnionId() {
+		return unionId;
+	}
+	public void setUnionId(String unionId) {
+		this.unionId = unionId;
 	}
 	@Override
 	public String toString() {

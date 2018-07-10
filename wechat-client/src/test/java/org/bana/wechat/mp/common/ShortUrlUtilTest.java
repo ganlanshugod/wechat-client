@@ -25,5 +25,13 @@ public class ShortUrlUtilTest extends BaseMPTestCase{
 		String shortUrl = ShortUrlUtil.shortUrl(accessToken.getAccess_token(), longUrl);
 		Assert.assertNotNull(shortUrl);
 	}
+	
+	@Test
+	public void test2(){
+		String accessToken = "11_Iyn62Km0JuJJQtCtXf6JdKBIXvm2FrhAQNnkzySf9rz6-gZGRGxFUQmp1UneVkSzfYJTzIiSsCGIidAwDLo1Q7Ot-YceEqZbDPbHKoA23RQN8BWStKpaeOKfGb1fLvMMSx3H5OPVMr1h7UlbGFFbABAMLL";
+		String longUrl = "http://www.qingdaodujia.cn/wxmp/shop/bus/shop01?appId=wx5bc259b375eb9572";
+		String shortUrl = ShortUrlUtil.shortUrl(accessToken, longUrl);
+		System.out.println(shortUrl);
+	}
 
 }
