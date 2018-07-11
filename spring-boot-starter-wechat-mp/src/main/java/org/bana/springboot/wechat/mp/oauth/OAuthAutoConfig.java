@@ -10,6 +10,7 @@ package org.bana.springboot.wechat.mp.oauth;
 
 import org.bana.wechat.mp.auth.OAuthMpService;
 import org.bana.wechat.mp.auth.impl.OAuthMpServiceImpl;
+import org.bana.wechat.mp.token.AccessTokenService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,8 +25,9 @@ public class OAuthAutoConfig {
 
 	@Bean
 	@ConditionalOnMissingBean
-	public OAuthMpService oauthMpService(){
+	public OAuthMpService oauthMpService(AccessTokenService accessTokenService){
 		OAuthMpServiceImpl oauthMpService = new OAuthMpServiceImpl();
+		oauthMpService.setAccessTokenService(accessTokenService);
 		return oauthMpService;
 	}
 }
