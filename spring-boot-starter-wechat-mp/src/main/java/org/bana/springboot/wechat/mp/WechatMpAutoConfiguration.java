@@ -9,6 +9,7 @@
 package org.bana.springboot.wechat.mp;
 
 import org.bana.springboot.wechat.mp.media.MediaMpAutoConfig;
+import org.bana.springboot.wechat.mp.message.MessageMpAutoConfig;
 import org.bana.springboot.wechat.mp.oauth.OAuthAutoConfig;
 import org.bana.springboot.wechat.mp.token.MpTokenCacheConfig;
 import org.bana.springboot.wechat.mp.token.MpTokenServiceAutoConfig;
@@ -28,7 +29,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @EnableCaching
 @AutoConfigureAfter(RedisAutoConfiguration.class)
-@Import({MpTokenServiceAutoConfig.class,OAuthAutoConfig.class,MediaMpAutoConfig.class})
+@Import({MpTokenServiceAutoConfig.class,OAuthAutoConfig.class,MediaMpAutoConfig.class,MessageMpAutoConfig.class})
 @EnableConfigurationProperties(WechatMpProperties.class)
 public class WechatMpAutoConfiguration {
 

@@ -28,6 +28,8 @@ public class WechatMpProperties {
 	
 	private String[] otherApp;
 	
+	private String url;
+	
 
 	public String getAppId() {
 		return appId;
@@ -53,10 +55,18 @@ public class WechatMpProperties {
 		this.otherApp = otherApp;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	@Override
 	public String toString() {
 		return "WechatMpProperties [appId=" + appId + ", secret=" + secret + ", otherApp=" + Arrays.toString(otherApp)
-				+ "]";
+				+ ", url=" + url + "]";
 	}
 	
 	

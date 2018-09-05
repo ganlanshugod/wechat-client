@@ -44,6 +44,7 @@ public enum Constants {
 	/*收发消息*/
 	群发消息(接口根路径.value + "/cgi-bin/message/mass/sendall"),
 	客服消息接口(接口根路径.value + "/cgi-bin/message/custom/send"),
+	模板消息接口(接口根路径.value + "/cgi-bin/message/template/send"),
 	/*收发消息*/
 	获取订单详情接口(接口根路径.value + "/merchant/order/getbyid"),
 	/*返回值属性的设置*/
