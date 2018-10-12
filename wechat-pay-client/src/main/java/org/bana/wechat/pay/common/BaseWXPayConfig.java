@@ -10,7 +10,8 @@ public abstract class BaseWXPayConfig implements WXPayConfig{
     private byte[] certData;
 
     public BaseWXPayConfig() throws Exception {
-        String certPath = "/cert/apiclient_cert.p12";
+    	
+        String certPath = "/cert/apiclient_cert_"+getMchID()+".p12";
         InputStream certStream = BaseWXPayConfig.class.getResourceAsStream(certPath);
         this.certData = new byte[(int) certStream.available()];
         certStream.read(this.certData);
