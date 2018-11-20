@@ -69,7 +69,7 @@ public class MpTokenServiceAutoConfig {
 					WechatMpConfig mpConfig = new WechatMpConfig();
 					mpConfig.setAppId(split[0]);
 					mpConfig.setSecret(split[1]);
-					wechatMpManagerImpl.addAppConfig(appConfig);
+					wechatMpManagerImpl.addAppConfig(mpConfig);
 				}
 			}
 		}
