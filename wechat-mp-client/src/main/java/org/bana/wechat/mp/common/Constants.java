@@ -30,6 +30,8 @@ public enum Constants {
 	/*页面认证*/
 	页面认证获取TOKEN(接口根路径.value + "/sns/oauth2/access_token"),
 	页面认证拉取用户信息(接口根路径.value + "/sns/userinfo"),
+	/*小程序登陆*/
+	小程序登录凭证校验(接口根路径.value + "/sns/jscode2session"),
 	/*卡券*/
 	团购券("GROUPON"),代金券("CASH"),折扣券("DISCOUNT"),礼品券("GIFT"),优惠券("GENERAL_COUPON"),
 	Code展示类型_文本("CODE_TYPE_TEXT"),Code展示类型_一维码("CODE_TYPE_BARCODECode"),Code展示类型_二维码("CODE_TYPE_QRCODE"),

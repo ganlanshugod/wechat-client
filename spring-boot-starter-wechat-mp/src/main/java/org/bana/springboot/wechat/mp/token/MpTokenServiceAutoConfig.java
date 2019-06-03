@@ -15,8 +15,10 @@ import org.bana.wechat.mp.app.WechatMpConfig;
 import org.bana.wechat.mp.app.WechatMpManager;
 import org.bana.wechat.mp.app.impl.InmemeryWechatMpManager;
 import org.bana.wechat.mp.token.AccessTokenService;
+import org.bana.wechat.mp.token.CodeSessionMiniService;
 import org.bana.wechat.mp.token.JSApiMpService;
 import org.bana.wechat.mp.token.JsApiTicketMpService;
+import org.bana.wechat.mp.token.impl.CodeSessionMiniServiceImpl;
 import org.bana.wechat.mp.token.impl.JSApiMpServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -48,6 +50,20 @@ public class MpTokenServiceAutoConfig {
 		CacheMpAccessTokenServiceImpl tokenService = new CacheMpAccessTokenServiceImpl();
 		tokenService.setWechatMpManager(wechatMpManager);
 		return tokenService;
+	}
+	/**
+	 * Description: 小程序相关service
+	 * @author Zhang Zhichao
+	 * @date 2019年6月3日 下午4:12:05
+	 * @param wechatMpManager
+	 * @return
+	 */
+	@Bean
+	@ConditionalOnMissingBean
+	public CodeSessionMiniService codeSessionMiniService(WechatMpManager wechatMpManager){
+		CodeSessionMiniServiceImpl csmService = new CodeSessionMiniServiceImpl();
+		csmService.setWechatMpManager(wechatMpManager);
+		return csmService;
 	}
 	
 	@Bean
