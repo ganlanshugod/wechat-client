@@ -47,6 +47,8 @@ public enum Constants {
 	群发消息(接口根路径.value + "/cgi-bin/message/mass/sendall"),
 	客服消息接口(接口根路径.value + "/cgi-bin/message/custom/send"),
 	模板消息接口(接口根路径.value + "/cgi-bin/message/template/send"),
+	/*内容安全*/
+	内容安全文本(接口根路径.value + "/wxa/msg_sec_check"),
 	/*收发消息*/
 	获取订单详情接口(接口根路径.value + "/merchant/order/getbyid"),
 	/*返回值属性的设置*/

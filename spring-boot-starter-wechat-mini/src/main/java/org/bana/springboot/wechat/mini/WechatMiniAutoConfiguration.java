@@ -9,6 +9,7 @@
 package org.bana.springboot.wechat.mini;
 
 import org.bana.springboot.wechat.mini.media.MediaMiniAutoConfig;
+import org.bana.springboot.wechat.mini.message.MessageMiniAutoConfig;
 import org.bana.springboot.wechat.mini.token.MiniTokenCacheConfig;
 import org.bana.springboot.wechat.mini.token.MiniTokenServiceAutoConfig;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -27,7 +28,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @EnableCaching
 @AutoConfigureAfter(RedisAutoConfiguration.class)
-@Import({MiniTokenServiceAutoConfig.class,MediaMiniAutoConfig.class})
+@Import({MiniTokenServiceAutoConfig.class,MediaMiniAutoConfig.class,MessageMiniAutoConfig.class})
 @EnableConfigurationProperties(WechatMiniProperties.class)
 public class WechatMiniAutoConfiguration {
 
