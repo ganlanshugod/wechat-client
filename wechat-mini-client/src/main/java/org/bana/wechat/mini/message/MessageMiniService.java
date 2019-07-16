@@ -25,4 +25,14 @@ public interface MessageMiniService {
 	 * @return
 	 */
 	MsgCheckResult checkMsgSec(String accessToken,String content);
+	
+	/** 
+	* @Description: 小程序：内容安全：图片
+	* @author zhangzhichao   
+	* @date 2019-07-15 18:59:38 
+	* @param accessToken
+	* @param imgUrl
+	* @return  
+	*/ 
+	MsgCheckResult checkImgSec(String accessToken,String imgUrl);
 }
