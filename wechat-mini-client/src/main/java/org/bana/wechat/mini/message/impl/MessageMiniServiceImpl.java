@@ -44,10 +44,26 @@ public class MessageMiniServiceImpl implements MessageMiniService {
 		}
 		HttpHelper httpHelper = new HttpHelper();
 		Map<String,String> param = new HashMap<String,String>();
-		param.put("access_token", accessToken);
 		param.put("content", content);
-		JSONObject resultObject = httpHelper.httpPost(Constants.内容安全文本.getValue(), param);
+		String url = Constants.内容安全文本.getValue()+"?access_token="+accessToken;
+		JSONObject resultObject = httpHelper.httpPost(url, param);
 		return WechatMiniResultHandler.handleResult(resultObject,MsgCheckResult.class);
+	}
+	/**
+	* <p>Description: </p> 
+	* @author zhangzhichao   
+	* @date Jul 16, 2019 9:07:56 AM 
+	* @param accessToken
+	* @param imgUrl
+	* @return 
+	* @see org.bana.wechat.mini.message.MessageMiniService#checkImgSec(java.lang.String, java.lang.String) 
+	*/ 
+	@Override
+	public MsgCheckResult checkImgSec(String accessToken, String imgUrl) {
+		if(StringUtils.isBlank(accessToken,imgUrl)){
+			throw new WeChatMiniException(WeChatMiniException.PARAM_ERROR,"checkImgSec时参数不能为空 accessToken=" + accessToken + ",imgUrl=" + imgUrl);
+		}
+		return null;
 	}
 
 }
