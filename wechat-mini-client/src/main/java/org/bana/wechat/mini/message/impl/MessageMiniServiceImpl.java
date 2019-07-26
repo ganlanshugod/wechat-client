@@ -8,9 +8,7 @@
 */ 
 package org.bana.wechat.mini.message.impl;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,16 +26,18 @@ import org.bana.wechat.mini.common.WeChatMiniException;
 import org.bana.wechat.mini.common.WechatMiniResultHandler;
 import org.bana.wechat.mini.message.MessageMiniService;
 import org.bana.wechat.mini.message.result.MsgCheckResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
 
 /** 
 * @ClassName: MessageMiniServiceImpl 
-* @Description: TODO(这里用一句话描述这个类的作用) 
+* @Description: 
 * @author zhangzhichao   
 */
 public class MessageMiniServiceImpl implements MessageMiniService {
-
+	private static final Logger LOG = LoggerFactory.getLogger(MessageMiniServiceImpl.class);
 	/**
 	* <p>Description: </p> 
 	* @author zhangzhichao   
@@ -86,14 +86,17 @@ public class MessageMiniServiceImpl implements MessageMiniService {
 			checkCon.setUseCaches(false);
 			checkCon.setRequestProperty("Connection", "Keep-Alive");
 			checkCon.setRequestProperty("Charset", "UTF-8");
-			String BOUNDARY = "----------" + System.currentTimeMillis();
-			checkCon.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
+			String boundary = "-------------------------" + System.currentTimeMillis();
+			String prefix = "--";
+			String end = "\r\n";
+			checkCon.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
 			StringBuilder sb = new StringBuilder();
-			sb.append("–");
-			sb.append(BOUNDARY);
-			sb.append("\r\n");
-			sb.append("Content-Disposition: form-data;name=\"media\";filename=\"" + imgNameArr[imgNameArr.length-1] + "\"\r\n");
-			sb.append("Content-Type:application/octet-stream\\r\\n\\r\\n");
+			sb.append(prefix);
+			sb.append(boundary);
+			sb.append(end);
+			sb.append("Content-Disposition: form-data; name=\"media\";filename=\"" + imgNameArr[imgNameArr.length-1] + "\"" + end);
+			sb.append("Content-Type: image/png" + end);
+			sb.append(end); // 上传图片流之前必须要有一个空行，否则服务端获取不到图片参数：{"errcode":41005,"errmsg":"media data missing hint: [eAbP301484245]"}
 			byte[] head = sb.toString().getBytes("utf-8");
 			OutputStream out = new DataOutputStream(checkCon.getOutputStream());
 			out.write(head);
@@ -101,20 +104,21 @@ public class MessageMiniServiceImpl implements MessageMiniService {
 			URL imgUrlObj = new URL(imgUrl+"?x-oss-process=image/resize,m_fill,w_720,h_540,color_FFFFFF,limit_0");
             HttpURLConnection conn = (HttpURLConnection)imgUrlObj.openConnection();    
             conn.setRequestMethod("GET");    
-            conn.setConnectTimeout(5 * 1000);    
+            conn.setConnectTimeout(5 * 1000);
             InputStream inStream = conn.getInputStream();
-			BufferedInputStream bis = new BufferedInputStream(inStream);
-			DataInputStream in = new DataInputStream(bis);
-			int bytes = 0;
+//			// 本地图片
+//			FileInputStream fis = new FileInputStream(new File("/Users/zhangzhichao/work/elink/test-code/a.jpg"));
+			int len = 0;
 			byte[] bufferOut = new byte[1024];
-			while ((bytes = in.read(bufferOut)) != -1) {
-				out.write(bufferOut, 0, bytes);
+			while ((len=inStream.read(bufferOut))!=-1) {
+				out.write(bufferOut, 0, len);
 			}
-			in.close();
-			byte[] foot = ("\r\n–" + BOUNDARY + "–\\r\\n").getBytes("utf-8");
+			inStream.close();
+			out.write(end.getBytes());
+			byte[] foot = (prefix + boundary + prefix + end).getBytes("utf-8");
 			out.write(foot);
 			out.flush();
-			out.close();
+			// 返回值
 			StringBuffer buffer = new StringBuffer();
 			reader = new BufferedReader(new InputStreamReader(checkCon.getInputStream()));
 			String line = null;
@@ -124,7 +128,7 @@ public class MessageMiniServiceImpl implements MessageMiniService {
 			if (result == null) {
 				result = buffer.toString();
 			}
-			System.out.println("img sec result="+result);
+			LOG.info("img-sec-result="+result);
 			JSONObject resultObject = JSONObject.parseObject(result);
 			return WechatMiniResultHandler.handleResult(resultObject,MsgCheckResult.class);
 		} catch (Exception e) {
