@@ -106,7 +106,7 @@ public class MessageMiniServiceImpl implements MessageMiniService {
             conn.setRequestMethod("GET");    
             conn.setConnectTimeout(5 * 1000);
             InputStream inStream = conn.getInputStream();
-//			// 本地图片
+//			// 本地图片测试
 //			FileInputStream fis = new FileInputStream(new File("/Users/zhangzhichao/work/elink/test-code/a.jpg"));
 			int len = 0;
 			byte[] bufferOut = new byte[1024];
