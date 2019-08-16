@@ -60,13 +60,38 @@ public class MenuMpServiceImpl extends WechatMpService implements MenuMpService 
 	*/ 
 	@Override
 	public MenuMpResult findAllMenus(String appId) {
+		return operatorMenus(appId, "findAllMenus");
+	}
+	
+	/**
+	* <p>Description: 获取自定义菜单配置</p> 
+	* @author zhangzhichao   
+	* @date Aug 16, 2019 7:52:40 PM 
+	* @param appId
+	* @return 
+	* @see org.bana.wechat.mp.menu.MenuMpService#findCurrMenus(java.lang.String) 
+	*/ 
+	@Override
+	public MenuMpResult findCurrMenus(String appId) {
+		return operatorMenus(appId, "findCurrMenus");
+	}
+	
+	private MenuMpResult operatorMenus(String appId,String type) {
 		// 非空校验
 		if(StringUtils.isBlank(appId)){
-			throw new WeChatMpException(WeChatMpException.PARAM_ERROR,"findAllMenus时参数不能为空,appId=,"+appId);
+			throw new WeChatMpException(WeChatMpException.PARAM_ERROR,type+"时参数不能为空,appId=,"+appId);
 		}
 		WeChatMpParam param = new WeChatMpParam();
 		param.setAppId(appId);
-		String url = this.addAccessToken(Constants.查询自定义菜单.getValue(), param);
+		String preUrl = "";
+		if("findCurrMenus".equals(type)) {
+			preUrl = Constants.获取自定义菜单配置.getValue();
+		}else if("deleteMenus".equals(type)) {
+			preUrl = Constants.删除自定义菜单.getValue();
+		}else {
+			preUrl = Constants.查询自定义菜单.getValue();
+		}
+		String url = this.addAccessToken(preUrl, param);
 		JSONObject resultObject = this.getHttpHelper().httpGet(url);
 		return WechatMpResultHandler.handleResult(resultObject,MenuMpResult.class);
 	}
@@ -81,15 +106,7 @@ public class MenuMpServiceImpl extends WechatMpService implements MenuMpService 
 	*/ 
 	@Override
 	public MenuMpResult deleteMenus(String appId) {
-		// 非空校验
-		if(StringUtils.isBlank(appId)){
-			throw new WeChatMpException(WeChatMpException.PARAM_ERROR,"deleteMenus时参数不能为空,appId=,"+appId);
-		}
-		WeChatMpParam param = new WeChatMpParam();
-		param.setAppId(appId);
-		String url = this.addAccessToken(Constants.删除自定义菜单.getValue(), param);
-		JSONObject resultObject = this.getHttpHelper().httpGet(url);
-		return WechatMpResultHandler.handleResult(resultObject,MenuMpResult.class);
+		return operatorMenus(appId, "deleteMenus");
 	}
 
 }

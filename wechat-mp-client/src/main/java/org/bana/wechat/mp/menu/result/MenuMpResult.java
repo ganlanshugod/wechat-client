@@ -12,6 +12,8 @@ import java.io.Serializable;
 
 import org.bana.wechat.mp.menu.model.MenuMpInfoModel;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * @ClassName: MenuMpResult
  * @Description: 自定义菜单
@@ -24,6 +26,10 @@ public class MenuMpResult implements Serializable {
 	private String errmsg;
 	private MenuMpInfoModel menu;
 	private MenuMpInfoModel conditionalmenu;
+	@JSONField(name="selfmenu_info")
+	private MenuMpInfoModel selfmenuInfo;
+	@JSONField(name="is_menu_open")
+	private String isMenuOpen;
 	
 	public String getErrcode() {
 		return errcode;
@@ -48,6 +54,18 @@ public class MenuMpResult implements Serializable {
 	}
 	public void setConditionalmenu(MenuMpInfoModel conditionalmenu) {
 		this.conditionalmenu = conditionalmenu;
+	}
+	public MenuMpInfoModel getSelfmenuInfo() {
+		return selfmenuInfo;
+	}
+	public void setSelfmenuInfo(MenuMpInfoModel selfmenuInfo) {
+		this.selfmenuInfo = selfmenuInfo;
+	}
+	public String getIsMenuOpen() {
+		return isMenuOpen;
+	}
+	public void setIsMenuOpen(String isMenuOpen) {
+		this.isMenuOpen = isMenuOpen;
 	}
 	@Override
 	public String toString() {

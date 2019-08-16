@@ -35,6 +35,15 @@ public interface MenuMpService {
 	public MenuMpResult findAllMenus(String appId);
 	
 	/** 
+	* @Description: 获取自定义菜单配置
+	* @author zhangzhichao   
+	* @date 2019-08-16 19:52:12 
+	* @param appId
+	* @return  
+	*/ 
+	public MenuMpResult findCurrMenus(String appId);
+	
+	/** 
 	* @Description: 删除菜单
 	* @author zhangzhichao   
 	* @date 2019-08-16 18:05:00 
