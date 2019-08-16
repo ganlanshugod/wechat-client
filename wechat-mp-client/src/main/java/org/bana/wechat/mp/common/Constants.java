@@ -27,6 +27,8 @@ public enum Constants {
 	获取用户基本信息(接口根路径.value + "/cgi-bin/user/info"),
 	/*菜单管理*/
 	创建自定义菜单(接口根路径.value + "/cgi-bin/menu/create"),
+	查询自定义菜单(接口根路径.value + "/cgi-bin/menu/get"),
+	删除自定义菜单(接口根路径.value + "/cgi-bin/menu/delete"),
 	/*页面认证*/
 	页面认证获取TOKEN(接口根路径.value + "/sns/oauth2/access_token"),
 	页面认证拉取用户信息(接口根路径.value + "/sns/userinfo"),
