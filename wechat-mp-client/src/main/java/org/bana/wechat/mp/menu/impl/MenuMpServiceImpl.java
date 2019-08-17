@@ -72,8 +72,16 @@ public class MenuMpServiceImpl extends WechatMpService implements MenuMpService 
 	* @see org.bana.wechat.mp.menu.MenuMpService#findCurrMenus(java.lang.String) 
 	*/ 
 	@Override
-	public MenuMpResult findCurrMenus(String appId) {
-		return operatorMenus(appId, "findCurrMenus");
+	public JSONObject findCurrMenus(String appId) {
+		// 非空校验
+		if(StringUtils.isBlank(appId)){
+			throw new WeChatMpException(WeChatMpException.PARAM_ERROR,"findCurrMenus时参数不能为空,appId=,"+appId);
+		}
+		WeChatMpParam param = new WeChatMpParam();
+		param.setAppId(appId);
+		String url = this.addAccessToken(Constants.获取自定义菜单配置.getValue(), param);
+		JSONObject resultObject = this.getHttpHelper().httpGet(url);
+		return resultObject;
 	}
 	
 	private MenuMpResult operatorMenus(String appId,String type) {
@@ -84,9 +92,7 @@ public class MenuMpServiceImpl extends WechatMpService implements MenuMpService 
 		WeChatMpParam param = new WeChatMpParam();
 		param.setAppId(appId);
 		String preUrl = "";
-		if("findCurrMenus".equals(type)) {
-			preUrl = Constants.获取自定义菜单配置.getValue();
-		}else if("deleteMenus".equals(type)) {
+		if("deleteMenus".equals(type)) {
 			preUrl = Constants.删除自定义菜单.getValue();
 		}else {
 			preUrl = Constants.查询自定义菜单.getValue();

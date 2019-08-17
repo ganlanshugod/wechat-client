@@ -11,6 +11,8 @@ package org.bana.wechat.mp.menu;
 import org.bana.wechat.mp.menu.param.MenuMpInfoParam;
 import org.bana.wechat.mp.menu.result.MenuMpResult;
 
+import com.alibaba.fastjson.JSONObject;
+
 /**
  * @ClassName: MenuMpService
  * @Description: 服务号：自定义菜单
@@ -41,7 +43,7 @@ public interface MenuMpService {
 	* @param appId
 	* @return  
 	*/ 
-	public MenuMpResult findCurrMenus(String appId);
+	public JSONObject findCurrMenus(String appId);
 	
 	/** 
 	* @Description: 删除菜单
