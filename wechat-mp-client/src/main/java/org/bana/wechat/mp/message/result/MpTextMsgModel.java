@@ -10,78 +10,69 @@ package org.bana.wechat.mp.message.result;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /** 
 * @ClassName: MpTextMsgModel 
 * @Description: TODO(这里用一句话描述这个类的作用) 
 * @author zhangzhichao   
 */
+@XmlAccessorType (XmlAccessType.FIELD)
 @XmlRootElement(name="xml")
 @XmlType(propOrder = { "toUserName", "fromUserName", "createTime","msgType","content"})  
 public class MpTextMsgModel {
-	private static final String PRE = "![CDATA[";
-	private static final String END = "]]";
-	
+	@XmlJavaTypeAdapter (CDataAdapter.class)
+    @XmlElement (name = "ToUserName")
 	private String toUserName;
+	@XmlJavaTypeAdapter (CDataAdapter.class)
+    @XmlElement (name = "FromUserName")
 	private String fromUserName;
+	@XmlElement (name = "CreateTime")
 	private Integer createTime;
+	@XmlJavaTypeAdapter (CDataAdapter.class)
+    @XmlElement (name = "MsgType")
 	private String msgType;
+	@XmlJavaTypeAdapter (CDataAdapter.class)
+    @XmlElement (name = "Content")
 	private String content;
-	private boolean transFlag;
 	public MpTextMsgModel() {
 		Long l = new Date().getTime();
 		this.createTime = Integer.parseInt(l/1000+"");
 	}
-	public void setTransFlag(boolean transFlag) {
-		this.transFlag = transFlag;
-	}
 	
 	public String getToUserName() {
-		return transFlag?removePrefix(toUserName):toUserName;
+		return toUserName;
 	}
-	@XmlElement(name="ToUserName")
 	public void setToUserName(String toUserName) {
-		this.toUserName = addPrefix(toUserName);
+		this.toUserName = toUserName;
 	}
 	public String getFromUserName() {
-		return transFlag?removePrefix(fromUserName):fromUserName;
+		return fromUserName;
 	}
-	@XmlElement(name="FromUserName")
 	public void setFromUserName(String fromUserName) {
-		this.fromUserName = addPrefix(fromUserName);
-	}
-	public String getMsgType() {
-		return transFlag?removePrefix(msgType):msgType;
-	}
-	@XmlElement(name="MsgType")
-	public void setMsgType(String msgType) {
-		this.msgType = addPrefix(msgType);
-	}
-	public String getContent() {
-		return transFlag?removePrefix(content):content;
-	}
-	@XmlElement(name="Content")
-	public void setContent(String content) {
-		this.content = addPrefix(content);
+		this.fromUserName = fromUserName;
 	}
 	public Integer getCreateTime() {
 		return createTime;
 	}
-	@XmlElement(name="CreateTime")
 	public void setCreateTime(Integer createTime) {
 		this.createTime = createTime;
 	}
-	/**************值处理*******************/
-	private String addPrefix(String fieldValue) {
-		return PRE + fieldValue + END;
+	public String getMsgType() {
+		return msgType;
 	}
-	private String removePrefix(String fieldValue) {
-		fieldValue = fieldValue.substring(PRE.length());
-		int i = fieldValue.lastIndexOf(END);
-		fieldValue = fieldValue.substring(0, i);
-		return fieldValue;
+	public void setMsgType(String msgType) {
+		this.msgType = msgType;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 }

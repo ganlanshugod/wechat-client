@@ -64,6 +64,8 @@ public class MpMessageUtil {
 			marshaller.marshal(obj, baos);
 			String xmlObj = new String(baos.toByteArray());         // 生成XML字符串  
 			xmlObj = xmlObj.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n", "");
+			xmlObj = xmlObj.replace("&lt;![CDATA[", "<![CDATA[");
+			xmlObj = xmlObj.replace("]]&gt;", "]]>");
 		    return xmlObj;
 		} catch (JAXBException e) {
 			e.printStackTrace();
