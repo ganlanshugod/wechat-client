@@ -29,6 +29,7 @@ public enum Constants {
 	创建自定义菜单(接口根路径.value + "/cgi-bin/menu/create"),
 	查询自定义菜单(接口根路径.value + "/cgi-bin/menu/get"),
 	获取自定义菜单配置(接口根路径.value + "/cgi-bin/get_current_selfmenu_info"),
+	获取公众号的自动回复规则(接口根路径.value + "/cgi-bin/get_current_autoreply_info"),
 	删除自定义菜单(接口根路径.value + "/cgi-bin/menu/delete"),
 	/*页面认证*/
 	页面认证获取TOKEN(接口根路径.value + "/sns/oauth2/access_token"),

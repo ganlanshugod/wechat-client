@@ -11,12 +11,22 @@ package org.bana.wechat.mp.message;
 import org.bana.wechat.mp.message.param.TemplateMessageMpParam;
 import org.bana.wechat.mp.message.result.TemplateMessageResult;
 
+import com.alibaba.fastjson.JSONObject;
+
 /**
  * @ClassName: MessageMpService
  * @Description: 服务号消息
  * @author Zhang Zhichao
  */
 public interface MessageMpService {
+	
+	/** 
+	* @Description: 获取公众号的自动回复规则
+	* @author zhangzhichao   
+	* @date 2019-08-17 10:24:37 
+	* @param appId  
+	*/ 
+	public JSONObject getAutoReplyInfo(String appId);
 	
 	/**
 	 * Description: 发送模板消息
