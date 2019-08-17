@@ -12,13 +12,15 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /** 
 * @ClassName: MpTextMsgModel 
 * @Description: TODO(这里用一句话描述这个类的作用) 
 * @author zhangzhichao   
 */
-@XmlRootElement(name="xml")  
+@XmlRootElement(name="xml")
+@XmlType(propOrder = { "toUserName", "fromUserName", "createTime","msgType","content"})  
 public class MpTextMsgModel {
 	private static final String PRE = "![CDATA[";
 	private static final String END = "]]";
