@@ -16,12 +16,14 @@ import org.bana.wechat.mp.common.WechatMpResultHandler;
 import org.bana.wechat.mp.common.WechatMpService;
 import org.bana.wechat.mp.menu.result.MenuMpResult;
 import org.bana.wechat.mp.message.MessageMpService;
+import org.bana.wechat.mp.message.param.CustomMsgMpParam;
 import org.bana.wechat.mp.message.param.MaterialPageParam;
 import org.bana.wechat.mp.message.param.TemplateMessageMpParam;
 import org.bana.wechat.mp.message.result.TemplateMessageResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 /**
@@ -72,6 +74,49 @@ public class MessageMpServiceImpl extends WechatMpService implements MessageMpSe
 		String url = this.addAccessToken(Constants.获取素材列表.getValue(), param);
 		JSONObject resultObject = this.getHttpHelper().httpPost(url,param);
 		return resultObject;
+	}
+	
+	/**
+	* <p>Description: 发送客服消息 </p> 
+	* @author zhangzhichao   
+	* @date Aug 18, 2019 4:29:05 PM 
+	* @param sendParam 
+	* @see org.bana.wechat.mp.message.MessageMpService#sendCustomMsg(com.alibaba.fastjson.JSONObject) 
+	*/ 
+	@Override
+	public void sendCustomMsg(CustomMsgMpParam sendParam) {
+		if(StringUtils.isBlank(sendParam.getAppId(),sendParam.getMsgtype(),sendParam.getTouser())) {
+			throw new WeChatMpException(WeChatMpException.PARAM_ERROR,"sendCustomMsg时参数不能为空:"+sendParam.toString());
+		}
+		String url = this.addAccessToken(Constants.客服消息接口.getValue(), sendParam);
+		JSONObject sendObj = new JSONObject();
+		sendObj.put("touser",sendParam.getTouser());
+		String msgType = sendParam.getMsgtype();
+		sendObj.put("msgtype",msgType);
+		JSONObject msg = new JSONObject();
+		if("text".equals(msgType)) {
+			msg.put("content", sendParam.getContent());
+			sendObj.put("text",msg);
+		}else if("voice".equals(msgType) || "mpnews".equals(msgType)) {
+			msg.put("media_id", sendParam.getMediaId());
+			sendObj.put(msgType,msg);
+		}else if("news".equals(msgType)) {
+			JSONArray msgList = new JSONArray();
+			JSONObject newsObj = new JSONObject();
+			newsObj.put("title", sendParam.getTitle());
+			newsObj.put("description", sendParam.getDescription());
+			newsObj.put("url", sendParam.getUrl());
+			newsObj.put("picurl", sendParam.getPicurl());
+			msgList.add(newsObj);
+			msg.put("articles", msgList);
+			sendObj.put("news",msg);
+		}else {
+			LOG.info("暂未实现的客服消息类型");
+			return;
+		}
+		LOG.info("客服消息:"+sendObj.toJSONString());
+		JSONObject resultObject = this.getHttpHelper().httpPost(url,sendObj);
+		LOG.info("客服消息发送结果："+resultObject.toJSONString());
 	}
 	
 	/**
