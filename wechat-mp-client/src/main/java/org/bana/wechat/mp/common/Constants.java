@@ -46,6 +46,8 @@ public enum Constants {
 	卡券时间_固定时间段("DATE_TYPE_FIX_TIME_RANGE"),卡券时间_固定时长("DATE_TYPE_FIX_TERM"),
 	创建卡券(接口根路径.value +  "/card/create"),
 	投放卡券_生成二维码(接口根路径.value + "/card/qrcode/create"),
+	/*账号管理*/
+	账号管理_生成二维码(接口根路径.value + "/cgi-bin/qrcode/create"),
 	/*上传媒体文件*/
 	上传媒体文件(接口根路径.value + "/cgi-bin/media/upload"),
 	上传图文消息素材(接口根路径.value + "/cgi-bin/media/uploadnews"),

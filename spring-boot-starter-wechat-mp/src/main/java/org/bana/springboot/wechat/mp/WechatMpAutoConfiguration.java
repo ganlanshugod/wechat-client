@@ -14,11 +14,16 @@ import org.bana.springboot.wechat.mp.message.MessageMpAutoConfig;
 import org.bana.springboot.wechat.mp.oauth.OAuthAutoConfig;
 import org.bana.springboot.wechat.mp.token.MpTokenCacheConfig;
 import org.bana.springboot.wechat.mp.token.MpTokenServiceAutoConfig;
+import org.bana.wechat.mp.account.AccountMpService;
+import org.bana.wechat.mp.account.impl.AccountMpServiceImpl;
+import org.bana.wechat.mp.token.AccessTokenService;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -33,7 +38,15 @@ import org.springframework.context.annotation.Import;
 @Import({MpTokenServiceAutoConfig.class,OAuthAutoConfig.class,MediaMpAutoConfig.class,MessageMpAutoConfig.class,MenuMpAutoConfig.class})
 @EnableConfigurationProperties(WechatMpProperties.class)
 public class WechatMpAutoConfiguration {
-
+	
+	@Bean
+	@ConditionalOnMissingBean
+	public AccountMpService accountMpService(AccessTokenService accessTokenService){
+		AccountMpServiceImpl impl = new AccountMpServiceImpl();
+		impl.setAccessTokenService(accessTokenService);
+		return impl;
+	}
+	
 	/**
 	 * @param redisTemplate
 	 * @return
