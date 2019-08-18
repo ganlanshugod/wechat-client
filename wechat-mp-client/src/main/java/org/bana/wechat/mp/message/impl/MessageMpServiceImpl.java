@@ -16,6 +16,7 @@ import org.bana.wechat.mp.common.WechatMpResultHandler;
 import org.bana.wechat.mp.common.WechatMpService;
 import org.bana.wechat.mp.menu.result.MenuMpResult;
 import org.bana.wechat.mp.message.MessageMpService;
+import org.bana.wechat.mp.message.param.MaterialPageParam;
 import org.bana.wechat.mp.message.param.TemplateMessageMpParam;
 import org.bana.wechat.mp.message.result.TemplateMessageResult;
 import org.slf4j.Logger;
@@ -48,6 +49,28 @@ public class MessageMpServiceImpl extends WechatMpService implements MessageMpSe
 		param.setAppId(appId);
 		String url = this.addAccessToken(Constants.获取公众号的自动回复规则.getValue(), param);
 		JSONObject resultObject = this.getHttpHelper().httpGet(url);
+		return resultObject;
+	}
+	
+	/** 
+	* @Description: 获取素材列表
+	* @author zhangzhichao   
+	* @date 2019-08-18 13:53:42 
+	* @return  
+	*/ 
+	@Override
+	public JSONObject getMaterialPage(MaterialPageParam param) {
+		if(StringUtils.isBlank(param.getAppId(),param.getType())) {
+			throw new WeChatMpException(WeChatMpException.PARAM_ERROR,"getMaterialPage时参数不能为空:"+param.toString());
+		}
+		if(param.getOffset()==null) {
+			param.setOffset(0);
+		}
+		if(param.getCount()==null) {
+			param.setCount(20);
+		}
+		String url = this.addAccessToken(Constants.获取素材列表.getValue(), param);
+		JSONObject resultObject = this.getHttpHelper().httpPost(url,param);
 		return resultObject;
 	}
 	

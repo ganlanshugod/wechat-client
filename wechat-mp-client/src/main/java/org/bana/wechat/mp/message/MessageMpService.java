@@ -8,6 +8,7 @@
  */
 package org.bana.wechat.mp.message;
 
+import org.bana.wechat.mp.message.param.MaterialPageParam;
 import org.bana.wechat.mp.message.param.TemplateMessageMpParam;
 import org.bana.wechat.mp.message.result.TemplateMessageResult;
 
@@ -27,6 +28,15 @@ public interface MessageMpService {
 	* @param appId  
 	*/ 
 	public JSONObject getAutoReplyInfo(String appId);
+	
+	/** 
+	* @Description: 获取素材列表
+	* @author zhangzhichao   
+	* @date 2019-08-18 13:53:07 
+	* @param param
+	* @return  
+	*/ 
+	public JSONObject getMaterialPage(MaterialPageParam param);
 	
 	/**
 	 * Description: 发送模板消息
