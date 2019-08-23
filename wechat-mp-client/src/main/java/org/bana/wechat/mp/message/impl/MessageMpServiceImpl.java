@@ -92,11 +92,17 @@ public class MessageMpServiceImpl extends WechatMpService implements MessageMpSe
 		JSONObject sendObj = new JSONObject();
 		sendObj.put("touser",sendParam.getTouser());
 		String msgType = sendParam.getMsgtype();
+		if("img".equals(msgType)) {
+			msgType = "image";
+		}
 		sendObj.put("msgtype",msgType);
 		JSONObject msg = new JSONObject();
 		if("text".equals(msgType)) {
 			msg.put("content", sendParam.getContent());
 			sendObj.put("text",msg);
+		}else if("image".equals(msgType)) {
+			msg.put("media_id", sendParam.getMediaId());
+			sendObj.put(msgType,msg);
 		}else if("voice".equals(msgType) || "mpnews".equals(msgType)) {
 			msg.put("media_id", sendParam.getMediaId());
 			sendObj.put(msgType,msg);
