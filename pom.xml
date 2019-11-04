@@ -20,7 +20,7 @@
 
 	<modules>
 		<module>wechat-common</module>
-		<module>wechat-client</module>
+		<!-- <module>wechat-client</module> -->
 		<module>wechat-cp-client</module>
 		<module>wechat-pay-client</module>
 		<module>wechat-mp-client</module>
