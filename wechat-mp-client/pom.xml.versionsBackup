@@ -5,54 +5,43 @@
  	<parent>
  		<groupId>org.bana</groupId>
  		<artifactId>wechat-parent</artifactId>
- 		<version>0.5.0-SNAPSHOT</version>
+ 		<version>0.4.1-SNAPSHOT</version>
  		<relativePath>../pom.xml</relativePath>
  	</parent>
-	<artifactId>wechat-common</artifactId>
-	<name>wechat-common</name> 
-	<description>wechat-客户端的统一工具类</description>
+	<artifactId>wechat-mp-client</artifactId>
+	<name>wechat-mp-client</name> 
+	<description>微信的服务号接口客户端组件</description>
 
 	<dependencies>
 		<!-- *********************************************************** -->
-
-		<!-- *********************************************************** -->
 		<!-- ========begin======系统正式运行需要的jar报配置依赖====begin========== -->
 		<!-- *********************************************************** -->
-		<!-- =======================通用commont-util的依赖 begin ================= -->
+
+		<!-- =======================wechat 的统一工具类 begin ================= -->
 		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-lang3</artifactId>
+			<groupId>org.bana</groupId>
+			<artifactId>wechat-common</artifactId>
 		</dependency>
-		<!-- =======================通用commont-util的依赖 end ================= -->
-		<!-- =======================json 组件的依赖 begin ================= -->
-		<dependency>
-		    <groupId>com.alibaba</groupId>
-		    <artifactId>fastjson</artifactId>
-		    <version>1.2.44</version>
-		</dependency>
-		<!-- =======================json 组件的依赖 end ================= -->
+		<!-- =======================wechat 的统一工具类 end ================= -->
 
 		<!-- =======================log 组件的依赖 begin ================= -->
 		<!-- 日志的API配置系统 -->
-	  	<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 			<version>${slf4j.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		
 		<!-- =======================log4j 组件的依赖 end ================= -->
 		
-        <!-- =======================http 组件的依赖 begin ================= -->
+		<!-- =======================servlet api begin ================= -->
 		<dependency>
-		    <groupId>org.apache.httpcomponents</groupId>
-		    <artifactId>httpmime</artifactId>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
-		<!-- =======================http 组件的依赖 begin ================= -->
+		<!-- =======================servlet api end ================= -->
+		
 		<!-- *********************************************************** -->
 		<!-- ========end======系统正式运行需要的jar报配置依赖====end========== -->
 		<!-- *********************************************************** -->
@@ -66,11 +55,15 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>org.easymock</groupId>
+		    <artifactId>easymock</artifactId>
+		    <scope>test</scope>
+		</dependency>
 		<!-- junit 测试依赖 end -->
 		<!-- *********************************************************** -->
 		<!-- ========end==========测试级别的依赖配置========end========== -->
 		<!-- *********************************************************** -->
 	</dependencies>
 
-	<!-- Maven私服配置 -->
 </project>
