@@ -31,6 +31,16 @@
 		    <version>1.2.44</version>
 		</dependency>
 		<!-- =======================json 组件的依赖 end ================= -->
+		
+		
+		<!-- =======================mongo 组件的依赖 begin ================= -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-mongodb</artifactId>
+		    <version>2.2.1.RELEASE</version>
+		    <optional>true</optional>
+		</dependency>
+		<!-- =======================mongo 组件的依赖 end ================= -->
 
 		<!-- =======================log 组件的依赖 begin ================= -->
 		<!-- 日志的API配置系统 -->

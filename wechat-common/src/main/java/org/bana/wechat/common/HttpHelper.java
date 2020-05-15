@@ -41,14 +41,21 @@ public class HttpHelper {
 	public static final String HTTP_GET = "get";
 	public static final String HTTP_POST = "post";
 	
-	private static final WechatLogger LOG = WechatLoggerFactory.getWechatLogger();
+	private static WechatLogger LOG;
+	
+	public static WechatLogger getLOG() {
+		if(LOG == null) {
+			LOG = WechatLoggerFactory.getWechatLogger();
+		}
+		return LOG;
+	}
 	
 	public JSONObject httpPost(String url, Object data) {
-		WechatLogDomain domain = LOG.getWechatLogDomain();
+		WechatLogDomain domain = getLOG().getWechatLogDomain();
 		// 记录开始信息内容
 		String params = JSON.toJSONString(data);
 		StringEntity requestEntity = new StringEntity(params, "utf-8");
-		LOG.logBegin(url, params, HTTP_POST);
+		getLOG().logBegin(url, params, HTTP_POST);
 		HttpPost httpPost = new HttpPost(url);
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 		RequestConfig requestConfig = RequestConfig.custom()
@@ -65,10 +72,10 @@ public class HttpHelper {
 			domain.setWechatResult(result);
 			return JSON.parseObject(result);
 		} catch (IOException e) {
-			LOG.logException(e);
+			getLOG().logException(e);
 			throw new WechatException("500",e.getMessage(),e);
 		} finally {
-			LOG.logEnd();
+			getLOG().logEnd();
 			try {
 				if(response != null){
 					domain.setStatusCode(String.valueOf(response.getStatusLine().getStatusCode()));
@@ -79,14 +86,14 @@ public class HttpHelper {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			LOG.saveLog();
+			getLOG().saveLog();
 		}
 	}
 	
 	
 	public JSONObject httpGet(String url) {
 		// 记录开始信息内容
-		LOG.logBegin(url, null, HTTP_POST);
+		getLOG().logBegin(url, null, HTTP_POST);
 		HttpGet httpGet = new HttpGet(url);
 		CloseableHttpResponse response = null;
 		CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -97,29 +104,29 @@ public class HttpHelper {
 			response = httpClient.execute(httpGet, new BasicHttpContext());
 			StringResponseHandler handler = new StringResponseHandler();
 			String result = handler.handleResponse(response);
-			LOG.getWechatLogDomain().setWechatResult(result);
+			getLOG().getWechatLogDomain().setWechatResult(result);
 			return JSON.parseObject(result);
 		} catch (IOException e) {
-			LOG.logException(e);
+			getLOG().logException(e);
 			throw new WechatException("500",e.getMessage(),e);
 		} finally {
-			LOG.logEnd();
+			getLOG().logEnd();
 			if (response != null) {
-				LOG.getWechatLogDomain().setStatusCode(String.valueOf(response.getStatusLine().getStatusCode()));
+				getLOG().getWechatLogDomain().setStatusCode(String.valueOf(response.getStatusLine().getStatusCode()));
 				try {
 					response.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-			LOG.saveLog();
+			getLOG().saveLog();
 		}
 	}
 	
 	
 	public JSONObject uploadMedia(String url, File file){
 		// 记录开始信息内容
-		LOG.logBegin(url, null, HTTP_GET);
+		getLOG().logBegin(url, null, HTTP_GET);
 		HttpPost httpPost = new HttpPost(url);
 		CloseableHttpResponse response = null;
 		CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -140,22 +147,22 @@ public class HttpHelper {
 			response = httpClient.execute(httpPost, new BasicHttpContext());
 			StringResponseHandler handler = new StringResponseHandler();
 			String result = handler.handleResponse(response);
-			LOG.getWechatLogDomain().setWechatResult(result);
+			getLOG().getWechatLogDomain().setWechatResult(result);
 			return JSON.parseObject(result);
 		} catch (IOException e) {
-			LOG.logException(e);
+			getLOG().logException(e);
 			throw new WechatException("500",e.getMessage(),e);
 		} finally {
-			LOG.logEnd();
+			getLOG().logEnd();
 			if (response != null) {
-				LOG.getWechatLogDomain().setStatusCode(String.valueOf(response.getStatusLine().getStatusCode()));
+				getLOG().getWechatLogDomain().setStatusCode(String.valueOf(response.getStatusLine().getStatusCode()));
 				try {
 					response.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-			LOG.saveLog();
+			getLOG().saveLog();
 		}
 	}
 }

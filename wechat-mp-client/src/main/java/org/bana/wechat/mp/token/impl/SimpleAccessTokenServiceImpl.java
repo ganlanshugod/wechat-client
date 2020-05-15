@@ -9,6 +9,7 @@
 package org.bana.wechat.mp.token.impl;
 
 import org.bana.wechat.common.HttpHelper;
+import org.bana.wechat.common.http.HttpHelperService;
 import org.bana.wechat.common.util.StringUtils;
 import org.bana.wechat.mp.app.WechatMpConfig;
 import org.bana.wechat.mp.app.WechatMpManager;
@@ -28,11 +29,11 @@ import com.alibaba.fastjson.JSONObject;
  * @Description: AccessToken的实现类
  * @author Liu Wenjie
  */
-public class SimpleAccessTokenServiceImpl implements AccessTokenService{
+public class SimpleAccessTokenServiceImpl extends HttpHelperService implements AccessTokenService{
 
 	private static final Logger LOG = LoggerFactory.getLogger(SimpleAccessTokenServiceImpl.class);
 	
-	private HttpHelper httpHelper = new HttpHelper();
+//	private HttpHelper httpHelper = new HttpHelper();
 	
 	private WechatMpManager wechatMpManager;
 	

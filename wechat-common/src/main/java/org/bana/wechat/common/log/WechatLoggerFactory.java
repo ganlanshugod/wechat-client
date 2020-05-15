@@ -8,6 +8,9 @@
 */ 
 package org.bana.wechat.common.log;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.bana.wechat.common.WechatException;
 
 /** 
@@ -18,6 +21,8 @@ import org.bana.wechat.common.WechatException;
 public class WechatLoggerFactory {
 	
 	private static Class<? extends WechatLogger> cls;
+	
+	private static Map<String,WechatLogger> cacheMap = new HashMap<String, WechatLogger>();
 
 	/**
 	* @Description: 获取一条微信登录记录日志对象
@@ -28,11 +33,15 @@ public class WechatLoggerFactory {
 	public static WechatLogger getWechatLogger(){
 		if(cls != null){
 			if(WechatLogger.class.isAssignableFrom(cls)){
-				try {
-					return cls.newInstance();
-				} catch (Exception e) {
-					throw new WechatException(WechatException.LOG_ERROR,"获取日志记录的指定实现类时出现异常!",e);
+				WechatLogger logger = cacheMap.get(cls.getName());
+				if(logger == null) {
+					try {
+						logger = cls.newInstance();
+					} catch (Exception e) {
+						throw new WechatException(WechatException.LOG_ERROR,"获取日志记录的指定实现类时出现异常!",e);
+					}
 				}
+				return logger;
 			}
 		}
 		return new WechatLogger();
@@ -44,6 +53,15 @@ public class WechatLoggerFactory {
 	 */
 	public static void setCls(Class<? extends WechatLogger> cls) {
 		WechatLoggerFactory.cls = cls;
+	}
+	
+	/**
+	 * @Description: 属性 cls 的set方法 
+	 * @param cls 
+	 */
+	public static void setCls(Class<? extends WechatLogger> cls, WechatLogger logger) {
+		WechatLoggerFactory.cls = cls;
+		cacheMap.put(cls.getName(), logger);
 	}
 	
 }

@@ -8,7 +8,7 @@
  */
 package org.bana.wechat.mp.token.impl;
 
-import org.bana.wechat.common.HttpHelper;
+import org.bana.wechat.common.http.HttpHelperService;
 import org.bana.wechat.mp.common.Constants;
 import org.bana.wechat.mp.common.WechatMpResultHandler;
 import org.bana.wechat.mp.token.AccessTokenService;
@@ -23,11 +23,11 @@ import com.alibaba.fastjson.JSONObject;
  * @Description: Simple
  * @author Liu Wenjie
  */
-public class SimpleJsApiTicketMpService implements JsApiTicketMpService{
+public class SimpleJsApiTicketMpService extends HttpHelperService  implements JsApiTicketMpService{
 	
 	private AccessTokenService accessTokenService;
 	
-	private HttpHelper httpHelper = new HttpHelper();
+//	private HttpHelper httpHelper = new HttpHelper();
 	
 	private static final Logger LOG = LoggerFactory.getLogger(SimpleAccessTokenServiceImpl.class);
 

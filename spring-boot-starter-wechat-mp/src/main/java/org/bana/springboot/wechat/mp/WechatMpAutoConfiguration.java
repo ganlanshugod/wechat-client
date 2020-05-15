@@ -14,10 +14,14 @@ import org.bana.springboot.wechat.mp.message.MessageMpAutoConfig;
 import org.bana.springboot.wechat.mp.oauth.OAuthAutoConfig;
 import org.bana.springboot.wechat.mp.token.MpTokenCacheConfig;
 import org.bana.springboot.wechat.mp.token.MpTokenServiceAutoConfig;
+import org.bana.wechat.common.log.WechatLogger;
+import org.bana.wechat.common.log.WechatLoggerFactory;
+import org.bana.wechat.common.log.mongo.MongoWechatLogger;
 import org.bana.wechat.mp.account.AccountMpService;
 import org.bana.wechat.mp.account.impl.AccountMpServiceImpl;
 import org.bana.wechat.mp.token.AccessTokenService;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
@@ -26,6 +30,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 /**
  * @ClassName: WechatMpAutoConfiguration
@@ -56,6 +61,20 @@ public class WechatMpAutoConfiguration {
 	@Configuration
 	@Import(MpTokenCacheConfig.class)
 	public class CacheConfig {
+		
+	}
+	
+	@ConditionalOnClass(MongoTemplate.class)
+	@ConditionalOnBean(MongoTemplate.class)
+	@Configuration
+	public class LogConfig{
+		@Bean
+		public WechatLogger mongoWechatLogger(MongoTemplate logMongoTemplate) {
+			MongoWechatLogger logger = new MongoWechatLogger();
+			logger.setMongoTemplate(logMongoTemplate);
+			WechatLoggerFactory.setCls(MongoWechatLogger.class,logger);
+			return logger;
+		}
 		
 	}
 	

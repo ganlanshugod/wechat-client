@@ -14,7 +14,6 @@ import org.bana.wechat.mp.common.WeChatMpException;
 import org.bana.wechat.mp.common.WeChatMpParam;
 import org.bana.wechat.mp.common.WechatMpResultHandler;
 import org.bana.wechat.mp.common.WechatMpService;
-import org.bana.wechat.mp.menu.result.MenuMpResult;
 import org.bana.wechat.mp.message.MessageMpService;
 import org.bana.wechat.mp.message.param.CustomMsgMpParam;
 import org.bana.wechat.mp.message.param.MaterialPageParam;
