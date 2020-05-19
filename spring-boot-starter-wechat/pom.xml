@@ -18,5 +18,15 @@
 			<artifactId>spring-boot-starter-wechat-cp</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.bana</groupId>
+			<artifactId>spring-boot-starter-wechat-mp</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bana</groupId>
+			<artifactId>spring-boot-starter-wechat-mini</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>
