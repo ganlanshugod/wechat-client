@@ -25,10 +25,12 @@
 		<module>wechat-pay-client</module>
 		<module>wechat-mp-client</module>
 		<module>wechat-mini-client</module>
+		<module>wechat-pay-client</module>
 		<module>spring-boot-starter-wechat-cp</module>
 		<module>spring-boot-starter-wechat-mp</module>
 		<module>spring-boot-starter-wechat-mini</module>
 		<module>spring-boot-starter-wechat</module>
+		
 	</modules>
 
 	<dependencyManagement>
@@ -54,6 +56,11 @@
 			<dependency>
 				<groupId>org.bana</groupId>
 				<artifactId>wechat-mp-client</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.bana</groupId>
+				<artifactId>wechat-pay-client</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
