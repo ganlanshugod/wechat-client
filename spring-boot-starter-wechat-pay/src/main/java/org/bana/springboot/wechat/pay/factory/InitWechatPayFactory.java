@@ -10,7 +10,6 @@ package org.bana.springboot.wechat.pay.factory;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.bana.springboot.wechat.pay.WechatPayProperties;

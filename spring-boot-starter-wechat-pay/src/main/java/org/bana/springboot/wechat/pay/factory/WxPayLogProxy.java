@@ -10,7 +10,6 @@ package org.bana.springboot.wechat.pay.factory;
 
 import java.lang.reflect.Method;
 
-import org.apache.http.entity.StringEntity;
 import org.bana.wechat.common.log.WechatLogDomain;
 import org.bana.wechat.common.log.WechatLogger;
 import org.bana.wechat.common.log.WechatLoggerFactory;
