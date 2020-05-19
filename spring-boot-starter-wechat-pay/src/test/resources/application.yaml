@@ -1,0 +1,7 @@
+wechat:
+  pay:
+    appID: wx5bc259b375eb9572
+    mchID: 1486632612
+    key: qingdaobinhaidujiawangxindujia88
+    cert_path: classpath:cert/apiclient_cert_1486632612.p12
+    log: true

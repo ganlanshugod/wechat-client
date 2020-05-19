@@ -69,6 +69,7 @@ public class WechatMpAutoConfiguration {
 	@Configuration
 	public class LogConfig{
 		@Bean
+		@ConditionalOnMissingBean
 		public WechatLogger mongoWechatLogger(MongoTemplate logMongoTemplate) {
 			MongoWechatLogger logger = new MongoWechatLogger();
 			logger.setMongoTemplate(logMongoTemplate);

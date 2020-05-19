@@ -20,5 +20,36 @@ public class WechatPayProperties {
 
 	public static final String WECHAT_PAY_PREFIX = "wechat.pay";
 	
+	private String appID; 
+	private String mchID;
+	private String key;
+	private String certPath;
+	
+	
+	public String getAppID() {
+		return appID;
+	}
+	public void setAppID(String appID) {
+		this.appID = appID;
+	}
+	public String getMchID() {
+		return mchID;
+	}
+	public void setMchID(String mchID) {
+		this.mchID = mchID;
+	}
+	public String getKey() {
+		return key;
+	}
+	public void setKey(String key) {
+		this.key = key;
+	}
+	public String getCertPath() {
+		return certPath;
+	}
+	public void setCertPath(String certPath) {
+		this.certPath = certPath;
+	}
+	
 	
 }

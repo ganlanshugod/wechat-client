@@ -37,16 +37,16 @@ public class WxPayFactory {
 		if(param == null || StringUtils.isAnyBlank(param.getAppId(),param.getMchId())) {
 			throw new WeChatPayException(WeChatPayException.PARAM_ERROR,"错误的微信Pay参数"+param);
 		}
-		WXPay wxPay = wxPayCache.get(param);
-		if(wxPay == null) {
-			WechatPayConfig wechatPayConfig = wechatPayAppManager.getWechatPayConfig(param);
-			if(wechatPayConfig == null) {
-				throw new WeChatPayException(WeChatPayException.APP_PARAM_ERROR1,"没有获取到"+param+"对应的支付配置");
+		if(wxPayCache == null) {
+			return this.getInstance(param);
+		}else {
+			WXPay wxPay = wxPayCache.get(param);
+			if(wxPay == null) {
+				wxPay = this.getInstance(param);
+				wxPayCache.put(param, wxPay);
 			}
-			wxPay = this.instance(wechatPayConfig);
-			wxPayCache.put(param, wxPay);
+			return wxPay;
 		}
-		return wxPay;
 	}
 	/**
 	* @Description: 实例化方法
@@ -58,6 +58,16 @@ public class WxPayFactory {
 	protected  WXPay instance(WechatPayConfig wechatPayConfig) {
 		return new WXPay(wechatPayConfig);
 	}
+	
+	private WXPay getInstance(WxPayParam param) {
+		WechatPayConfig wechatPayConfig = wechatPayAppManager.getWechatPayConfig(param);
+		if(wechatPayConfig == null) {
+			throw new WeChatPayException(WeChatPayException.APP_PARAM_ERROR1,"没有获取到"+param+"对应的支付配置");
+		}
+		return this.instance(wechatPayConfig);
+	}
+	
+	
 	
 
 	public void setWechatPayAppManager(WechatPayAppManager wechatPayAppManager) {
