@@ -20,6 +20,8 @@ import org.bana.wechat.common.log.mongo.MongoWechatLogger;
 import org.bana.wechat.mp.account.AccountMpService;
 import org.bana.wechat.mp.account.impl.AccountMpServiceImpl;
 import org.bana.wechat.mp.token.AccessTokenService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -68,9 +70,20 @@ public class WechatMpAutoConfiguration {
 	@ConditionalOnBean(MongoTemplate.class)
 	@Configuration
 	public class LogConfig{
-		@Bean
-		@ConditionalOnMissingBean
-		public WechatLogger mongoWechatLogger(MongoTemplate logMongoTemplate) {
+		@Bean(name="mongoWechatLogger")
+		@ConditionalOnMissingBean(name="mongoWechatLogger")
+		@ConditionalOnBean(name="logMongoTemplate")
+		public WechatLogger mongoWechatLogger(@Autowired @Qualifier("logMongoTemplate")MongoTemplate logMongoTemplate) {
+			MongoWechatLogger logger = new MongoWechatLogger();
+			logger.setMongoTemplate(logMongoTemplate);
+			WechatLoggerFactory.setCls(MongoWechatLogger.class,logger);
+			return logger;
+		}
+		
+		@Bean(name="mongoWechatLogger")
+		@ConditionalOnMissingBean(name="mongoWechatLogger")
+		@ConditionalOnBean(name="mongoTemplate")
+		public WechatLogger mongoWechatLogger2(@Autowired @Qualifier("mongoTemplate")MongoTemplate logMongoTemplate) {
 			MongoWechatLogger logger = new MongoWechatLogger();
 			logger.setMongoTemplate(logMongoTemplate);
 			WechatLoggerFactory.setCls(MongoWechatLogger.class,logger);

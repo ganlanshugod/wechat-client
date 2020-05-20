@@ -10,6 +10,7 @@ import org.bana.wechat.pay.app.WechatPayAppManager;
 import org.bana.wechat.pay.app.WxPayFactory;
 import org.bana.wechat.pay.impl.WechatPayServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -80,17 +81,30 @@ public class WechatPayAutoConfiguration {
 	}
 	
 	
+
 	@ConditionalOnClass(MongoTemplate.class)
 	@ConditionalOnBean(MongoTemplate.class)
 	@Configuration
 	public class LogConfig{
-		@Bean
-		@ConditionalOnMissingBean
-		public WechatLogger mongoWechatLogger(MongoTemplate logMongoTemplate) {
+		@Bean(name="mongoWechatLogger")
+		@ConditionalOnMissingBean(name="mongoWechatLogger")
+		@ConditionalOnBean(name="logMongoTemplate")
+		public WechatLogger mongoWechatLogger(@Autowired @Qualifier("logMongoTemplate")MongoTemplate logMongoTemplate) {
 			MongoWechatLogger logger = new MongoWechatLogger();
 			logger.setMongoTemplate(logMongoTemplate);
 			WechatLoggerFactory.setCls(MongoWechatLogger.class,logger);
 			return logger;
 		}
+		
+		@Bean(name="mongoWechatLogger")
+		@ConditionalOnMissingBean(name="mongoWechatLogger")
+		@ConditionalOnBean(name="mongoTemplate")
+		public WechatLogger mongoWechatLogger2(@Autowired @Qualifier("mongoTemplate")MongoTemplate logMongoTemplate) {
+			MongoWechatLogger logger = new MongoWechatLogger();
+			logger.setMongoTemplate(logMongoTemplate);
+			WechatLoggerFactory.setCls(MongoWechatLogger.class,logger);
+			return logger;
+		}
+		
 	}
 }
