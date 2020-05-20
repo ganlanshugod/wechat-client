@@ -29,6 +29,26 @@ public interface WechatPayService {
 	* @throws Exception  
 	*/ 
 	public Map<String, String> unifiedOrder(WxPayParam payParam,Map<String, String> reqData) throws Exception;
-	 
-	 
+	
+	/** 
+	* @Description: 退款
+	* @author zhangzhichao   
+	* @date May 20, 2020 5:41:36 PM 
+	* @param payParam
+	* @param reqData
+	* @return
+	* @throws Exception  
+	*/ 
+	public Map<String, String> refund(WxPayParam payParam,Map<String, String> reqData) throws Exception;
+	
+	/** 
+	* @Description: 验证签名
+	* @author zhangzhichao   
+	* @date May 20, 2020 5:45:01 PM 
+	* @param payParam
+	* @param reqData
+	* @return
+	* @throws Exception  
+	*/ 
+	public boolean isPayResultNotifySignatureValid(WxPayParam payParam,Map<String, String> reqData) throws Exception;
 }
