@@ -20,7 +20,6 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 public class MpTokenCacheConfig {
 
 	@Bean
-	@ConditionalOnBean(RedisConnectionFactory.class)
 	@ConditionalOnMissingBean(CacheManager.class)
 	public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
 //	    RedisCacheManager cacheManager= new RedisCacheManager(redisTemplate);
@@ -32,8 +31,9 @@ public class MpTokenCacheConfig {
 	    
 	    RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(connectionFactory);
         // 默认配置，过期时间指定是30分钟
-        RedisCacheConfiguration defaultCacheConfig = RedisCacheConfiguration.defaultCacheConfig();
-        defaultCacheConfig.entryTtl(Duration.ofMinutes(10)); // 单位分钟
+        RedisCacheConfiguration defaultCacheConfig = 
+        		RedisCacheConfiguration.defaultCacheConfig()
+        		.entryTtl(Duration.ofMinutes(10)); // 单位分钟
 
         // redisExpire1h cache配置，过期时间指定是1小时，缓存key的前缀指定成prefixaaa_（存到redis的key会自动添加这个前缀）
         RedisCacheConfiguration userCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig().
