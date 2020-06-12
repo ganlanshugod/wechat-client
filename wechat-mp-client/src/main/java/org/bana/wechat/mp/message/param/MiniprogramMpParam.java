@@ -16,24 +16,24 @@ package org.bana.wechat.mp.message.param;
 public class MiniprogramMpParam {
 	
 	private String appid; // 所需跳转到的小程序appid（该小程序appid必须与发模板消息的公众号是绑定关联关系，暂不支持小游戏）
-	private String pagepath; // 所需跳转到小程序的具体页面路径，支持带参数,（示例index?foo=bar），暂不支持小游戏
+	private String page; // 所需跳转到小程序的具体页面路径，支持带参数,（示例index?foo=bar），暂不支持小游戏，实际是path
 	
 	
 	public String getAppid() {
 		return appid;
 	}
-	public String getPagepath() {
-		return pagepath;
-	}
 	public void setAppid(String appid) {
 		this.appid = appid;
 	}
-	public void setPagepath(String pagepath) {
-		this.pagepath = pagepath;
+	public String getPage() {
+		return page;
+	}
+	public void setPage(String page) {
+		this.page = page;
 	}
 	@Override
 	public String toString() {
-		return "MiniprogramMpParam [appid=" + appid + ", pagepath=" + pagepath + "]";
+		return "MiniprogramMpParam [appid=" + appid + ", pagepath=" + page + "]";
 	}
 	
 }
