@@ -27,6 +27,7 @@
 		<module>wechat-mini-client</module>
 		<module>spring-boot-starter-wechat-cp</module>
 		<module>spring-boot-starter-wechat-mp</module>
+		<module>spring-boot-starter-wechat-pay</module>
 		<module>spring-boot-starter-wechat-mini</module>
 		<module>spring-boot-starter-wechat</module>
 		
