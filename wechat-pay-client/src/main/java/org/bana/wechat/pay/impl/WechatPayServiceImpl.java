@@ -51,6 +51,36 @@ public class WechatPayServiceImpl implements WechatPayService{
 	public Map<String, String> refund(WxPayParam payParam, Map<String, String> reqData) throws Exception {
 		return wxPayFactory.getWxPay(payParam).refund(reqData);
 	}
+	
+	/**
+	* <p>Description:查询支付单 </p> 
+	* @author zhangzhichao   
+	* @date Jul 3, 2020 2:49:24 PM 
+	* @param payParam
+	* @param reqData
+	* @return
+	* @throws Exception 
+	* @see org.bana.wechat.pay.WechatPayService#orderQuery(org.bana.wechat.pay.app.WxPayParam, java.util.Map) 
+	*/ 
+	@Override
+	public Map<String, String> orderQuery(WxPayParam payParam, Map<String, String> reqData) throws Exception {
+		return wxPayFactory.getWxPay(payParam).orderQuery(reqData);
+	}
+	
+	/**
+	* <p>Description: 查询退款单</p> 
+	* @author zhangzhichao   
+	* @date Jul 6, 2020 9:25:29 AM 
+	* @param payParam
+	* @param reqData
+	* @return
+	* @throws Exception 
+	* @see org.bana.wechat.pay.WechatPayService#refundQuery(org.bana.wechat.pay.app.WxPayParam, java.util.Map) 
+	*/ 
+	@Override
+	public Map<String, String> refundQuery(WxPayParam payParam, Map<String, String> reqData) throws Exception {
+		return wxPayFactory.getWxPay(payParam).refundQuery(reqData);
+	}
 	/**
 	* <p>Description: 验证签名</p> 
 	* @author zhangzhichao   
