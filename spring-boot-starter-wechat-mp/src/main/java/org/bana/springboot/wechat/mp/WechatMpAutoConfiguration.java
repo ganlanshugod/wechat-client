@@ -33,6 +33,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 
 /**
  * @ClassName: WechatMpAutoConfiguration
@@ -59,7 +60,7 @@ public class WechatMpAutoConfiguration {
 	 * @return
 	 * 如果环境中存在redis环境则使用redis加载cache方法
 	 */
-	@ConditionalOnClass(name="org.springframework.data.redis.cacheRedisCacheManager")
+	@ConditionalOnClass(RedisConnectionFactory.class)
 	@Configuration
 	@Import(MpTokenCacheConfig.class)
 	public class CacheConfig {
