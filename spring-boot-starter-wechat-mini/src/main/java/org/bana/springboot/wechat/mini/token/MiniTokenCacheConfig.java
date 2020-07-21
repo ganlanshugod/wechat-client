@@ -1,18 +1,7 @@
 package org.bana.springboot.wechat.mini.token;
 
-import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.cache.RedisCacheConfiguration;
-import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.cache.RedisCacheWriter;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 
 @Configuration
 public class MiniTokenCacheConfig {
@@ -29,21 +18,32 @@ public class MiniTokenCacheConfig {
 //	    return cacheManager;
 //	}
 	
+//	@Bean
+//	@ConditionalOnMissingBean(CacheManager.class)
+//	public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
+//	    RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(connectionFactory);
+//        // 默认配置，过期时间指定是30分钟
+//	    RedisCacheConfiguration defaultCacheConfig = RedisCacheConfiguration.defaultCacheConfig()
+//	    		.entryTtl(Duration.ofMinutes(10)); // 单位分钟
+//
+//        // redisExpire1h cache配置，过期时间指定是1小时，缓存key的前缀指定成prefixaaa_（存到redis的key会自动添加这个前缀）
+//        RedisCacheConfiguration userCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig().
+//                entryTtl(Duration.ofHours(1)).prefixKeysWith("MINIToken");
+//        Map<String, RedisCacheConfiguration> redisCacheConfigurationMap = new HashMap<>();
+//        redisCacheConfigurationMap.put("redisExpire1h", userCacheConfiguration);
+//
+//        RedisCacheManager cacheManager = new RedisCacheManager(redisCacheWriter, defaultCacheConfig, redisCacheConfigurationMap);
+//        return cacheManager;
+//	}
+	
+	/** 
+	* @Description:  小程序 的token 缓存新的形式
+	* @author liuwenjie   
+	* @date Jul 7, 2020 4:07:52 PM 
+	* @return  
+	*/ 
 	@Bean
-	@ConditionalOnMissingBean(CacheManager.class)
-	public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
-	    RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(connectionFactory);
-        // 默认配置，过期时间指定是30分钟
-	    RedisCacheConfiguration defaultCacheConfig = RedisCacheConfiguration.defaultCacheConfig()
-	    		.entryTtl(Duration.ofMinutes(10)); // 单位分钟
-
-        // redisExpire1h cache配置，过期时间指定是1小时，缓存key的前缀指定成prefixaaa_（存到redis的key会自动添加这个前缀）
-        RedisCacheConfiguration userCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig().
-                entryTtl(Duration.ofHours(1)).prefixKeysWith("MINIToken");
-        Map<String, RedisCacheConfiguration> redisCacheConfigurationMap = new HashMap<>();
-        redisCacheConfigurationMap.put("redisExpire1h", userCacheConfiguration);
-
-        RedisCacheManager cacheManager = new RedisCacheManager(redisCacheWriter, defaultCacheConfig, redisCacheConfigurationMap);
-        return cacheManager;
+	public WechatMiniRedisCacheManagerBuilderCustomizer wechatMiniRedisCacheManagerBuilderCustomizer() {
+		return new WechatMiniRedisCacheManagerBuilderCustomizer();
 	}
 }

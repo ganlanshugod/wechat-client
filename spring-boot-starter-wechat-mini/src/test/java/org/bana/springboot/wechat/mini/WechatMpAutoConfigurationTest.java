@@ -10,15 +10,12 @@ package org.bana.springboot.wechat.mini;
 
 import static org.junit.Assert.assertNotNull;
 
-import org.bana.springboot.wechat.mini.WechatMiniAutoConfiguration;
-import org.bana.springboot.wechat.mini.WechatMiniProperties;
 import org.bana.wechat.mini.media.MediaMiniService;
 import org.bana.wechat.mini.token.AccessTokenService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 

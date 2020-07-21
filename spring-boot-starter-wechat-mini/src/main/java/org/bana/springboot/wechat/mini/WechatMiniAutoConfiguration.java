@@ -37,7 +37,7 @@ public class WechatMiniAutoConfiguration {
 	 * @return
 	 * 如果环境中存在redis环境则使用redis加载cache方法
 	 */
-	@ConditionalOnClass(name="org.springframework.data.redis.cacheRedisCacheManager")
+	@ConditionalOnClass(name="org.springframework.data.redis.connection.RedisConnectionFactory")
 	@Configuration
 	@Import(MiniTokenCacheConfig.class)
 	public class CacheConfig {
