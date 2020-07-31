@@ -12,6 +12,7 @@ import org.bana.wechat.common.HttpHelper;
 import org.bana.wechat.common.util.StringUtils;
 import org.bana.wechat.mp.auth.OAuthMpService;
 import org.bana.wechat.mp.auth.param.UserMpInfoParam;
+import org.bana.wechat.mp.auth.param.UserPaidInfoParam;
 import org.bana.wechat.mp.auth.result.UserMpInfo;
 import org.bana.wechat.mp.common.Constants;
 import org.bana.wechat.mp.common.WeChatMpException;
@@ -79,6 +80,22 @@ public class OAuthMpServiceImpl extends WechatMpService implements OAuthMpServic
 		}
 		param.setLang(DEFAULT_LANG);
 		JSONObject post = this.get(Constants.获取用户基本信息.getValue(), param);
+		return WechatMpResultHandler.handleResult(post, UserMpInfo.class);
+	}
+	/**
+	* <p>Description: 用户支付完成后，获取该用户的 UnionId</p> 
+	* @author zhangzhichao   
+	* @date Jul 31, 2020 9:20:12 AM 
+	* @param param
+	* @return 
+	* @see org.bana.wechat.mp.auth.OAuthMpService#getPaidUserInfo(org.bana.wechat.mp.auth.param.UserPaidInfoParam) 
+	*/ 
+	@Override
+	public UserMpInfo getPaidUserInfo(UserPaidInfoParam param) {
+		if(param == null || StringUtils.isBlank(param.getAppId(),param.getOpenId())){
+			throw new WeChatMpException(WeChatMpException.PARAM_ERROR,"getPaidUserInfo时参数不能为空 param=," + param);
+		}
+		JSONObject post = this.get(Constants.支付完成后获取用户信息.getValue(), param);
 		return WechatMpResultHandler.handleResult(post, UserMpInfo.class);
 	}
 

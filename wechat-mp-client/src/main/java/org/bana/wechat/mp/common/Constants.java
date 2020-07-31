@@ -25,6 +25,7 @@ public enum Constants {
 	长链接转短链接(接口根路径.value + "/cgi-bin/shorturl"),
 	/*用户管理*/
 	获取用户基本信息(接口根路径.value + "/cgi-bin/user/info"),
+	支付完成后获取用户信息(接口根路径.value + "/wxa/getpaidunionid"),
 	/*菜单管理*/
 	创建自定义菜单(接口根路径.value + "/cgi-bin/menu/create"),
 	查询自定义菜单(接口根路径.value + "/cgi-bin/menu/get"),

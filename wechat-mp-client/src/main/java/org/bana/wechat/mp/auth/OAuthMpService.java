@@ -9,6 +9,7 @@
 package org.bana.wechat.mp.auth;
 
 import org.bana.wechat.mp.auth.param.UserMpInfoParam;
+import org.bana.wechat.mp.auth.param.UserPaidInfoParam;
 import org.bana.wechat.mp.auth.result.UserMpInfo;
 
 /**
@@ -48,4 +49,13 @@ public interface OAuthMpService {
 	* @return  
 	*/ 
 	UserMpInfo getUserInfoAll(UserMpInfoParam param);
+	
+	/** 
+	* Description: 用户支付完成后，获取该用户的 UnionId
+	* @author zhangzhichao   
+	* @date 2020-07-31 09:19:50 
+	* @param param
+	* @return  
+	*/ 
+	UserMpInfo getPaidUserInfo(UserPaidInfoParam param);
 }
