@@ -1,5 +1,5 @@
 /**
- * 对企业微信发送给企业后台的消息加解密示例代码.
+ * 对公众平台发送给公众账号的消息加解密示例代码.
  * 
  * @copyright Copyright (c) 1998-2014 Tencent Inc.
  */
@@ -24,10 +24,10 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 
 /**
- * 提供接收和推送给企业微信消息的加解密接口(UTF8编码的字符串).
+ * 提供接收和推送给公众平台消息的加解密接口(UTF8编码的字符串).
  * <ol>
- * 	<li>第三方回复加密消息给企业微信</li>
- * 	<li>第三方收到企业微信发送的消息，验证消息的安全性，并对消息进行解密。</li>
+ * 	<li>第三方回复加密消息给公众平台</li>
+ * 	<li>第三方收到公众平台发送的消息，验证消息的安全性，并对消息进行解密。</li>
  * </ol>
  * 说明：异常java.security.InvalidKeyException:illegal Key Size的解决方案
  * <ol>
@@ -43,23 +43,23 @@ public class WXBizMsgCrypt {
 	Base64 base64 = new Base64();
 	byte[] aesKey;
 	String token;
-	String corpId;
+	String appId;
 
 	/**
 	 * 构造函数
-	 * @param token 企业微信后台，开发者设置的token
-	 * @param encodingAesKey 企业微信后台，开发者设置的EncodingAESKey
-	 * @param corpId 企业的corpid
+	 * @param token 公众平台上，开发者设置的token
+	 * @param encodingAesKey 公众平台上，开发者设置的EncodingAESKey
+	 * @param appId 公众平台appid
 	 * 
 	 * @throws AesException 执行失败，请查看该异常的错误码和具体的错误信息
 	 */
-	public WXBizMsgCrypt(String token, String encodingAesKey, String corpId) throws AesException {
+	public WXBizMsgCrypt(String token, String encodingAesKey, String appId) throws AesException {
 		if (encodingAesKey.length() != 43) {
 			throw new AesException(AesException.IllegalAesKey);
 		}
 
 		this.token = token;
-		this.corpId = corpId;
+		this.appId = appId;
 		aesKey = Base64.decodeBase64(encodingAesKey + "=");
 	}
 
@@ -107,13 +107,13 @@ public class WXBizMsgCrypt {
 		byte[] randomStrBytes = randomStr.getBytes(CHARSET);
 		byte[] textBytes = text.getBytes(CHARSET);
 		byte[] networkBytesOrder = getNetworkBytesOrder(textBytes.length);
-		byte[] corpidBytes = corpId.getBytes(CHARSET);
+		byte[] appidBytes = appId.getBytes(CHARSET);
 
-		// randomStr + networkBytesOrder + text + corpid
+		// randomStr + networkBytesOrder + text + appid
 		byteCollector.addBytes(randomStrBytes);
 		byteCollector.addBytes(networkBytesOrder);
 		byteCollector.addBytes(textBytes);
-		byteCollector.addBytes(corpidBytes);
+		byteCollector.addBytes(appidBytes);
 
 		// ... + pad: 使用自定义的填充方式对明文进行补位填充
 		byte[] padBytes = PKCS7Encoder.encode(byteCollector.size());
@@ -168,48 +168,48 @@ public class WXBizMsgCrypt {
 			throw new AesException(AesException.DecryptAESError);
 		}
 
-		String xmlContent, from_corpid;
+		String xmlContent, from_appid;
 		try {
 			// 去除补位字符
 			byte[] bytes = PKCS7Encoder.decode(original);
 
-			// 分离16位随机字符串,网络字节序和corpId
+			// 分离16位随机字符串,网络字节序和AppId
 			byte[] networkOrder = Arrays.copyOfRange(bytes, 16, 20);
 
 			int xmlLength = recoverNetworkBytesOrder(networkOrder);
 
 			xmlContent = new String(Arrays.copyOfRange(bytes, 20, 20 + xmlLength), CHARSET);
-			from_corpid = new String(Arrays.copyOfRange(bytes, 20 + xmlLength, bytes.length),
+			from_appid = new String(Arrays.copyOfRange(bytes, 20 + xmlLength, bytes.length),
 					CHARSET);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AesException(AesException.IllegalBuffer);
 		}
 
-		// corpid不相同的情况
-		if (!from_corpid.equals(corpId)) {
-			throw new AesException(AesException.ValidateCorpidError);
+		// appid不相同的情况
+		if (!from_appid.equals(appId)) {
+			throw new AesException(AesException.ValidateAppidError);
 		}
 		return xmlContent;
 
 	}
 
 	/**
-	 * 将企业微信回复用户的消息加密打包.
+	 * 将公众平台回复用户的消息加密打包.
 	 * <ol>
 	 * 	<li>对要发送的消息进行AES-CBC加密</li>
 	 * 	<li>生成安全签名</li>
 	 * 	<li>将消息密文和安全签名打包成xml格式</li>
 	 * </ol>
 	 * 
-	 * @param replyMsg 企业微信待回复用户的消息，xml格式的字符串
+	 * @param replyMsg 公众平台待回复用户的消息，xml格式的字符串
 	 * @param timeStamp 时间戳，可以自己生成，也可以用URL参数的timestamp
 	 * @param nonce 随机串，可以自己生成，也可以用URL参数的nonce
 	 * 
 	 * @return 加密后的可以直接回复用户的密文，包括msg_signature, timestamp, nonce, encrypt的xml格式的字符串
 	 * @throws AesException 执行失败，请查看该异常的错误码和具体的错误信息
 	 */
-	public String EncryptMsg(String replyMsg, String timeStamp, String nonce) throws AesException {
+	public String encryptMsg(String replyMsg, String timeStamp, String nonce) throws AesException {
 		// 加密
 		String encrypt = encrypt(getRandomStr(), replyMsg);
 
@@ -242,7 +242,7 @@ public class WXBizMsgCrypt {
 	 * @return 解密后的原文
 	 * @throws AesException 执行失败，请查看该异常的错误码和具体的错误信息
 	 */
-	public String DecryptMsg(String msgSignature, String timeStamp, String nonce, String postData)
+	public String decryptMsg(String msgSignature, String timeStamp, String nonce, String postData)
 			throws AesException {
 
 		// 密钥，公众账号的app secret
@@ -274,7 +274,7 @@ public class WXBizMsgCrypt {
 	 * @return 解密之后的echostr
 	 * @throws AesException 执行失败，请查看该异常的错误码和具体的错误信息
 	 */
-	public String VerifyURL(String msgSignature, String timeStamp, String nonce, String echoStr)
+	public String verifyUrl(String msgSignature, String timeStamp, String nonce, String echoStr)
 			throws AesException {
 		String signature = SHA1.getSHA1(token, timeStamp, nonce, echoStr);
 

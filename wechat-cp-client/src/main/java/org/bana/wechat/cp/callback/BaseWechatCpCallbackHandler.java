@@ -100,7 +100,7 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 		if(StringUtils.isNotBlank(echoStr)){
 			WXBizMsgCrypt wxcpt = getFirstWxcpt(suiteConfig);
 			LOG.warn("suite" + suiteId + "首次推送成功");
-			return wxcpt.VerifyURL(msgSignature, timeStamp, nonce, echoStr);
+			return wxcpt.verifyUrl(msgSignature, timeStamp, nonce, echoStr);
 		}
 		
 		WXBizMsgCrypt wxcpt = getWxcpt(suiteConfig);
@@ -109,7 +109,7 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 			InputStream is = request.getInputStream();
 			String postData = getPostData(is);
 			LOG.info("解密前的解密字符串为：" + postData);
-			String decryptMsg = wxcpt.DecryptMsg(msgSignature, timeStamp, nonce, postData);
+			String decryptMsg = wxcpt.decryptMsg(msgSignature, timeStamp, nonce, postData);
 			LOG.info("获取到的解密字符串为：" + decryptMsg);
 			ResultType msgType = getMsgType(decryptMsg);
 			return handleMessage(msgType,decryptMsg);
@@ -154,7 +154,7 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 		if(StringUtils.isNotBlank(echoStr)){
 			WXBizMsgCrypt wxcpt = new WXBizMsgCrypt(corpAppConfig.getToken(), corpAppConfig.getEncodingAeskey(), corpId);
 			LOG.warn("自建应用接收消息：corpId=" + corpId + "，agentId="+agentId+"首次推送成功");
-			return wxcpt.VerifyURL(msgSignature, timeStamp, nonce, echoStr);
+			return wxcpt.verifyUrl(msgSignature, timeStamp, nonce, echoStr);
 		}
 		
 		WXBizMsgCrypt wxcpt = new WXBizMsgCrypt(corpAppConfig.getToken(), corpAppConfig.getEncodingAeskey(), corpId);
@@ -163,7 +163,7 @@ public class BaseWechatCpCallbackHandler implements WechatCpCallbackHandler {
 			InputStream is = request.getInputStream();
 			String postData = getPostData(is);
 			LOG.info("自建应用接收消息：解密前的解密字符串为：" + postData);
-			String decryptMsg = wxcpt.DecryptMsg(msgSignature, timeStamp, nonce, postData);
+			String decryptMsg = wxcpt.decryptMsg(msgSignature, timeStamp, nonce, postData);
 			LOG.info("自建应用接收消息：获取到的解密字符串为：" + decryptMsg);
 			// 消息类型MsgType，此时固定为：event，通过Event区分不同的事件
 			ResultType msgType = getDecryptMsgInfo(decryptMsg,CHANGE_TYPE);

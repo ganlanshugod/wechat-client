@@ -29,6 +29,8 @@ public class WeChatMpException extends WechatException {
 	
 	public static final String JSSKD_ERROR1="js-001";
 	
+	public static final String MP_COMP_ERROR = "MP-COMP-001";
+	
 	/**
 	 * <p>Description: </p>
 	 * @author Liu Wenjie

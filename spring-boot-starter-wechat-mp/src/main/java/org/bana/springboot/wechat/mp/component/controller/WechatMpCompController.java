@@ -1,0 +1,76 @@
+/**
+* @Company 全域旅游
+* @Title: WechatMpController.java 
+* @Package org.bana.springboot.wechat.mp.controller 
+* @author liuwenjie   
+* @date Sep 17, 2020 9:16:32 AM 
+* @version V1.0   
+*/ 
+package org.bana.springboot.wechat.mp.component.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
+
+import org.bana.wechat.mp.component.common.WXMpBizMsgCryptFactory;
+import org.bana.wechat.mp.component.common.WechatMpComponentTicketStore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.qq.weixin.mp.aes.WXBizMsgCrypt;
+
+/** 
+* @ClassName: WechatMpController 
+* @Description: 
+* @author liuwenjie   
+*/
+//@Controller
+@RequestMapping("app/wechat")
+public class WechatMpCompController {
+	
+	private static final String PARAM_TIMESTAMP = "timestamp";
+	private static final String PARAM_NONCE = "nonce";
+	private static final String PARAM_ENCRYPT_TYPE = "encrypt_type";
+	private static final String PARAM_MSG_SIGNATURE = "msg_signature";
+	
+	private static final Logger LOG = LoggerFactory.getLogger(WechatMpCompController.class);
+	
+	
+	@Autowired 
+	private WXMpBizMsgCryptFactory wxMpBizMsgCryptFactory;
+	
+	@Autowired
+	private WechatMpComponentTicketStore wechatMpComponentTicketStore;
+
+	@RequestMapping("receive/{componentAppId}")
+	@ResponseBody
+	public String receive(HttpServletRequest request,@RequestBody String postData,@PathParam("componentAppId") String componentAppId){
+		String timestamp = request.getParameter(PARAM_TIMESTAMP);
+		String nonce = request.getParameter(PARAM_NONCE);
+		String encryptType = request.getParameter(PARAM_ENCRYPT_TYPE);
+		String msgSignature = request.getParameter(PARAM_MSG_SIGNATURE);
+		LOG.info("======收到推送消息== timestamp=" + timestamp
+				+ "\n nonce=" + nonce
+				+ "\n encryptType=" + encryptType
+				+ "\n msgSignature=" + msgSignature
+				+ "\n postData=" + postData
+				+ "\n componentAppId=" + componentAppId);
+		
+		// 解密对应的推送消息
+		WXBizMsgCrypt wxBizMsgCrypt = wxMpBizMsgCryptFactory.getWxBizMsgCrypt(componentAppId);
+		String decryptMsg = wxBizMsgCrypt.decryptMsg(msgSignature, timestamp, nonce, postData);
+		LOG.info("=====解密收到的消息为===" + decryptMsg);
+		
+		
+		return "success";
+	}
+	
+	
+	@RequestMapping("callback/{APPID}")
+	public void callBack() {
+		
+	}
+}

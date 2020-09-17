@@ -1,5 +1,5 @@
 /**
- * 对企业微信发送给企业后台的消息加解密示例代码.
+ * 对公众平台发送给公众账号的消息加解密示例代码.
  * 
  * @copyright Copyright (c) 1998-2014 Tencent Inc.
  */
@@ -14,7 +14,7 @@ import java.util.Arrays;
 /**
  * SHA1 class
  *
- * 计算消息签名接口.
+ * 计算公众平台的消息签名接口.
  */
 class SHA1 {
 

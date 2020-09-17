@@ -59,6 +59,11 @@ public enum Constants {
 	模板消息接口(接口根路径.value + "/cgi-bin/message/template/send"),
 	/*收发消息*/
 	获取订单详情接口(接口根路径.value + "/merchant/order/getbyid"),
+	
+	
+	/* 第三方服务商相关的接口地址 */
+    第三方获取令牌(接口根路径.value+"/cgi-bin/component/api_component_token"),
+	
 	/*返回值属性的设置*/
 	返回码("errcode"),
 	返回信息("errmsg"),
