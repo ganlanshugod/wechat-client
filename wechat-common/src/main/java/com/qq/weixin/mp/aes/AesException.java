@@ -57,5 +57,9 @@ public class AesException extends WechatException {
 		super(String.valueOf(code),getMessage(code));
 		this.code = code;
 	}
+	
+	AesException(int code,Throwable t) {
+		super(String.valueOf(code), getMessage(code), t);
+	}
 
 }

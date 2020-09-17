@@ -45,11 +45,14 @@ class XMLParse {
 			NodeList nodelist2 = root.getElementsByTagName("ToUserName");
 			result[0] = 0;
 			result[1] = nodelist1.item(0).getTextContent();
+			if(nodelist2.getLength() == 0) {
+				nodelist2 = root.getElementsByTagName("AppId");
+			}
 			result[2] = nodelist2.item(0).getTextContent();
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new AesException(AesException.ParseXmlError);
+			throw new AesException(AesException.ParseXmlError,e);
 		}
 	}
 

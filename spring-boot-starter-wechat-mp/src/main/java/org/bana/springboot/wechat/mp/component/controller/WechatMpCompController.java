@@ -9,10 +9,12 @@
 package org.bana.springboot.wechat.mp.component.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.websocket.server.PathParam;
 
+import org.bana.wechat.mp.component.common.ReceiveObjUtil;
 import org.bana.wechat.mp.component.common.WXMpBizMsgCryptFactory;
 import org.bana.wechat.mp.component.common.WechatMpComponentTicketStore;
+import org.bana.wechat.mp.component.param.ReceiveComponentTicket;
+import org.bana.wechat.mp.component.param.ReceiveObj;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +67,19 @@ public class WechatMpCompController {
 		String decryptMsg = wxBizMsgCrypt.decryptMsg(msgSignature, timestamp, nonce, postData);
 		LOG.info("=====解密收到的消息为===" + decryptMsg);
 		
+		ReceiveObj receiveObj = ReceiveObjUtil.parseXML(decryptMsg);
+		if(receiveObj != null) {
+			if(receiveObj instanceof ReceiveComponentTicket) {
+				ReceiveComponentTicket ticket = (ReceiveComponentTicket)receiveObj;
+				wechatMpComponentTicketStore.putComponentVerifyTicket(componentAppId, ticket.getComponentVerifyTicket());
+			}
+		}
 		
+//		<xml><AppId><![CDATA[wxe35ec229c4f65cd9]]></AppId>
+//		<CreateTime>1600327988</CreateTime>
+//		<InfoType><![CDATA[component_verify_ticket]]></InfoType>
+//		<ComponentVerifyTicket><![CDATA[ticket@@@vYbvOZp4ViRUuqnlO54dKH-DftgoBdkrHTHKbdB1rZIv4u8LDyBL2G3Nz1O2oxeW0Pm7zr0JG3fMObROA_rZFg]]></ComponentVerifyTicket>
+//		</xml>
 		return "success";
 	}
 	
