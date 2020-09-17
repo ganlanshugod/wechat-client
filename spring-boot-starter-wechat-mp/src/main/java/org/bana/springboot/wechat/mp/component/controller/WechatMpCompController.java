@@ -16,6 +16,7 @@ import org.bana.wechat.mp.component.common.WechatMpComponentTicketStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,7 +48,7 @@ public class WechatMpCompController {
 
 	@RequestMapping("receive/{componentAppId}")
 	@ResponseBody
-	public String receive(HttpServletRequest request,@RequestBody String postData,@PathParam("componentAppId") String componentAppId){
+	public String receive(HttpServletRequest request,@RequestBody String postData,@PathVariable("componentAppId") String componentAppId){
 		String timestamp = request.getParameter(PARAM_TIMESTAMP);
 		String nonce = request.getParameter(PARAM_NONCE);
 		String encryptType = request.getParameter(PARAM_ENCRYPT_TYPE);
