@@ -10,6 +10,7 @@ package org.bana.springboot.wechat.mp.component;
 
 import java.util.List;
 
+import org.bana.springboot.wechat.mp.component.cache.CacheWechatMpComponentTicketStoreImpl;
 import org.bana.springboot.wechat.mp.component.controller.WechatMpCompController;
 import org.bana.wechat.mp.component.ComponentTokenService;
 import org.bana.wechat.mp.component.common.WXMpBizMsgCryptFactory;
@@ -19,11 +20,13 @@ import org.bana.wechat.mp.component.common.WechatMpComponentTicketStore;
 import org.bana.wechat.mp.component.common.impl.InMermeryWechatMpComponentManager;
 import org.bana.wechat.mp.component.common.impl.InMermeryWechatMpComponentTicketStore;
 import org.bana.wechat.mp.component.impl.SimpleComponentTokenServiceImpl;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 
 /** 
 * @ClassName: WechatMpComponetConfig 
@@ -83,5 +86,12 @@ public class WechatMpComponetConfig {
 		return factory;
 	}
 	
+	
+	@Bean
+	@ConditionalOnClass(RedisConnectionFactory.class)
+	public WechatMpComponentTicketStore  cacheWechatMpComponentTicketStore() {
+		CacheWechatMpComponentTicketStoreImpl store = new CacheWechatMpComponentTicketStoreImpl();
+		return store;
+	}
 	
 }
