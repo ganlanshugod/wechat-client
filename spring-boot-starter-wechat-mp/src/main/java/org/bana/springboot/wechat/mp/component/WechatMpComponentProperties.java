@@ -21,7 +21,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix=WechatMpComponentProperties.WECHAT_MP_COMP_PREFIX)
 public class WechatMpComponentProperties {
 
-	static final String WECHAT_MP_COMP_PREFIX = "wechat.mp.component";
+	public static final String WECHAT_MP_COMP_PREFIX = "wechat.mp.component";
 	
 	private String enable;  // 决定是否开启第三方应用对应的支持功能
 	

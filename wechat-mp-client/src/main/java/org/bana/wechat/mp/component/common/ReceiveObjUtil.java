@@ -17,6 +17,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.bana.wechat.common.util.BeanXmlUtil;
 import org.bana.wechat.common.util.StringUtils;
+import org.bana.wechat.mp.component.param.ReceiveAuthChange;
 import org.bana.wechat.mp.component.param.ReceiveComponentTicket;
 import org.bana.wechat.mp.component.param.ReceiveObj;
 import org.w3c.dom.Document;
@@ -53,9 +54,15 @@ public class ReceiveObjUtil {
 			Element root = document.getDocumentElement();
 			NodeList infoNodeList = root.getElementsByTagName("InfoType");
 			String infoType = infoNodeList.item(0).getTextContent();
-			if("component_verify_ticket".equals(infoType)) {
+			ReceiveInfoType instance = ReceiveInfoType.instance(infoType);
+			switch(instance) {
+			case 推送ticket:
 				return BeanXmlUtil.xmlToBean(xmlStr, ReceiveComponentTicket.class);
-			}else {
+			case 取消授权通知:
+			case 授权更新通知:
+			case 授权成功通知:
+				return BeanXmlUtil.xmlToBean(xmlStr, ReceiveAuthChange.class);
+			default:
 				throw new RuntimeException("不合法的接受的InfoType内容" + infoType);
 			}
 		} catch (ParserConfigurationException e) {

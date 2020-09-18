@@ -12,7 +12,6 @@ import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.bana.wechat.mp.component.common.WechatMpComponentTicketStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

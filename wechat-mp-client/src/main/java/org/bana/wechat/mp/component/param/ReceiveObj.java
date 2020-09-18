@@ -8,6 +8,8 @@
 */ 
 package org.bana.wechat.mp.component.param;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlElement;
 
 /** 
@@ -15,8 +17,12 @@ import javax.xml.bind.annotation.XmlElement;
 * @Description: 收到的消息对象
 * @author liuwenjie   
 */
-public class ReceiveObj {
+public class ReceiveObj implements Serializable {
 
+	/** 
+	* @Fields serialVersionUID : 
+	*/ 
+	private static final long serialVersionUID = -659368013274062856L;
 	private String infoType;
 
 	@XmlElement(name="InfoType")

@@ -34,7 +34,7 @@ public class AccessTokenServiceTest extends BaseMpTest{
 	@Test
 	public void testGetWebAuthAccessToken() {
 		String code = "071TbACV1i5zCW0pC7CV19izCV1TbACe";
-		WebAuthAccessToken webAuthAccessToken = tokenService.getWebAuthAccessToken(appId, code);
+		WebAuthAccessToken webAuthAccessToken = webAuthAccessTokenService.getWebAuthAccessToken(appId, code);
 		System.out.println(webAuthAccessToken);
 	}
 

@@ -8,8 +8,6 @@
  */
 package org.bana.wechat.mp.token;
 
-import org.bana.wechat.mp.token.result.WebAuthAccessToken;
-
 /**
  * @ClassName: AccessTokenService
  * @Description: 服务号的tokenService
@@ -27,13 +25,5 @@ public interface AccessTokenService {
 	* @return  
 	*/ 
 	String getAccessToken(String appId);
-	
-	/**
-	 * Description: 获取网页端授权的authToken，authToken中包含openId字段
-	 * @author Liu Wenjie
-	 * @date 2018年5月15日 下午12:59:40
-	 * @param appId
-	 * @return
-	 */
-	WebAuthAccessToken getWebAuthAccessToken(String appId,String code);
 }
+	

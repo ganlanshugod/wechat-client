@@ -10,6 +10,7 @@ package org.bana.springboot.wechat.mp.component;
 
 import java.util.List;
 
+import org.bana.springboot.wechat.mp.component.cache.CacheComponentTokenServiceImpl;
 import org.bana.springboot.wechat.mp.component.cache.CacheWechatMpComponentTicketStoreImpl;
 import org.bana.springboot.wechat.mp.component.controller.WechatMpCompController;
 import org.bana.wechat.mp.component.ComponentTokenService;
@@ -18,8 +19,6 @@ import org.bana.wechat.mp.component.common.WechatMpComponentConfig;
 import org.bana.wechat.mp.component.common.WechatMpComponentManager;
 import org.bana.wechat.mp.component.common.WechatMpComponentTicketStore;
 import org.bana.wechat.mp.component.common.impl.InMermeryWechatMpComponentManager;
-import org.bana.wechat.mp.component.common.impl.InMermeryWechatMpComponentTicketStore;
-import org.bana.wechat.mp.component.impl.SimpleComponentTokenServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -63,23 +62,6 @@ public class WechatMpComponetConfig {
 	
 	@Bean
 	@ConditionalOnMissingBean
-	public WechatMpComponentTicketStore wechatMpComponentTicketStore() {
-		InMermeryWechatMpComponentTicketStore store = new InMermeryWechatMpComponentTicketStore();
-		return store;
-	}
-	
-
-	@Bean
-	@ConditionalOnMissingBean
-	public ComponentTokenService componentTokenService(WechatMpComponentManager wechatMpComponentManager,WechatMpComponentTicketStore wechatMpComponentTicketStore) {
-		SimpleComponentTokenServiceImpl componentTokenService = new SimpleComponentTokenServiceImpl();
-		componentTokenService.setWechatMpComponentManager(wechatMpComponentManager);
-		componentTokenService.setWechatMpComponentTicketStore(wechatMpComponentTicketStore);
-		return componentTokenService;
-	}
-	
-	@Bean
-	@ConditionalOnMissingBean
 	public WXMpBizMsgCryptFactory wxMpBizMsgCryptFactory(WechatMpComponentManager wechatMpComponentManager) {
 		WXMpBizMsgCryptFactory factory = new WXMpBizMsgCryptFactory();
 		factory.setWechatMpComponentManager(wechatMpComponentManager);
@@ -93,5 +75,16 @@ public class WechatMpComponetConfig {
 		CacheWechatMpComponentTicketStoreImpl store = new CacheWechatMpComponentTicketStoreImpl();
 		return store;
 	}
+	
+	@Bean
+	@ConditionalOnClass(RedisConnectionFactory.class)
+	@ConditionalOnMissingBean
+	public ComponentTokenService ComponentTokenService(WechatMpComponentManager wechatMpComponentManager,WechatMpComponentTicketStore wechatMpComponentTicketStore) {
+		CacheComponentTokenServiceImpl componentTokenService = new CacheComponentTokenServiceImpl();
+		componentTokenService.setWechatMpComponentManager(wechatMpComponentManager);
+		componentTokenService.setWechatMpComponentTicketStore(wechatMpComponentTicketStore);
+		return componentTokenService;
+	}
+	
 	
 }

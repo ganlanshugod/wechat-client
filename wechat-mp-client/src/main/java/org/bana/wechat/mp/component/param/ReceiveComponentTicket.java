@@ -18,8 +18,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 */
 @XmlRootElement(name="xml")
 public class ReceiveComponentTicket extends ReceiveObj{
-
 	
+	/** 
+	* @Fields serialVersionUID :
+	*/ 
+	private static final long serialVersionUID = -2705302368767388037L;
+
 	private String appId;
 	
 	private long createTime;

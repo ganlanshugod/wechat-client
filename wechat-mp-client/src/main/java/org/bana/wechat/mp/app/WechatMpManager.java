@@ -23,4 +23,5 @@ public interface WechatMpManager {
 	 * @return
 	 */
 	WechatMpConfig getAppConfig(String appId);
+
 }

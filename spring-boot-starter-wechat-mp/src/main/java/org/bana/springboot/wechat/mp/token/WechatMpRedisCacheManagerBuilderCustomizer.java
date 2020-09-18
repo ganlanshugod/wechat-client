@@ -10,6 +10,7 @@ package org.bana.springboot.wechat.mp.token;
 
 import java.time.Duration;
 
+import org.bana.springboot.wechat.mp.WechatMpConstants;
 import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager.RedisCacheManagerBuilder;
@@ -31,8 +32,8 @@ public class WechatMpRedisCacheManagerBuilderCustomizer implements RedisCacheMan
 	@Override
 	public void customize(RedisCacheManagerBuilder builder) {
 		RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-				.entryTtl(Duration.ofHours(1)).prefixKeysWith("MPToken");
-        builder.withCacheConfiguration("MPToken", config);
+				.entryTtl(Duration.ofHours(1)).prefixKeysWith(WechatMpConstants.CACHE_NAME);
+        builder.withCacheConfiguration(WechatMpConstants.CACHE_NAME, config);
 	}
 
 }

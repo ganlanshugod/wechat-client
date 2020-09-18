@@ -11,7 +11,9 @@ package org.bana.wechat.mp;
 import org.bana.wechat.mp.app.WechatMpConfig;
 import org.bana.wechat.mp.app.WechatMpManager;
 import org.bana.wechat.mp.app.impl.InmemeryWechatMpManager;
+import org.bana.wechat.mp.token.WebAuthAccessTokenService;
 import org.bana.wechat.mp.token.impl.SimpleAccessTokenServiceImpl;
+import org.bana.wechat.mp.token.impl.WebAuthAccessTokenServiceImpl;
 import org.junit.BeforeClass;
 
 /**
@@ -29,6 +31,8 @@ public class BaseMpTest {
 	
 	protected static WechatMpManager wechatMpManager;
 	
+	protected static WebAuthAccessTokenService webAuthAccessTokenService;
+	
 	@BeforeClass
 	public static void beforeClass(){
 		InmemeryWechatMpManager wechatMpManagerImpl = new InmemeryWechatMpManager();
@@ -39,6 +43,9 @@ public class BaseMpTest {
 		wechatMpManagerImpl.addAppConfig(appConfig);
 		SimpleAccessTokenServiceImpl tokenServiceImpl =  new SimpleAccessTokenServiceImpl();
 		tokenServiceImpl.setWechatMpManager(wechatMpManagerImpl);
+		
+		WebAuthAccessTokenServiceImpl webAuthAccessTokenServiceImpl = new WebAuthAccessTokenServiceImpl();
+		webAuthAccessTokenServiceImpl.setWechatMpManager(wechatMpManagerImpl);
 		
 		tokenService = tokenServiceImpl;
 		wechatMpManager = wechatMpManagerImpl;

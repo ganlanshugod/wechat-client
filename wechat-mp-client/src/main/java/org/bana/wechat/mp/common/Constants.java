@@ -63,6 +63,14 @@ public enum Constants {
 	
 	/* 第三方服务商相关的接口地址 */
     第三方获取令牌(接口根路径.value+"/cgi-bin/component/api_component_token"),
+    第三方获取预授权码(接口根路径.value+"/cgi-bin/component/api_create_preauthcode"),
+    第三方获取授权信息(接口根路径.value+"/cgi-bin/component/api_query_auth"),
+    第三方获取服务号AccessToken(接口根路径.value+"/cgi-bin/component/api_authorizer_token"),
+    第三方获取授权详细信息(接口根路径.value+"/cgi-bin/component/api_get_authorizer_info"),
+    第三方获取授权方配置开关(接口根路径.value+"/cgi-bin/component/api_get_authorizer_option"),
+    第三方设置授权方配置开关(接口根路径.value+"/cgi-bin/component/api_set_authorizer_option"),
+    第三方获取页面认证token的接口(接口根路径.value+"/sns/oauth2/component/access_token"),
+    
 	
 	/*返回值属性的设置*/
 	返回码("errcode"),

@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bana.wechat.mp.component.common.WechatMpComponentTicketStore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /** 
 * @ClassName: InMermeryWechatMpComponentTicketStore 
@@ -19,6 +21,7 @@ import org.bana.wechat.mp.component.common.WechatMpComponentTicketStore;
 * @author liuwenjie   
 */
 public class InMermeryWechatMpComponentTicketStore implements WechatMpComponentTicketStore{
+	private static final Logger LOG = LoggerFactory.getLogger(InMermeryWechatMpComponentTicketStore.class);
 
 	private Map<String,String> cacheMap = new HashMap<>();
 	
@@ -32,6 +35,7 @@ public class InMermeryWechatMpComponentTicketStore implements WechatMpComponentT
 	*/ 
 	@Override
 	public String getComponentVerifyTicket(String appId) {
+		LOG.info("使用内存中后去ticket=="+appId);
 		return cacheMap.get(appId);
 	}
 
@@ -45,6 +49,7 @@ public class InMermeryWechatMpComponentTicketStore implements WechatMpComponentT
 	*/ 
 	@Override
 	public void putComponentVerifyTicket(String appId, String ticket) {
+		LOG.info("使用内存保存ticket=="+appId+","+ticket);
 		cacheMap.put(appId, ticket);
 	}
 

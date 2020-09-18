@@ -9,16 +9,23 @@
 package org.bana.springboot.wechat.mp.token;
 
 import org.bana.springboot.wechat.mp.WechatMpProperties;
+import org.bana.springboot.wechat.mp.component.WechatMpComponentProperties;
+import org.bana.springboot.wechat.mp.component.cache.CacheComponentAccessTokenServiceImpl;
 import org.bana.springboot.wechat.mp.token.impl.CacheJsApiTicketMpServiceImpl;
 import org.bana.springboot.wechat.mp.token.impl.CacheMpAccessTokenServiceImpl;
 import org.bana.wechat.mp.app.WechatMpConfig;
 import org.bana.wechat.mp.app.WechatMpManager;
 import org.bana.wechat.mp.app.impl.InmemeryWechatMpManager;
+import org.bana.wechat.mp.component.ComponentTokenService;
+import org.bana.wechat.mp.component.impl.WebAuthAccessTokenComponentServiceImpl;
 import org.bana.wechat.mp.token.AccessTokenService;
 import org.bana.wechat.mp.token.JSApiMpService;
 import org.bana.wechat.mp.token.JsApiTicketMpService;
+import org.bana.wechat.mp.token.WebAuthAccessTokenService;
 import org.bana.wechat.mp.token.impl.JSApiMpServiceImpl;
+import org.bana.wechat.mp.token.impl.WebAuthAccessTokenServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -33,6 +40,17 @@ import org.springframework.util.Assert;
 @Configuration
 @Import(MpTokenCacheConfig.class)
 public class MpTokenServiceAutoConfig {
+	
+	@Bean
+	@ConditionalOnMissingBean
+	@ConditionalOnProperty(prefix=WechatMpComponentProperties.WECHAT_MP_COMP_PREFIX,name="enable",havingValue="true",matchIfMissing=false)
+	public AccessTokenService mpComponentAccessToken(WechatMpManager wechatMpManager,ComponentTokenService componentTokenService){
+		CacheComponentAccessTokenServiceImpl tokenService = new CacheComponentAccessTokenServiceImpl();
+		tokenService.setWechatMpManager(wechatMpManager);
+		tokenService.setComponentTokenService(componentTokenService);
+		return tokenService;
+	}
+	
 	
 	/**
 	 * Description: AcsseccTOkenService
@@ -91,6 +109,26 @@ public class MpTokenServiceAutoConfig {
 		JSApiMpServiceImpl jSApiMpServiceImpl = new JSApiMpServiceImpl();
 		jSApiMpServiceImpl.setJsApiTicketMpService(jsApiTicketService);;
 		return jSApiMpServiceImpl;
+	}
+	
+	
+	
+	@Bean
+	@ConditionalOnMissingBean
+	@ConditionalOnProperty(prefix=WechatMpComponentProperties.WECHAT_MP_COMP_PREFIX,name="enable",havingValue="true",matchIfMissing=false)
+	public WebAuthAccessTokenService webAuthComponentAccessToken(WechatMpManager wechatMpManager,ComponentTokenService componentTokenService){
+		WebAuthAccessTokenComponentServiceImpl tokenService = new WebAuthAccessTokenComponentServiceImpl();
+		tokenService.setWechatMpManager(wechatMpManager);
+		tokenService.setComponentTokenService(componentTokenService);
+		return tokenService;
+	}
+	
+	@Bean
+	@ConditionalOnMissingBean
+	public WebAuthAccessTokenService webAuthAccessToken(WechatMpManager wechatMpManager){
+		WebAuthAccessTokenServiceImpl tokenService = new WebAuthAccessTokenServiceImpl();
+		tokenService.setWechatMpManager(wechatMpManager);
+		return tokenService;
 	}
 	
 }
