@@ -11,6 +11,7 @@ package org.bana.springboot.wechat.mp.component;
 import java.util.List;
 
 import org.bana.springboot.wechat.mp.component.cache.CacheComponentTokenServiceImpl;
+import org.bana.springboot.wechat.mp.component.cache.CacheWechatMpComponentServiceImpl;
 import org.bana.springboot.wechat.mp.component.cache.CacheWechatMpComponentTicketStoreImpl;
 import org.bana.springboot.wechat.mp.component.controller.WechatMpCompController;
 import org.bana.wechat.mp.component.ComponentService;
@@ -86,6 +87,15 @@ public class WechatMpComponetConfig {
 		componentTokenService.setWechatMpComponentManager(wechatMpComponentManager);
 		componentTokenService.setWechatMpComponentTicketStore(wechatMpComponentTicketStore);
 		return componentTokenService;
+	}
+	
+	@Bean
+	@ConditionalOnClass(RedisConnectionFactory.class)
+	@ConditionalOnMissingBean
+	public ComponentService cacheComponentService(ComponentTokenService componentTokenService) {
+		CacheWechatMpComponentServiceImpl componentService = new CacheWechatMpComponentServiceImpl();
+		componentService.setComponentTokenService(componentTokenService);
+		return componentService;
 	}
 	
 	@Bean

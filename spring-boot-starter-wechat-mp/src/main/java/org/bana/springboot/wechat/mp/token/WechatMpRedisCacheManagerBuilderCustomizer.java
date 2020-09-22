@@ -34,6 +34,12 @@ public class WechatMpRedisCacheManagerBuilderCustomizer implements RedisCacheMan
 		RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
 				.entryTtl(Duration.ofHours(1)).prefixKeysWith(WechatMpConstants.CACHE_NAME);
         builder.withCacheConfiguration(WechatMpConstants.CACHE_NAME, config);
+        
+        // 预授权码对应的时间
+        RedisCacheConfiguration config2 = RedisCacheConfiguration.defaultCacheConfig()
+				.entryTtl(Duration.ofMinutes(8)).prefixKeysWith(WechatMpConstants.CACHE_PRECODE);
+        
+        builder.withCacheConfiguration(WechatMpConstants.CACHE_PRECODE, config2);
 	}
 
 }

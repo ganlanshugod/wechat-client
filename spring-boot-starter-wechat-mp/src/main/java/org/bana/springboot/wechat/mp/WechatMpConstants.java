@@ -16,4 +16,6 @@ package org.bana.springboot.wechat.mp;
 public class WechatMpConstants {
 
 	public static final String CACHE_NAME = "MPToken";
+	
+	public static final String CACHE_PRECODE = "CompPreCode";
 }
