@@ -13,12 +13,14 @@ import java.util.List;
 import org.bana.springboot.wechat.mp.component.cache.CacheComponentTokenServiceImpl;
 import org.bana.springboot.wechat.mp.component.cache.CacheWechatMpComponentTicketStoreImpl;
 import org.bana.springboot.wechat.mp.component.controller.WechatMpCompController;
+import org.bana.wechat.mp.component.ComponentService;
 import org.bana.wechat.mp.component.ComponentTokenService;
 import org.bana.wechat.mp.component.common.WXMpBizMsgCryptFactory;
 import org.bana.wechat.mp.component.common.WechatMpComponentConfig;
 import org.bana.wechat.mp.component.common.WechatMpComponentManager;
 import org.bana.wechat.mp.component.common.WechatMpComponentTicketStore;
 import org.bana.wechat.mp.component.common.impl.InMermeryWechatMpComponentManager;
+import org.bana.wechat.mp.component.impl.WechatMpComponentServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -79,12 +81,21 @@ public class WechatMpComponetConfig {
 	@Bean
 	@ConditionalOnClass(RedisConnectionFactory.class)
 	@ConditionalOnMissingBean
-	public ComponentTokenService ComponentTokenService(WechatMpComponentManager wechatMpComponentManager,WechatMpComponentTicketStore wechatMpComponentTicketStore) {
+	public ComponentTokenService componentTokenService(WechatMpComponentManager wechatMpComponentManager,WechatMpComponentTicketStore wechatMpComponentTicketStore) {
 		CacheComponentTokenServiceImpl componentTokenService = new CacheComponentTokenServiceImpl();
 		componentTokenService.setWechatMpComponentManager(wechatMpComponentManager);
 		componentTokenService.setWechatMpComponentTicketStore(wechatMpComponentTicketStore);
 		return componentTokenService;
 	}
+	
+	@Bean
+	@ConditionalOnMissingBean
+	public ComponentService componentService(ComponentTokenService componentTokenService) {
+		WechatMpComponentServiceImpl componentService = new WechatMpComponentServiceImpl();
+		componentService.setComponentTokenService(componentTokenService);
+		return componentService;
+	}
+	
 	
 	
 }

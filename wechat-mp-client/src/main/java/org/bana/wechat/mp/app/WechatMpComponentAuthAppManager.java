@@ -29,7 +29,7 @@ public interface WechatMpComponentAuthAppManager extends WechatMpManager {
 	* @param authorizerInfo  
 	 * @param createDate 
 	*/ 
-	void createComponetAppConfig(String componentAppId, AuthorizationInfo authorizationInfo, AuthorizerInfo authorizerInfo, Date createDate);
+	void createComponentAppConfig(String componentAppId, AuthorizationInfo authorizationInfo, AuthorizerInfo authorizerInfo, Date createDate);
 
 	/** 
 	* @Description: 更新授权后的第三方
@@ -39,7 +39,7 @@ public interface WechatMpComponentAuthAppManager extends WechatMpManager {
 	* @param queryAuth
 	* @param authorizerInfo  
 	*/ 
-	void updateComponetAppConfig(String componentAppId, AuthorizationInfo authorizationInfo, AuthorizerInfo authorizerInfo);
+	void updateComponentAppConfig(String componentAppId, AuthorizationInfo authorizationInfo, AuthorizerInfo authorizerInfo,Date createDate);
 
 	/** 
 	* @Description: 删除一条第三方授权的应用配置
@@ -50,16 +50,4 @@ public interface WechatMpComponentAuthAppManager extends WechatMpManager {
 	 * @param createDate 
 	*/ 
 	void deleteComponentAppConfig(String componentAppId, String authorizerAppid, Date createDate);
-
-	/** 
-	* @Description: TODO (这里用一句话描述这个类的作用)
-	* @author liuwenjie   
-	* @date Sep 18, 2020 5:40:40 PM 
-	* @param componentAppId
-	* @param queryAuth
-	* @param authorizerInfo
-	* @param createDate  
-	*/ 
-	void updateComponetAppConfig(String componentAppId, AuthorizationInfo queryAuth, AuthorizerInfo authorizerInfo,
-			Date createDate);
 }

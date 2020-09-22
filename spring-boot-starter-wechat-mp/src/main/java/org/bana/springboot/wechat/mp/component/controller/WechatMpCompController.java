@@ -8,9 +8,13 @@
 */ 
 package org.bana.springboot.wechat.mp.component.controller;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 
 import org.bana.wechat.mp.app.WechatMpComponentAuthAppManager;
 import org.bana.wechat.mp.component.ComponentService;
@@ -117,12 +121,12 @@ public class WechatMpCompController {
 			String authCode = authChange.getAuthorizationCode();
 			AuthorizationInfo queryAuth = componentService.queryAuth(componentAppId, authCode);
 			AuthDetailInfo authorizerInfo = componentService.getAuthorizerInfo(componentAppId, authorizerAppid);
-			wechatMpAuthAppManager.createComponetAppConfig(componentAppId,queryAuth,authorizerInfo.getAuthorizerInfo(),createDate);
+			wechatMpAuthAppManager.createComponentAppConfig(componentAppId,queryAuth,authorizerInfo.getAuthorizerInfo(),createDate);
 		}else if(ReceiveInfoType.授权更新通知.getValue().equalsIgnoreCase(infoType)) {
 			String authCode = authChange.getAuthorizationCode();
 			AuthorizationInfo queryAuth = componentService.queryAuth(componentAppId, authCode);
 			AuthDetailInfo authorizerInfo = componentService.getAuthorizerInfo(componentAppId, authorizerAppid);
-			wechatMpAuthAppManager.updateComponetAppConfig(componentAppId,queryAuth,authorizerInfo.getAuthorizerInfo(),createDate);
+			wechatMpAuthAppManager.updateComponentAppConfig(componentAppId,queryAuth,authorizerInfo.getAuthorizerInfo(),createDate);
 		}else if(ReceiveInfoType.取消授权通知.getValue().equalsIgnoreCase(infoType)) {
 			wechatMpAuthAppManager.deleteComponentAppConfig(componentAppId,authorizerAppid,createDate);
 		}else {
@@ -132,7 +136,16 @@ public class WechatMpCompController {
 
 
 	@RequestMapping("callback/{APPID}")
-	public void callBack() {
-		
+	@ResponseBody
+	public String callBack(HttpServletRequest request,@PathParam("APPID")String appId,@RequestBody String postData) {
+		LOG.info("====callback 获取到的事件方法====="
+				+ "request的参数");
+		Map<String, String[]> parameterMap = request.getParameterMap();
+		for (Entry<String,String[]> item : parameterMap.entrySet()) {
+			System.out.println(item.getKey() + "=======" + Arrays.toString(item.getValue()));
+		}
+		System.out.println("=====AppID====" + appId);
+		System.out.println("=====PostData====" + postData);
+		return "success";
 	}
 }
