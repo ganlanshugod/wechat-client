@@ -70,6 +70,7 @@ public enum Constants {
     第三方获取授权方配置开关(接口根路径.value+"/cgi-bin/component/api_get_authorizer_option"),
     第三方设置授权方配置开关(接口根路径.value+"/cgi-bin/component/api_set_authorizer_option"),
     第三方获取页面认证token的接口(接口根路径.value+"/sns/oauth2/component/access_token"),
+    第三方获取授权公众号列表(接口根路径.value+"/cgi-bin/component/api_get_authorizer_list"),
     
 	
 	/*返回值属性的设置*/

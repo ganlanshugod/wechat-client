@@ -27,7 +27,7 @@ import com.alibaba.fastjson.JSONObject;
  * @Description:
  * @author liuwenjie
  */
-public class ComponentTest {
+public class ComponentTokenTest {
 	private ComponentTokenService tokenService;
 
 	private String appId = "wxe35ec229c4f65cd9";

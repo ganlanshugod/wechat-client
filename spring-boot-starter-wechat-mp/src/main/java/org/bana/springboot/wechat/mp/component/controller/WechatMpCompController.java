@@ -9,24 +9,19 @@
 package org.bana.springboot.wechat.mp.component.controller;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 
-import org.bana.wechat.mp.app.WechatMpComponentAuthAppManager;
-import org.bana.wechat.mp.component.ComponentService;
-import org.bana.wechat.mp.component.common.ReceiveInfoType;
+import org.bana.springboot.wechat.mp.component.handler.ReceiveMsgHandler;
 import org.bana.wechat.mp.component.common.ReceiveObjUtil;
 import org.bana.wechat.mp.component.common.WXMpBizMsgCryptFactory;
 import org.bana.wechat.mp.component.common.WechatMpComponentTicketStore;
 import org.bana.wechat.mp.component.param.ReceiveAuthChange;
 import org.bana.wechat.mp.component.param.ReceiveComponentTicket;
 import org.bana.wechat.mp.component.param.ReceiveObj;
-import org.bana.wechat.mp.component.result.AuthDetailInfo;
-import org.bana.wechat.mp.component.result.AuthorizationInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,10 +56,7 @@ public class WechatMpCompController {
 	private WechatMpComponentTicketStore wechatMpComponentTicketStore;
 	
 	@Autowired
-	private WechatMpComponentAuthAppManager wechatMpAuthAppManager;
-	
-	@Autowired
-	private ComponentService componentService;
+	private ReceiveMsgHandler receiveMsgHandler;
 
 	@RequestMapping("receive/{componentAppId}")
 	@ResponseBody
@@ -92,7 +84,7 @@ public class WechatMpCompController {
 				wechatMpComponentTicketStore.putComponentVerifyTicket(componentAppId, ticket.getComponentVerifyTicket());
 			}else if(receiveObj instanceof ReceiveAuthChange) {
 				ReceiveAuthChange authChange = (ReceiveAuthChange)receiveObj;
-				handleReceiveAuthChange(authChange);
+				receiveMsgHandler.handleReceiveAuthChange(authChange);
 			}
 		}
 		
@@ -105,36 +97,6 @@ public class WechatMpCompController {
 	}
 	
 	
-	/** 
-	* @Description: 处理授权发生变化的方法
-	* @author liuwenjie   
-	* @date Sep 18, 2020 5:13:19 PM 
-	* @param authChange  
-	*/ 
-	private void handleReceiveAuthChange(ReceiveAuthChange authChange) {
-		String infoType = authChange.getInfoType();
-		String componentAppId = authChange.getAppId();
-		long createTime = authChange.getCreateTime();
-		Date createDate = new Date(createTime*1000);
-		String authorizerAppid = authChange.getAuthorizerAppid();
-		if(ReceiveInfoType.授权成功通知.getValue().equalsIgnoreCase(infoType)) {
-			String authCode = authChange.getAuthorizationCode();
-			AuthorizationInfo queryAuth = componentService.queryAuth(componentAppId, authCode);
-			AuthDetailInfo authorizerInfo = componentService.getAuthorizerInfo(componentAppId, authorizerAppid);
-			wechatMpAuthAppManager.createComponentAppConfig(componentAppId,queryAuth,authorizerInfo.getAuthorizerInfo(),createDate);
-		}else if(ReceiveInfoType.授权更新通知.getValue().equalsIgnoreCase(infoType)) {
-			String authCode = authChange.getAuthorizationCode();
-			AuthorizationInfo queryAuth = componentService.queryAuth(componentAppId, authCode);
-			AuthDetailInfo authorizerInfo = componentService.getAuthorizerInfo(componentAppId, authorizerAppid);
-			wechatMpAuthAppManager.updateComponentAppConfig(componentAppId,queryAuth,authorizerInfo.getAuthorizerInfo(),createDate);
-		}else if(ReceiveInfoType.取消授权通知.getValue().equalsIgnoreCase(infoType)) {
-			wechatMpAuthAppManager.deleteComponentAppConfig(componentAppId,authorizerAppid,createDate);
-		}else {
-			LOG.warn("====没有处理的不确定的infoType====" + authChange);
-		}
-	}
-
-
 	@RequestMapping("callback/{APPID}")
 	@ResponseBody
 	public String callBack(HttpServletRequest request,@PathParam("APPID")String appId,@RequestBody String postData) {

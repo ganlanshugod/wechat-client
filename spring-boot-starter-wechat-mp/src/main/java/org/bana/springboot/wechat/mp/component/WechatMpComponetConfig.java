@@ -14,6 +14,8 @@ import org.bana.springboot.wechat.mp.component.cache.CacheComponentTokenServiceI
 import org.bana.springboot.wechat.mp.component.cache.CacheWechatMpComponentServiceImpl;
 import org.bana.springboot.wechat.mp.component.cache.CacheWechatMpComponentTicketStoreImpl;
 import org.bana.springboot.wechat.mp.component.controller.WechatMpCompController;
+import org.bana.springboot.wechat.mp.component.handler.ReceiveMsgHandler;
+import org.bana.springboot.wechat.mp.component.handler.impl.BasicReceiveMsgHandler;
 import org.bana.wechat.mp.component.ComponentService;
 import org.bana.wechat.mp.component.ComponentTokenService;
 import org.bana.wechat.mp.component.common.WXMpBizMsgCryptFactory;
@@ -44,6 +46,14 @@ public class WechatMpComponetConfig {
 	public WechatMpCompController wechatMpController() {
 		WechatMpCompController wechatMpController = new WechatMpCompController();
 		return wechatMpController;
+	}
+	
+	@Bean
+	@ConditionalOnProperty(prefix=WechatMpComponentProperties.WECHAT_MP_COMP_PREFIX,name="enable",havingValue="true",matchIfMissing=false)
+	@ConditionalOnMissingBean
+	public ReceiveMsgHandler receiveMsgHandler() {
+		BasicReceiveMsgHandler componentService = new BasicReceiveMsgHandler();
+		return componentService;
 	}
 	
 	@Bean
@@ -105,7 +115,6 @@ public class WechatMpComponetConfig {
 		componentService.setComponentTokenService(componentTokenService);
 		return componentService;
 	}
-	
 	
 	
 }

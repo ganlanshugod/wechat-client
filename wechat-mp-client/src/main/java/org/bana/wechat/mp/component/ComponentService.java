@@ -8,9 +8,11 @@
 */ 
 package org.bana.wechat.mp.component;
 
+import org.bana.wechat.common.page.PageResult;
 import org.bana.wechat.mp.component.param.AuthorizerOption;
 import org.bana.wechat.mp.component.result.AuthDetailInfo;
 import org.bana.wechat.mp.component.result.AuthorizationInfo;
+import org.bana.wechat.mp.component.result.SimpleAuthorizer;
 
 /** 
 * @ClassName: ComponentService 
@@ -73,4 +75,14 @@ public interface ComponentService {
 	public void setAuthorizerOption(String componentAppId,String authorizerAppid,AuthorizerOption option,String optionValue);
 
 	
+		
+	/** 
+	* @Description: 获取授权的公众号列表
+	* @author liuwenjie   
+	* @date Sep 23, 2020 12:13:33 PM 
+	* @param componentAppId
+	* @param offset
+	* @param count  
+	*/ 
+	public PageResult<SimpleAuthorizer> getAuthorizerList(String componentAppId,int offset,int count);
 }

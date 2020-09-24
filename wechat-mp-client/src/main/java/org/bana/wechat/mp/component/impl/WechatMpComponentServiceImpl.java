@@ -9,8 +9,10 @@
 package org.bana.wechat.mp.component.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.bana.wechat.common.page.PageResult;
 import org.bana.wechat.mp.common.Constants;
 import org.bana.wechat.mp.common.WechatMpResultHandler;
 import org.bana.wechat.mp.component.ComponentService;
@@ -18,6 +20,7 @@ import org.bana.wechat.mp.component.common.WechatMpComponentBaseService;
 import org.bana.wechat.mp.component.param.AuthorizerOption;
 import org.bana.wechat.mp.component.result.AuthDetailInfo;
 import org.bana.wechat.mp.component.result.AuthorizationInfo;
+import org.bana.wechat.mp.component.result.SimpleAuthorizer;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -173,6 +176,37 @@ public class WechatMpComponentServiceImpl extends WechatMpComponentBaseService i
 		param.put("option_value", optionValue);
 		JSONObject post = this.post(Constants.第三方设置授权方配置开关.getValue(), componentAppId, param);
 		WechatMpResultHandler.handleResult(post);
+	}
+
+	/**
+	* <p>Description: </p> 
+	* @author liuwenjie   
+	* @date Sep 23, 2020 12:16:03 PM 
+	* @param componentAppId
+	* @param offset
+	* @param count
+	* @return 
+	* @see org.bana.wechat.mp.component.ComponentService#getAuthorizerList(java.lang.String, int, int) 
+	*/ 
+	@Override
+	public PageResult<SimpleAuthorizer> getAuthorizerList(String componentAppId, int offset, int count) {
+		Map<String, String> param = new HashMap<>();
+//		{
+//			  "component_appid": "appid_value",
+//			  "offset": 0,
+//			  "count": 100
+//			}
+		param.put("component_appid", componentAppId);
+		param.put("offset", String.valueOf(offset));
+		param.put("count", String.valueOf(count));
+		JSONObject post = this.post(Constants.第三方获取授权公众号列表.getValue(), componentAppId, param);
+		WechatMpResultHandler.handleResult(post);
+		List<SimpleAuthorizer> parseArray = JSONObject.parseArray(post.getJSONArray("list").toJSONString(),SimpleAuthorizer.class);
+		Long total = post.getLong("total_count");
+		PageResult<SimpleAuthorizer> result = new PageResult<>();
+		result.setList(parseArray);
+		result.setTotalCount(total);
+		return result;
 	}
 
 }
