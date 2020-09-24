@@ -68,7 +68,7 @@ public class WebAuthAccessTokenComponentServiceImpl extends WechatMpComponentBas
 			param.put("code", code);
 			param.put("grant_type", "authorization_code");
 			param.put("component_appid", compAppId);
-			JSONObject jsonObject = this.get(Constants.第三方获取页面认证token的接口.getValue(), appId, param);
+			JSONObject jsonObject = this.get(Constants.第三方获取页面认证token的接口.getValue(), compAppId, param);
 			WebAuthAccessToken handleResult = WechatMpResultHandler.handleResult(jsonObject, WebAuthAccessToken.class);
 			return handleResult;
 		} else {
