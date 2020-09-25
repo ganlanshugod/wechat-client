@@ -8,6 +8,7 @@
 */ 
 package org.bana.springboot.wechat.mp.component.cache;
 
+import org.bana.springboot.wechat.mp.WechatMpConstants;
 import org.bana.wechat.mp.component.impl.SimpleComponentAccessTokenServiceImpl;
 import org.springframework.cache.annotation.Cacheable;
 
@@ -27,7 +28,7 @@ public class CacheComponentAccessTokenServiceImpl extends SimpleComponentAccessT
 	* @see org.bana.wechat.mp.component.impl.SimpleComponentAccessTokenServiceImpl#getAccessToken(java.lang.String) 
 	*/ 
 	@Override
-	@Cacheable
+	@Cacheable(value=WechatMpConstants.CACHE_NAME,key="methodName+'Component'+#appId")
 	public String getAccessToken(String appId) {
 		return super.getAccessToken(appId);
 	}
