@@ -6,7 +6,7 @@
 * @date Sep 23, 2020 1:58:25 PM 
 * @version V1.0   
 */ 
-package org.bana.springboot.wechat.mp.component.handler;
+package org.bana.wechat.mp.component.handler;
 
 import org.bana.wechat.mp.component.param.ReceiveAuthChange;
 

@@ -18,7 +18,7 @@ import com.qq.weixin.mp.aes.WXBizMsgCrypt;
 * @Description: WXBizMsgCrypt方法
 * @author liuwenjie   
 */
-public class WXMpBizMsgCryptFactory {
+public class WXMpCompBizMsgCryptFactory {
 	
 	private WechatMpComponentManager wechatMpComponentManager;
 	

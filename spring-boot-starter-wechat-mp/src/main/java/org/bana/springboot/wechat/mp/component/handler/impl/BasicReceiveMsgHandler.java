@@ -11,10 +11,10 @@ package org.bana.springboot.wechat.mp.component.handler.impl;
 import java.util.Date;
 
 import org.bana.springboot.wechat.mp.component.handler.ReceiveAuthChangeEvent;
-import org.bana.springboot.wechat.mp.component.handler.ReceiveMsgHandler;
 import org.bana.wechat.mp.app.WechatMpComponentAuthAppManager;
 import org.bana.wechat.mp.component.ComponentService;
 import org.bana.wechat.mp.component.common.ReceiveInfoType;
+import org.bana.wechat.mp.component.handler.ReceiveMsgHandler;
 import org.bana.wechat.mp.component.param.ReceiveAuthChange;
 import org.bana.wechat.mp.component.result.AuthDetailInfo;
 import org.bana.wechat.mp.component.result.AuthorizationInfo;

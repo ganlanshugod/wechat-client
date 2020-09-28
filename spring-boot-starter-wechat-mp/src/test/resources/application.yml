@@ -1,3 +1,11 @@
-wechat.mp.appId=wxa7eeec1744e8d41e
-wechat.mp.secret=d6fadb9f2aad175b7e2bcc35048b35ab
-wechat.mp.component.enable=true
+wechat:
+  mp:
+    appId: wxa7eeec1744e8d41e
+    secret: d6fadb9f2aad175b7e2bcc35048b35ab
+    component:
+      enable: false
+      config:
+      - component_appid: wxe35ec229c4f65cd9
+        component_appsecret: 02006bac6d8e59c8bba8164562a35437
+        component_token: sdqylyelink20200513lkkqsxlLLsdk
+        encodingAESKey: sdqylyelink20200513msgkeylklxhslKDswksdwdgs
