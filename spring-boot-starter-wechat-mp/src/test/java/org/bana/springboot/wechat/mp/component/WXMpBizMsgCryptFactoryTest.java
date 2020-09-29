@@ -9,6 +9,7 @@
 package org.bana.springboot.wechat.mp.component;
 
 import org.bana.springboot.test.WechatMpApplication;
+import org.bana.wechat.mp.common.WXMpBizMsgCryptFactory;
 import org.bana.wechat.mp.component.common.WXMpCompBizMsgCryptFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,8 +27,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class WXMpBizMsgCryptFactoryTest {
 
+	@Autowired(required=false)
+	private WXMpCompBizMsgCryptFactory wXMpCompBizMsgCryptFactory;
+	
 	@Autowired
-	private WXMpCompBizMsgCryptFactory wXMpBizMsgCryptFactory;
+	private WXMpBizMsgCryptFactory wxMpBizMsgCryptFactory;
 	
 	private String compoenentAppId =  "wxe35ec229c4f65cd9";
 	
@@ -44,13 +48,18 @@ public class WXMpBizMsgCryptFactoryTest {
 	
 	@Test
 	public void testDecroyt() {
-		String decryptMsg = wXMpBizMsgCryptFactory.getWxBizMsgCrypt(compoenentAppId).decryptMsg(msgSignature, timestamp, nonce, postData);
+		String decryptMsg = wXMpCompBizMsgCryptFactory.getWxBizMsgCrypt(compoenentAppId).decryptMsg(msgSignature, timestamp, nonce, postData);
 		System.out.println(decryptMsg);
 	}
 	
 	@Test
 	public void testVerify() {
-		String verifyUrl = wXMpBizMsgCryptFactory.getWxBizMsgCrypt(compoenentAppId).verifyUrl(msgSignature, timestamp, nonce, postData);
+		String appId = "wx7ce3c1551c2d20e8";
+		String timestamp="1601365917";
+		String nonce="284548542";
+		String signature= "2f7d70c6d5ff7cc3be4d8e6366a996243a20dba6";
+		String echoStr="3204505170213529533";
+		String verifyUrl = wxMpBizMsgCryptFactory.getWxBizMsgCrypt(appId).verifyUrl(signature, timestamp, nonce, echoStr);
 		System.out.println(verifyUrl);
 	}
 }

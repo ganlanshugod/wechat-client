@@ -78,6 +78,8 @@ public class MpTokenServiceAutoConfig {
 		Assert.notNull(wechatMpProperties.getSecret(),"wechat.mp.secret必须配置");
 		appConfig.setAppId(wechatMpProperties.getAppId());
 		appConfig.setSecret(wechatMpProperties.getSecret());
+		appConfig.setToken(wechatMpProperties.getToken());
+		appConfig.setEncodingAESKey(wechatMpProperties.getEncodingAESKey());
 		wechatMpManagerImpl.addAppConfig(appConfig);
 		String[] otherApp = wechatMpProperties.getOtherApp();
 		if(otherApp != null){

@@ -88,26 +88,20 @@ public class WechatMpCompCallbackController {
 		CallBackObj callBackObj = CallBackObjUtil.parseXML(decryptMsg);
 		String resultStr = "success";
 		if(callBackObj != null) {
+			String result = null;
 			if(callBackObj instanceof CallBackMessage) {
 				CallBackMessage msg = (CallBackMessage)callBackObj;
-				String result = callBackHandler.handleCallBackMessage(msg);
-				if(!StringUtils.isBlank(result)) {
-//					String beanToXml = BeanXmlUtil.beanToXml(result);
-					long time = System.currentTimeMillis()/1000;
-					String newtimeStamp = String.valueOf(time);
-					String newNonce = StringUtils.getRandomStr();
-					resultStr = wxBizMsgCrypt.encryptMsg(result, newtimeStamp, newNonce);
-				}
+				result = callBackHandler.handleCallBackMessage(msg);
 			}else if(callBackObj instanceof CallBackEvent) {
 				CallBackEvent event = (CallBackEvent)callBackObj;
-				String result = callBackHandler.handleCallBackEvent(event);
-				if(!StringUtils.isBlank(result)) {
-//					String beanToXml = BeanXmlUtil.beanToXml(result);
-					long time = System.currentTimeMillis()/1000;
-					String newtimeStamp = String.valueOf(time);
-					String newNonce = StringUtils.getRandomStr();
-					resultStr = wxBizMsgCrypt.encryptMsg(result, newtimeStamp, newNonce);
-				}
+				result = callBackHandler.handleCallBackEvent(event);
+			}
+			if(!StringUtils.isBlank(result)) {
+//				String beanToXml = BeanXmlUtil.beanToXml(result);
+				long time = System.currentTimeMillis()/1000;
+				String newtimeStamp = String.valueOf(time);
+				String newNonce = StringUtils.getRandomStr();
+				resultStr = wxBizMsgCrypt.encryptMsg(result, newtimeStamp, newNonce);
 			}
 		}
 		

@@ -26,6 +26,10 @@ public class WechatMpProperties {
 	
 	private String secret;
 	
+	private String token;
+	
+	private String encodingAESKey;
+	
 	private String[] otherApp;
 	
 	private String url;
@@ -61,6 +65,22 @@ public class WechatMpProperties {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public String getEncodingAESKey() {
+		return encodingAESKey;
+	}
+
+	public void setEncodingAESKey(String encodingAESKey) {
+		this.encodingAESKey = encodingAESKey;
 	}
 
 	@Override

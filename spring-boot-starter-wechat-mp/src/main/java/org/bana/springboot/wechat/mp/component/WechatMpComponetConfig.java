@@ -91,7 +91,6 @@ public class WechatMpComponetConfig {
 		return factory;
 	}
 	
-	
 	@Bean
 	@ConditionalOnClass(RedisConnectionFactory.class)
 	public WechatMpComponentTicketStore  cacheWechatMpComponentTicketStore() {

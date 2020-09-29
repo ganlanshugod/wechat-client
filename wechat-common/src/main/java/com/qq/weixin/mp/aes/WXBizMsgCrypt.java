@@ -62,6 +62,7 @@ public class WXBizMsgCrypt {
 		this.appId = appId;
 		aesKey = Base64.decodeBase64(encodingAesKey + "=");
 	}
+	
 
 	// 生成4个字节的网络字节序
 	byte[] getNetworkBytesOrder(int sourceNumber) {

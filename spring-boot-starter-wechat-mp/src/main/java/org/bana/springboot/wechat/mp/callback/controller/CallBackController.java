@@ -10,8 +10,12 @@ package org.bana.springboot.wechat.mp.callback.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
+import org.bana.wechat.common.util.StringUtils;
 import org.bana.wechat.mp.callback.CallBackHandler;
+import org.bana.wechat.mp.callback.CallBackObj;
+import org.bana.wechat.mp.callback.CallBackObjUtil;
+import org.bana.wechat.mp.callback.event.CallBackEvent;
+import org.bana.wechat.mp.callback.msg.CallBackMessage;
 import org.bana.wechat.mp.common.WXMpBizMsgCryptFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +24,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.qq.weixin.mp.aes.WXBizMsgCrypt;
 
 /** 
 * @ClassName: CallBackController 
@@ -65,12 +71,50 @@ public class CallBackController {
 				+ "\n AppID=" + appId //null
 				+ "\n postData=" + postData
 				+ "\n echoStr=" + echoStr); 
-		if(StringUtils.isNoneBlank(echoStr)) {
-			return wxMpBizMsgCryptFactory.getWxBizMsgCrypt(appId).verifyUrl(msgSignature, timestamp, nonce, echoStr);
+		
+		WXBizMsgCrypt wxBizMsgCrypt = null;
+		if(StringUtils.isNoneBlank(encryptType)) {
+			wxBizMsgCrypt = wxMpBizMsgCryptFactory.getWxBizMsgCrypt(appId);
 		}
 		
 		
-		return "success";
+		// 验证url可访问
+		if(StringUtils.isNoneBlank(echoStr)) {
+			if(StringUtils.isNoneBlank(encryptType)) {
+				return wxBizMsgCrypt.verifyUrl(signature, timestamp, nonce, echoStr);
+			}else {
+				return echoStr;
+			}
+		}
+		
+		
+		// 如果解密参数不为空，则需要解密
+		String decryptMsg = postData;
+		if(StringUtils.isNoneBlank(encryptType)) {
+			decryptMsg = wxMpBizMsgCryptFactory.getWxBizMsgCrypt(appId).decryptMsg(msgSignature, timestamp, nonce, postData);
+		}
+		
+		CallBackObj callBackObj = CallBackObjUtil.parseXML(decryptMsg);
+		String resultStr = "success";
+		if(callBackObj != null) {
+			String result = null;
+			if(callBackObj instanceof CallBackMessage) {
+				CallBackMessage msg = (CallBackMessage)callBackObj;
+				result = callBackHandler.handleCallBackMessage(msg);
+			}else if(callBackObj instanceof CallBackEvent) {
+				CallBackEvent event = (CallBackEvent)callBackObj;
+				result = callBackHandler.handleCallBackEvent(event);
+			}
+			if(StringUtils.isNoneBlank(result,encryptType)) {
+//				String beanToXml = BeanXmlUtil.beanToXml(result);
+				long time = System.currentTimeMillis()/1000;
+				String newtimeStamp = String.valueOf(time);
+				String newNonce = StringUtils.getRandomStr();
+				resultStr = wxBizMsgCrypt.encryptMsg(result, newtimeStamp, newNonce);
+			}
+		}
+		
+		return resultStr;
 	}
 	
 	

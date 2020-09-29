@@ -1,6 +1,7 @@
 package com.qq.weixin.mp.aes;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -9,6 +10,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.codec.binary.Base64;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -148,5 +150,26 @@ public class WXBizMsgCryptTest {
 		String echoStr = "P9nAzCzyDtyTWESHep1vC5X9xho/qYX3Zpb4yKa9SKld1DsH3Iyt3tP3zNdtp+4RPcs8TgAE7OaBO+FZXvnaqQ==";
 		wxcpt.verifyUrl(verifyMsgSig, timeStamp, nonce, echoStr);
 		// 只要不抛出异常就好
+	}
+	
+	
+	@Test
+	public void testVerifyUrl2() throws AesException {
+		WXBizMsgCrypt wxcpt = new WXBizMsgCrypt("coldwind",
+				"bGtsa3NsZGtqc2xka3Nsc2tkbHNrZGx3a3RrMmtza2U", "wx7ce3c1551c2d20e8");
+		String verifyMsgSig = "f53821b4a3f39a8a7a9c84fef8f6287ebda9b85f";
+		String timeStamp = "1601368254";
+		String nonce = "249225735";
+		String echoStr = "8851332174993683966";
+		wxcpt.verifyUrl(verifyMsgSig, timeStamp, nonce, echoStr);
+		// 只要不抛出异常就好
+	}
+	
+	@Test
+	public void newEncryptCode() {
+		String str = "lklksldkjsldkslskdlskdlwktk2kske";
+		System.out.println(str.length());
+		String encode = Base64.encodeBase64String(str.getBytes());
+		System.out.println(encode + "  " + encode.length());
 	}
 }

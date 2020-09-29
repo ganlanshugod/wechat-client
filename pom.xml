@@ -11,7 +11,7 @@
 
 
 	<properties>
-		<httpclient.version>4.5.3</httpclient.version>
+		<httpclient.version>4.5.12</httpclient.version>
 		<bana.version>0.1.4-SNAPSHOT</bana.version>
 		<common.util.version>1.2.0-SNAPSHOT</common.util.version>
 		<spring.boot.version>2.2.0.RELEASE</spring.boot.version>
