@@ -53,7 +53,7 @@ public class WechatMpComponetConfig {
 	
 	@Bean
 	@ConditionalOnProperty(prefix=WechatMpCallbackProperties.WECHAT_MP_CALLBACK_PREFIX,name="enable",havingValue="true",matchIfMissing=false)
-	public WechatMpCompCallbackController WechatMpCompCallbackController() {
+	public WechatMpCompCallbackController wechatMpCompCallbackController() {
 		WechatMpCompCallbackController wechatMpController = new WechatMpCompCallbackController();
 		return wechatMpController;
 	}
@@ -85,7 +85,7 @@ public class WechatMpComponetConfig {
 	
 	@Bean
 	@ConditionalOnMissingBean
-	public WXMpCompBizMsgCryptFactory wxMpBizMsgCryptFactory(WechatMpComponentManager wechatMpComponentManager) {
+	public WXMpCompBizMsgCryptFactory wxMpCompBizMsgCryptFactory(WechatMpComponentManager wechatMpComponentManager) {
 		WXMpCompBizMsgCryptFactory factory = new WXMpCompBizMsgCryptFactory();
 		factory.setWechatMpComponentManager(wechatMpComponentManager);
 		return factory;

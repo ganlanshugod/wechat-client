@@ -45,7 +45,7 @@ public class WechatMpCompReceiveController {
 	
 	
 	@Autowired 
-	private WXMpCompBizMsgCryptFactory wxMpBizMsgCryptFactory;
+	private WXMpCompBizMsgCryptFactory wxMpCompBizMsgCryptFactory;
 	
 	@Autowired
 	private WechatMpComponentTicketStore wechatMpComponentTicketStore;
@@ -68,7 +68,7 @@ public class WechatMpCompReceiveController {
 				+ "\n componentAppId=" + componentAppId);
 		
 		// 解密对应的推送消息
-		WXBizMsgCrypt wxBizMsgCrypt = wxMpBizMsgCryptFactory.getWxBizMsgCrypt(componentAppId);
+		WXBizMsgCrypt wxBizMsgCrypt = wxMpCompBizMsgCryptFactory.getWxBizMsgCrypt(componentAppId);
 		String decryptMsg = wxBizMsgCrypt.decryptMsg(msgSignature, timestamp, nonce, postData);
 		LOG.info("=====解密收到的消息为===" + decryptMsg);
 		

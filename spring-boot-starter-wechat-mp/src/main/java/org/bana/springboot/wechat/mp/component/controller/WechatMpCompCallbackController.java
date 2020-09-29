@@ -46,7 +46,7 @@ public class WechatMpCompCallbackController {
 	private static final Logger LOG = LoggerFactory.getLogger(WechatMpCompCallbackController.class);
 	
 	@Autowired 
-	private WXMpCompBizMsgCryptFactory wxMpBizMsgCryptFactory;
+	private WXMpCompBizMsgCryptFactory wxMpCompBizMsgCryptFactory;
 	
 	@Autowired
 	private CallBackHandler callBackHandler;
@@ -74,7 +74,7 @@ public class WechatMpCompCallbackController {
 		//<xml><ToUserName><![CDATA[gh_d1fb40c6be3b]]></ToUserName>
 //	    <Encrypt><![CDATA[MXnOlgkDzLthzUuGhF+jAxOPxUEN2BxPsCrOC8dDkd7LGH+fv4vuNj1bHSuoCNgKn6YxGERkS84bu20ux8si1K0ieXrIHX4oftm5V0602oQw9YEH3ov/Iiq56E3jDqp7pAJ/qvQ9gOHS4Dr9QX8qM8I37d6MQzoBcLhWyazhQ5qOBpT3+jWPCHoW96wG6nNZxfYuRp2jrU9oGaFqw7y9n+BQif8aq8gumHWzxp+fAQuctRGRdiIppIvowU1Rd9jD92tXHG2TKEsG6yDktAJ7NEWuHWr8GCponA9SXn/Rzm+IDcEFP4k/vPmd1kyf9l4ZFMXKstTIDAfDY4iIqb8UHMmbFbPCs+OST4qN5/7k+3gtvNoJLpQG5QkstHbhTy+FpdhEqPv86dBXFIB1glJFtfQf/wCVOMVaujV8vcdacr4=]]></Encrypt>
 //	</xml>
-		WXBizMsgCrypt wxBizMsgCrypt = wxMpBizMsgCryptFactory.getWxBizMsgCrypt(componentAppId);
+		WXBizMsgCrypt wxBizMsgCrypt = wxMpCompBizMsgCryptFactory.getWxBizMsgCrypt(componentAppId);
 		String decryptMsg = wxBizMsgCrypt.decryptMsg(msgSignature, timestamp, nonce, postData);
 		LOG.info("=====解密收到的消息为===" + decryptMsg);
 		/*<xml><ToUserName><![CDATA[gh_d1fb40c6be3b]]></ToUserName>

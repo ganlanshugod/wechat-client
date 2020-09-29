@@ -8,8 +8,8 @@
 */ 
 package org.bana.springboot.wechat.mp.callback;
 
+import org.bana.springboot.wechat.mp.callback.controller.CallBackController;
 import org.bana.springboot.wechat.mp.component.WechatMpComponentProperties;
-import org.bana.springboot.wechat.mp.component.controller.WechatMpCompReceiveController;
 import org.bana.wechat.mp.app.WechatMpManager;
 import org.bana.wechat.mp.callback.CallBackHandler;
 import org.bana.wechat.mp.common.WXMpBizMsgCryptFactory;
@@ -30,7 +30,7 @@ public class WechatMpCallBackConfig {
 	@Bean
 	@ConditionalOnProperty(prefix=WechatMpComponentProperties.WECHAT_MP_COMP_PREFIX,name="enable",havingValue="true",matchIfMissing=false)
 	@ConditionalOnMissingBean
-	public WechatMpCallBackHandler WechatMpCallBackHandler() {
+	public WechatMpCallBackHandler wechatMpCallBackHandler() {
 		DemoWechatMpCallBackHandler WechatMpCallBackHandler = new DemoWechatMpCallBackHandler();
 		return WechatMpCallBackHandler;
 	}
@@ -44,6 +44,7 @@ public class WechatMpCallBackConfig {
 		return basicCallBackHandler;
 	}
 	
+
 	@Bean
 	@ConditionalOnMissingBean
 	public WXMpBizMsgCryptFactory wxMpBizMsgCryptFactory(WechatMpManager wechatMpManager) {
@@ -51,11 +52,11 @@ public class WechatMpCallBackConfig {
 		factory.setWechatMpManager(wechatMpManager);
 		return factory;
 	}
-
+	
 	@Bean
 	@ConditionalOnProperty(prefix=WechatMpCallbackProperties.WECHAT_MP_CALLBACK_PREFIX,name="enable",havingValue="true",matchIfMissing=false)
-	public WechatMpCompReceiveController wechatMpController() {
-		WechatMpCompReceiveController wechatMpController = new WechatMpCompReceiveController();
-		return wechatMpController;
+	public CallBackController wechatMpCallbackController() {
+		CallBackController callBackController = new CallBackController();
+		return callBackController;
 	}
 }
