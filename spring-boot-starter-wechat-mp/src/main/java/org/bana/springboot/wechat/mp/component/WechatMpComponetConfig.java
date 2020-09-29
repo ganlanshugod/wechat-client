@@ -10,15 +10,13 @@ package org.bana.springboot.wechat.mp.component;
 
 import java.util.List;
 
-import org.bana.springboot.wechat.mp.callback.BasicCallBackHandler;
-import org.bana.springboot.wechat.mp.callback.DemoWechatMpCallBackHandler;
-import org.bana.springboot.wechat.mp.callback.WechatMpCallBackHandler;
+import org.bana.springboot.wechat.mp.callback.WechatMpCallbackProperties;
 import org.bana.springboot.wechat.mp.component.cache.CacheComponentTokenServiceImpl;
 import org.bana.springboot.wechat.mp.component.cache.CacheWechatMpComponentServiceImpl;
 import org.bana.springboot.wechat.mp.component.cache.CacheWechatMpComponentTicketStoreImpl;
-import org.bana.springboot.wechat.mp.component.controller.WechatMpCompController;
+import org.bana.springboot.wechat.mp.component.controller.WechatMpCompCallbackController;
+import org.bana.springboot.wechat.mp.component.controller.WechatMpCompReceiveController;
 import org.bana.springboot.wechat.mp.component.handler.impl.BasicReceiveMsgHandler;
-import org.bana.wechat.mp.callback.CallBackHandler;
 import org.bana.wechat.mp.component.ComponentService;
 import org.bana.wechat.mp.component.ComponentTokenService;
 import org.bana.wechat.mp.component.common.WXMpCompBizMsgCryptFactory;
@@ -48,8 +46,15 @@ public class WechatMpComponetConfig {
 
 	@Bean
 	@ConditionalOnProperty(prefix=WechatMpComponentProperties.WECHAT_MP_COMP_PREFIX,name="enable",havingValue="true",matchIfMissing=false)
-	public WechatMpCompController wechatMpController() {
-		WechatMpCompController wechatMpController = new WechatMpCompController();
+	public WechatMpCompReceiveController wechatMpCompReceiveController() {
+		WechatMpCompReceiveController wechatMpController = new WechatMpCompReceiveController();
+		return wechatMpController;
+	}
+	
+	@Bean
+	@ConditionalOnProperty(prefix=WechatMpCallbackProperties.WECHAT_MP_CALLBACK_PREFIX,name="enable",havingValue="true",matchIfMissing=false)
+	public WechatMpCompCallbackController WechatMpCompCallbackController() {
+		WechatMpCompCallbackController wechatMpController = new WechatMpCompCallbackController();
 		return wechatMpController;
 	}
 	
@@ -60,24 +65,6 @@ public class WechatMpComponetConfig {
 		BasicReceiveMsgHandler componentService = new BasicReceiveMsgHandler();
 		return componentService;
 	}
-	
-	@Bean
-	@ConditionalOnProperty(prefix=WechatMpComponentProperties.WECHAT_MP_COMP_PREFIX,name="enable",havingValue="true",matchIfMissing=false)
-	@ConditionalOnMissingBean
-	public WechatMpCallBackHandler WechatMpCallBackHandler() {
-		DemoWechatMpCallBackHandler WechatMpCallBackHandler = new DemoWechatMpCallBackHandler();
-		return WechatMpCallBackHandler;
-	}
-	
-	
-	@Bean
-	@ConditionalOnProperty(prefix=WechatMpComponentProperties.WECHAT_MP_COMP_PREFIX,name="enable",havingValue="true",matchIfMissing=false)
-	@ConditionalOnMissingBean
-	public CallBackHandler callBackHandler() {
-		BasicCallBackHandler basicCallBackHandler = new BasicCallBackHandler();
-		return basicCallBackHandler;
-	}
-	
 	
 	@Bean
 	@ConditionalOnMissingBean

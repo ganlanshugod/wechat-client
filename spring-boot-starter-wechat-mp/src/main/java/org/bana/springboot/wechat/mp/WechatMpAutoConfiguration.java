@@ -8,6 +8,8 @@
  */
 package org.bana.springboot.wechat.mp;
 
+import org.bana.springboot.wechat.mp.callback.WechatMpCallBackConfig;
+import org.bana.springboot.wechat.mp.callback.WechatMpCallbackProperties;
 import org.bana.springboot.wechat.mp.component.WechatMpComponetConfig;
 import org.bana.springboot.wechat.mp.media.MediaMpAutoConfig;
 import org.bana.springboot.wechat.mp.menu.MenuMpAutoConfig;
@@ -45,8 +47,9 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 @EnableCaching
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 @Import({MpTokenServiceAutoConfig.class,OAuthAutoConfig.class,MediaMpAutoConfig.class,MessageMpAutoConfig.class,MenuMpAutoConfig.class,
+	WechatMpCallBackConfig.class,
 	WechatMpComponetConfig.class})
-@EnableConfigurationProperties(WechatMpProperties.class)
+@EnableConfigurationProperties({WechatMpProperties.class,WechatMpCallbackProperties.class})
 public class WechatMpAutoConfiguration {
 	
 	@Bean

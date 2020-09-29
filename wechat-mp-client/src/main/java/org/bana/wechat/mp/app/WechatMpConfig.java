@@ -23,6 +23,8 @@ public class WechatMpConfig implements Serializable{
 	private static final long serialVersionUID = -2747044207333259480L;
 	private String appId; //必填
 	private String secret; // 应用是自己按类型的时候，必填此项
+	private String token; // 如果配置自建类型的回调地址时，如果启用加密配置，则必须配置此信息
+	private String encodingAESKey; //如果配置自建类型的回调地址时，如果启用加密配置，则必须配置此信息
 	private String mpType = MpType.自建类型.getValue();
 	private String authorizerRefreshToken;  // 应用是第三方授权类型时，必填此项
 	private String componentAppid; // 应用是第三方授权类型时，必填此项
@@ -59,10 +61,25 @@ public class WechatMpConfig implements Serializable{
 	public void setComponentAppid(String componentAppid) {
 		this.componentAppid = componentAppid;
 	}
+	
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
+	public String getEncodingAESKey() {
+		return encodingAESKey;
+	}
+	public void setEncodingAESKey(String encodingAESKey) {
+		this.encodingAESKey = encodingAESKey;
+	}
+	
 	@Override
 	public String toString() {
-		return "WechatMpConfig [appId=" + appId + ", secret=" + secret + ", mpType=" + mpType
-				+ ", authorizerRefreshToken=" + authorizerRefreshToken + ", componentAppid=" + componentAppid + "]";
+		return "WechatMpConfig [appId=" + appId + ", secret=" + secret + ", token=" + token + ", encodingAESKey="
+				+ encodingAESKey + ", mpType=" + mpType + ", authorizerRefreshToken=" + authorizerRefreshToken
+				+ ", componentAppid=" + componentAppid + "]";
 	}
 
 }

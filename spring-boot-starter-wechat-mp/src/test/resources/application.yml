@@ -2,6 +2,10 @@ wechat:
   mp:
     appId: wxa7eeec1744e8d41e
     secret: d6fadb9f2aad175b7e2bcc35048b35ab
+    token: coldwind
+    encodingAESKey: mp6CFTF8aEWtqPQPQne1jsmpSHozZEspkGBFewsc39m
+    callback:
+      enable: true
     component:
       enable: false
       config:
