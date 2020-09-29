@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.bana.wechat.common.MsgType;
 import org.bana.wechat.common.util.BeanXmlUtil;
 import org.bana.wechat.mp.callback.CallBackHandler;
+import org.bana.wechat.mp.callback.CallBackObj;
+import org.bana.wechat.mp.callback.event.CallBackEvent;
 import org.bana.wechat.mp.callback.msg.CallBackMessage;
 import org.bana.wechat.mp.callback.result.ArticleCallBackResult;
 import org.bana.wechat.mp.callback.result.CallBackResult;
@@ -53,7 +55,23 @@ public class BasicCallBackHandler implements CallBackHandler {
 		return parseResut2String(message, result);
 	}
 	
-	private String parseResut2String(CallBackMessage message, MessageParam result) {
+	/**
+	* <p>Description: </p> 
+	* @author liuwenjie   
+	* @date Sep 29, 2020 10:50:49 AM 
+	* @param event
+	* @return 
+	* @see org.bana.wechat.mp.callback.CallBackHandler#handleCallBackEvent(org.bana.wechat.mp.callback.event.CallBackEvent) 
+	*/ 
+	@Override
+	public String handleCallBackEvent(CallBackEvent callBackEvent) {
+		MessageParam result = wechatMpCallBackHandler.handleCallBackEvent(callBackEvent);
+		CallBackEventEvent callBackEventEvent = new CallBackEventEvent(this,callBackEvent);
+		applicationContext.publishEvent(callBackEventEvent);
+		return parseResut2String(callBackEvent, result);
+	}
+	
+	private String parseResut2String(CallBackObj callbackObj, MessageParam result) {
 		// 构造如下返回结果的对象
 		/*<xml>
 		  <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -98,12 +116,12 @@ public class BasicCallBackHandler implements CallBackHandler {
 			}
 		}
 		if(StringUtils.isNotBlank(callBackResult.getMsgType())) {
-			callBackResult.setFromUserName(message.getAppId());
-			callBackResult.setToUserName(message.getOpenId());
+			callBackResult.setFromUserName(callbackObj.getAppId());
+			callBackResult.setToUserName(callbackObj.getOpenId());
 			callBackResult.setCreateTime(System.currentTimeMillis()/1000+"");
 			return BeanXmlUtil.beanToXml(callBackResult);
 		}
 		return null;
 	}
-	
+
 }

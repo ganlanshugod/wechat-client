@@ -24,27 +24,9 @@ public abstract class CallBackMessage extends CallBackObj{
 	*/ 
 	private static final long serialVersionUID = 148693760885119044L;
 	
-	private String appId;
-	private String openId;
 	private long createTime;
 	private String msgId;
 	
-	
-	@XmlElement(name="ToUserName")
-	public String getAppId() {
-		return appId;
-	}
-	public void setAppId(String appId) {
-		this.appId = appId;
-	}
-	
-	@XmlElement(name="FromUserName")
-	public String getOpenId() {
-		return openId;
-	}
-	public void setOpenId(String openId) {
-		this.openId = openId;
-	}
 	
 	@XmlElement(name="CreateTime")
 	public long getCreateTime() {

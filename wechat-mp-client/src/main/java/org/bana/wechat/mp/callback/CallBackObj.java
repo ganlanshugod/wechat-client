@@ -25,6 +25,8 @@ public abstract class CallBackObj implements Serializable{
 	private static final long serialVersionUID = 1874000396417085914L;
 
 	private String msgType;
+	private String appId;
+	private String openId;
 
 	@XmlElement(name="MsgType")
 	public String getMsgType() {
@@ -35,6 +37,21 @@ public abstract class CallBackObj implements Serializable{
 		this.msgType = msgType;
 	}
 
+	@XmlElement(name="ToUserName")
+	public String getAppId() {
+		return appId;
+	}
+	public void setAppId(String appId) {
+		this.appId = appId;
+	}
+	
+	@XmlElement(name="FromUserName")
+	public String getOpenId() {
+		return openId;
+	}
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
 	
 	
 }

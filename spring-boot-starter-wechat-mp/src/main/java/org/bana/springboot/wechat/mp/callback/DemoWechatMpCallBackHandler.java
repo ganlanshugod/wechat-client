@@ -8,10 +8,13 @@
 */ 
 package org.bana.springboot.wechat.mp.callback;
 
+import org.bana.wechat.mp.callback.event.CallBackEvent;
 import org.bana.wechat.mp.callback.msg.CallBackMessage;
 import org.bana.wechat.mp.callback.msg.TextCallBackMessage;
 import org.bana.wechat.mp.message.param.MessageParam;
 import org.bana.wechat.mp.message.param.text.TextMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /** 
 * @ClassName: DemoWechatMpCallBackHandler 
@@ -19,6 +22,8 @@ import org.bana.wechat.mp.message.param.text.TextMessage;
 * @author liuwenjie   
 */
 public class DemoWechatMpCallBackHandler implements WechatMpCallBackHandler{
+	
+	private static final Logger LOG = LoggerFactory.getLogger(DemoWechatMpCallBackHandler.class);
 
 	/**
 	* <p>Description: </p> 
@@ -30,6 +35,7 @@ public class DemoWechatMpCallBackHandler implements WechatMpCallBackHandler{
 	*/ 
 	@Override
 	public MessageParam handleCallBackMessage(CallBackMessage message) {
+		LOG.info("==处理回调消息===" + message);
 		if(message instanceof TextCallBackMessage) {
 			TextCallBackMessage textMessage = (TextCallBackMessage)message;
 			String content = textMessage.getContent();
@@ -39,6 +45,20 @@ public class DemoWechatMpCallBackHandler implements WechatMpCallBackHandler{
 				return result;
 			}
 		}
+		return null;
+	}
+
+	/**
+	* <p>Description: </p> 
+	* @author liuwenjie   
+	* @date Sep 29, 2020 10:59:41 AM 
+	* @param event
+	* @return 
+	* @see org.bana.springboot.wechat.mp.callback.WechatMpCallBackHandler#handleCallBackEvent(org.bana.wechat.mp.callback.event.CallBackEvent) 
+	*/ 
+	@Override
+	public MessageParam handleCallBackEvent(CallBackEvent event) {
+		LOG.info("==处理回调事件===" + event);
 		return null;
 	}
 

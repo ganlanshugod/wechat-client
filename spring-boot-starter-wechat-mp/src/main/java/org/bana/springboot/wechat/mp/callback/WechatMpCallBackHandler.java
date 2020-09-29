@@ -8,6 +8,7 @@
 */ 
 package org.bana.springboot.wechat.mp.callback;
 
+import org.bana.wechat.mp.callback.event.CallBackEvent;
 import org.bana.wechat.mp.callback.msg.CallBackMessage;
 import org.bana.wechat.mp.message.param.MessageParam;
 
@@ -26,6 +27,15 @@ public interface WechatMpCallBackHandler {
 	* @return 返回的是回调消息的类型
 	*/ 
 	MessageParam handleCallBackMessage(CallBackMessage message);
+
+	/** 
+	* @Description: 处理回调的事件方法
+	* @author liuwenjie   
+	* @date Sep 29, 2020 10:58:31 AM 
+	* @param event
+	* @return  
+	*/ 
+	MessageParam handleCallBackEvent(CallBackEvent event);
 
 	
 }

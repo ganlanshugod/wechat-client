@@ -14,6 +14,7 @@ public enum CallBackMsgType {
 	小视频("shortvideo"),
 	地理位置("location"),
 	连接("link"),
+	事件("event"),
 	不支持的通知("unknow")
 	;
 	

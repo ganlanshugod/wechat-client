@@ -14,6 +14,7 @@ import org.bana.wechat.common.util.StringUtils;
 import org.bana.wechat.mp.callback.CallBackHandler;
 import org.bana.wechat.mp.callback.CallBackObj;
 import org.bana.wechat.mp.callback.CallBackObjUtil;
+import org.bana.wechat.mp.callback.event.CallBackEvent;
 import org.bana.wechat.mp.callback.msg.CallBackMessage;
 import org.bana.wechat.mp.component.common.ReceiveObjUtil;
 import org.bana.wechat.mp.component.common.WXMpCompBizMsgCryptFactory;
@@ -141,6 +142,16 @@ public class WechatMpCompController {
 			if(callBackObj instanceof CallBackMessage) {
 				CallBackMessage msg = (CallBackMessage)callBackObj;
 				String result = callBackHandler.handleCallBackMessage(msg);
+				if(!StringUtils.isBlank(result)) {
+//					String beanToXml = BeanXmlUtil.beanToXml(result);
+					long time = System.currentTimeMillis()/1000;
+					String newtimeStamp = String.valueOf(time);
+					String newNonce = StringUtils.getRandomStr();
+					resultStr = wxBizMsgCrypt.encryptMsg(result, newtimeStamp, newNonce);
+				}
+			}else if(callBackObj instanceof CallBackEvent) {
+				CallBackEvent event = (CallBackEvent)callBackObj;
+				String result = callBackHandler.handleCallBackEvent(event);
 				if(!StringUtils.isBlank(result)) {
 //					String beanToXml = BeanXmlUtil.beanToXml(result);
 					long time = System.currentTimeMillis()/1000;

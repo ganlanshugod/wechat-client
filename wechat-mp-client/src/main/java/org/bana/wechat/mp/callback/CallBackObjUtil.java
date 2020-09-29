@@ -15,6 +15,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.bana.wechat.common.util.BeanXmlUtil;
 import org.bana.wechat.common.util.StringUtils;
+import org.bana.wechat.mp.callback.event.CallBackEvent;
+import org.bana.wechat.mp.callback.event.ClickCallBackEvent;
+import org.bana.wechat.mp.callback.event.LocationCallBackEvent;
+import org.bana.wechat.mp.callback.event.ScanCallBackEvent;
+import org.bana.wechat.mp.callback.event.SubscribeCallBackEvent;
+import org.bana.wechat.mp.callback.event.UnsubscribeCallBackEvent;
+import org.bana.wechat.mp.callback.event.ViewCallBackEvent;
 import org.bana.wechat.mp.callback.msg.ImageCallBackMessage;
 import org.bana.wechat.mp.callback.msg.LinkCallBackMessage;
 import org.bana.wechat.mp.callback.msg.LocationCallBackMessage;
@@ -75,6 +82,10 @@ public class CallBackObjUtil {
 				return  BeanXmlUtil.xmlToBean(xmlStr, LocationCallBackMessage.class);
 			case 连接:
 				return  BeanXmlUtil.xmlToBean(xmlStr, LinkCallBackMessage.class);
+			case 事件:
+				NodeList eventNode = root.getElementsByTagName("Event");
+				String eventStr = eventNode.item(0).getTextContent();
+				return parseEventCallBackObj(xmlStr,eventStr);
 			default:
 				LOG.warn("不支持的MSGType:"+msgTypeStr + xmlStr);
 				throw new RuntimeException("不合法的接受的MsgType内容" + msgTypeStr + xmlStr);
@@ -82,6 +93,34 @@ public class CallBackObjUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("解析xml对象失败" + xmlStr, e);
+		}
+	}
+	/** 
+	* @Description: 解析事件类型的callback对象
+	* @author liuwenjie   
+	* @date Sep 29, 2020 10:38:06 AM 
+	* @param xmlStr
+	* @param eventStr
+	* @return  
+	*/ 
+	private static CallBackEvent parseEventCallBackObj(String xmlStr, String eventStr) {
+		CallBackEventType eventType = CallBackEventType.instance(eventStr);
+		switch(eventType) {
+		case 关注_含扫码:
+			return BeanXmlUtil.xmlToBean(xmlStr, SubscribeCallBackEvent.class);
+		case 取消关注:
+			return BeanXmlUtil.xmlToBean(xmlStr, UnsubscribeCallBackEvent.class);
+		case 扫码事件_已关注扫码:
+			return BeanXmlUtil.xmlToBean(xmlStr, ScanCallBackEvent.class);
+		case 上报位置:
+			return BeanXmlUtil.xmlToBean(xmlStr, LocationCallBackEvent.class);
+		case 点击自定义菜单事件:
+			return BeanXmlUtil.xmlToBean(xmlStr, ClickCallBackEvent.class);
+		case 点击自定义的连接菜单:
+			return BeanXmlUtil.xmlToBean(xmlStr, ViewCallBackEvent.class);
+		default:
+			LOG.warn("不支持的事件类型:"+eventStr + xmlStr);
+			throw new RuntimeException("不支持的callback事件类型:"+eventStr + xmlStr);
 		}
 	}
 }
