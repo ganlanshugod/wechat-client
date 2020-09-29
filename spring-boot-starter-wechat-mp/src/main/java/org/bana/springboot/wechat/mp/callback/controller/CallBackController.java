@@ -92,6 +92,7 @@ public class CallBackController {
 		String decryptMsg = postData;
 		if(StringUtils.isNoneBlank(encryptType)) {
 			decryptMsg = wxMpBizMsgCryptFactory.getWxBizMsgCrypt(appId).decryptMsg(msgSignature, timestamp, nonce, postData);
+			LOG.info("=====解密收到的消息为===" + decryptMsg);
 		}
 		
 		CallBackObj callBackObj = CallBackObjUtil.parseXML(decryptMsg);
@@ -105,12 +106,15 @@ public class CallBackController {
 				CallBackEvent event = (CallBackEvent)callBackObj;
 				result = callBackHandler.handleCallBackEvent(event);
 			}
-			if(StringUtils.isNoneBlank(result,encryptType)) {
-//				String beanToXml = BeanXmlUtil.beanToXml(result);
-				long time = System.currentTimeMillis()/1000;
-				String newtimeStamp = String.valueOf(time);
-				String newNonce = StringUtils.getRandomStr();
-				resultStr = wxBizMsgCrypt.encryptMsg(result, newtimeStamp, newNonce);
+			if(StringUtils.isNoneBlank(result)) {
+				if(StringUtils.isNoneBlank(encryptType)){
+					long time = System.currentTimeMillis()/1000;
+					String newtimeStamp = String.valueOf(time);
+					String newNonce = StringUtils.getRandomStr();
+					resultStr = wxBizMsgCrypt.encryptMsg(result, newtimeStamp, newNonce);
+				}else {
+					resultStr = result;
+				}
 			}
 		}
 		
