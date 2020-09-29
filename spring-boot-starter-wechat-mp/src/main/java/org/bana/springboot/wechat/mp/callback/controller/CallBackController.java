@@ -10,6 +10,7 @@ package org.bana.springboot.wechat.mp.callback.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.bana.wechat.mp.callback.CallBackHandler;
 import org.bana.wechat.mp.common.WXMpBizMsgCryptFactory;
 import org.slf4j.Logger;
@@ -36,6 +37,7 @@ public class CallBackController {
 	private static final String PARAM_MSG_SIGNATURE = "msg_signature";
 	private static final String PARAM_SIGNATURE = "signature";
 	private static final String PARAM_OPENID = "openid";
+	private static final String PARAM_ECHOSTR = "echostr";
 	
 	@Autowired
 	private WXMpBizMsgCryptFactory wxMpBizMsgCryptFactory;
@@ -46,13 +48,14 @@ public class CallBackController {
 	
 	@RequestMapping("callback/{APPID}")
 	@ResponseBody
-	public String callBack(HttpServletRequest request,@PathVariable("APPID")String appId,@RequestBody String postData) {
+	public String callBack(HttpServletRequest request,@PathVariable("APPID")String appId,@RequestBody(required=false) String postData) {
 		String timestamp = request.getParameter(PARAM_TIMESTAMP);
 		String nonce = request.getParameter(PARAM_NONCE);
 		String encryptType = request.getParameter(PARAM_ENCRYPT_TYPE);
 		String msgSignature = request.getParameter(PARAM_MSG_SIGNATURE);
 		String signature = request.getParameter(PARAM_SIGNATURE);
 		String openId = request.getParameter(PARAM_OPENID);
+		String echoStr = request.getParameter(PARAM_ECHOSTR);
 		LOG.info("======收到自建类型的推送消息== timestamp=" + timestamp //[1601258242]
 				+ "\n nonce=" + nonce //[1468299776]
 				+ "\n encryptType=" + encryptType   // [aes]
@@ -60,7 +63,11 @@ public class CallBackController {
 				+"\n signature=" + signature //[9ad3978410c79eb5022b7bf87bad11dc8434143a]
 				+"\n openId=" + openId //[oTNO107-p12Cg05fnzL1-mccHzb4]
 				+ "\n AppID=" + appId //null
-				+ "\n postData=" + postData); 
+				+ "\n postData=" + postData
+				+ "\n echoStr=" + echoStr); 
+		if(StringUtils.isNoneBlank(echoStr)) {
+			return wxMpBizMsgCryptFactory.getWxBizMsgCrypt(appId).verifyUrl(msgSignature, timestamp, nonce, echoStr);
+		}
 		
 		
 		return "success";
