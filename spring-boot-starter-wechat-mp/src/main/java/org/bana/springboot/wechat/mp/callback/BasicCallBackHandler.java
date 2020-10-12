@@ -116,7 +116,7 @@ public class BasicCallBackHandler implements CallBackHandler {
 			}
 		}
 		if(StringUtils.isNotBlank(callBackResult.getMsgType())) {
-			callBackResult.setFromUserName(callbackObj.getAppId());
+			callBackResult.setFromUserName(callbackObj.getOriginalId());
 			callBackResult.setToUserName(callbackObj.getOpenId());
 			callBackResult.setCreateTime(System.currentTimeMillis()/1000+"");
 			return BeanXmlUtil.beanToXml(callBackResult);

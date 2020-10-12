@@ -99,6 +99,7 @@ public class CallBackController {
 		String resultStr = "success";
 		if(callBackObj != null) {
 			String result = null;
+			callBackObj.setAppId(appId);
 			if(callBackObj instanceof CallBackMessage) {
 				CallBackMessage msg = (CallBackMessage)callBackObj;
 				result = callBackHandler.handleCallBackMessage(msg);
