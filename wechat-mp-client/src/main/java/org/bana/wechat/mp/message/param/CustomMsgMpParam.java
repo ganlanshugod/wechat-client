@@ -27,6 +27,37 @@ public class CustomMsgMpParam extends WeChatMpParam {
 	private String description; // 外链图文，描述
 	private String url; // 外链图文，链接
 	private String picurl; // 外链图文，封面
+	private String musicUrl; //音乐url
+	private String hqMusicUrl; //音乐hq url
+	private String cardId;//卡券id
+	private String miniAppId;//小程序id
+	
+	
+	
+	public String getMiniAppId() {
+		return miniAppId;
+	}
+	public void setMiniAppId(String miniAppId) {
+		this.miniAppId = miniAppId;
+	}
+	public String getCardId() {
+		return cardId;
+	}
+	public void setCardId(String cardId) {
+		this.cardId = cardId;
+	}
+	public String getMusicUrl() {
+		return musicUrl;
+	}
+	public void setMusicUrl(String musicUrl) {
+		this.musicUrl = musicUrl;
+	}
+	public String getHqMusicUrl() {
+		return hqMusicUrl;
+	}
+	public void setHqMusicUrl(String hqMusicUrl) {
+		this.hqMusicUrl = hqMusicUrl;
+	}
 	public String getTouser() {
 		return touser;
 	}

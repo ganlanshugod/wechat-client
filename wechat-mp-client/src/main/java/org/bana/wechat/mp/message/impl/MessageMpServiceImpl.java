@@ -115,7 +115,29 @@ public class MessageMpServiceImpl extends WechatMpService implements MessageMpSe
 			msgList.add(newsObj);
 			msg.put("articles", msgList);
 			sendObj.put("news",msg);
-		}else {
+		}else if("video".equals(msgType)) {
+			msg.put("media_id", sendParam.getMediaId());
+			msg.put("thumb_media_id", sendParam.getMediaId());
+			msg.put("title", sendParam.getTitle());
+			msg.put("description", sendParam.getDescription());
+			sendObj.put(msgType,msg);
+		}else if("music".equals(msgType)) {
+			msg.put("title", sendParam.getTitle());
+			msg.put("description", sendParam.getDescription());
+			msg.put("musicurl", sendParam.getMusicUrl());
+			msg.put("hqmusicurl", sendParam.getHqMusicUrl());
+			msg.put("thumb_media_id", sendParam.getMediaId());
+			sendObj.put(msgType,msg);
+		}else if("wxcard".equals(msgType)) {
+			msg.put("card_id", sendParam.getCardId());
+			sendObj.put(msgType,msg);
+		}else if("miniprogrampage".equals(msgType)) {
+			msg.put("title", sendParam.getTitle());
+			msg.put("appid", sendParam.getMiniAppId());
+			msg.put("pagepath", sendParam.getUrl());
+			msg.put("thumb_media_id", sendParam.getMediaId());
+			sendObj.put(msgType,msg);
+		} else {
 			LOG.info("暂未实现的客服消息类型");
 			return;
 		}
