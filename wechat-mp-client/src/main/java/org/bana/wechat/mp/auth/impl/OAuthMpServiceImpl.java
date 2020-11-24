@@ -12,8 +12,10 @@ import org.bana.wechat.common.HttpHelper;
 import org.bana.wechat.common.util.StringUtils;
 import org.bana.wechat.mp.auth.OAuthMpService;
 import org.bana.wechat.mp.auth.param.UserMpInfoParam;
+import org.bana.wechat.mp.auth.param.UserMpListParam;
 import org.bana.wechat.mp.auth.param.UserPaidInfoParam;
 import org.bana.wechat.mp.auth.result.UserMpInfo;
+import org.bana.wechat.mp.auth.result.UserMpListResult;
 import org.bana.wechat.mp.common.Constants;
 import org.bana.wechat.mp.common.WeChatMpException;
 import org.bana.wechat.mp.common.WechatMpResultHandler;
@@ -58,6 +60,23 @@ public class OAuthMpServiceImpl extends WechatMpService implements OAuthMpServic
 				.append("&lang=").append(lang);
 		JSONObject post = httpHelper.httpGet(url.toString());
 		return WechatMpResultHandler.handleResult(post, UserMpInfo.class);
+	}
+	/** 
+	* Description: 获取用户列表
+	* @author zhangzhichao   
+	* @date 2020-11-17 18:19:56 
+	* @param accessToken
+	* @param openId
+	* @param lang
+	* @return  
+	*/ 
+	@Override
+	public UserMpListResult getUserList(UserMpListParam param) {
+		if(param == null || StringUtils.isBlank(param.getAppId())){
+			throw new WeChatMpException(WeChatMpException.PARAM_ERROR,"getUserList时参数不能为空 param=," + param);
+		}
+		JSONObject getList = this.get(Constants.获取关注者列表.getValue(), param);
+		return WechatMpResultHandler.handleResult(getList, UserMpListResult.class);
 	}
 	/**
 	 * <p>Description: </p>

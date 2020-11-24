@@ -9,8 +9,10 @@
 package org.bana.wechat.mp.auth;
 
 import org.bana.wechat.mp.auth.param.UserMpInfoParam;
+import org.bana.wechat.mp.auth.param.UserMpListParam;
 import org.bana.wechat.mp.auth.param.UserPaidInfoParam;
 import org.bana.wechat.mp.auth.result.UserMpInfo;
+import org.bana.wechat.mp.auth.result.UserMpListResult;
 
 /**
  * @ClassName: AuthMpService
@@ -29,6 +31,15 @@ public interface OAuthMpService {
 	 * @return
 	 */
 	UserMpInfo getUserInfo(String accessToken,String openId,String lang);
+	/** 
+	* Description: 获取用户列表
+	* @author zhangzhichao   
+	* @date 2020-11-17 18:19:32 
+	* @param accessToken
+	* @param nextOpenId
+	* @return  
+	*/ 
+	UserMpListResult getUserList(UserMpListParam param);
 	
 	/**
 	 * Description: 根据页面认证token拉取用户信息

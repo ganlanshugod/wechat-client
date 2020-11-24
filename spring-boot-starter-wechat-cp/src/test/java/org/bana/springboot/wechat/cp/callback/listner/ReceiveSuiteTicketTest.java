@@ -89,9 +89,9 @@ public class ReceiveSuiteTicketTest {
 	
 	@Test
 	public void testEncrypt(){
-		String nonce = getRandomStr(9);
-		String encryptMsg = wxCrypt.EncryptMsg(callBackStr, "1403610513", nonce);
-		System.out.println(encryptMsg);
+//		String nonce = getRandomStr(9);
+//		String encryptMsg = wxCrypt.EncryptMsg(callBackStr, "1403610513", nonce);
+//		System.out.println(encryptMsg);
 //		System.out.println(wxCrypt.DecryptMsg(msgSignature, timeStamp, nonce, postData));
 	}
 	
@@ -102,8 +102,8 @@ public class ReceiveSuiteTicketTest {
 "<ToUserName><![CDATA[ww4asffe99e54c0f4c]]></ToUserName>"+
 "<AgentID><![CDATA[toAgentID]]></AgentID>"+
 "</xml>";
-		String decryptMsg = wxCrypt.DecryptMsg("3d058933c288a128ce644094a795b7337f2d1985", "1403610513", "741159830", postData);
-		System.out.println(decryptMsg);
+//		String decryptMsg = wxCrypt.DecryptMsg("3d058933c288a128ce644094a795b7337f2d1985", "1403610513", "741159830", postData);
+//		System.out.println(decryptMsg);
 	}
 	
 	@Test
