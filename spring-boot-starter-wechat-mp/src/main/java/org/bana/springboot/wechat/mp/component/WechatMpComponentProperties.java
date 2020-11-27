@@ -25,6 +25,8 @@ public class WechatMpComponentProperties {
 	
 	private String enable;  // 决定是否开启第三方应用对应的支持功能
 	
+	private String receive; // 决定是否开启第三方应用的receive接口s
+	
 	private List<WechatMpComponentConfig> config;
 
 	public String getEnable() {
@@ -41,6 +43,14 @@ public class WechatMpComponentProperties {
 
 	public void setConfig(List<WechatMpComponentConfig> config) {
 		this.config = config;
+	}
+	
+	public String getReceive() {
+		return receive;
+	}
+
+	public void setReceive(String receive) {
+		this.receive = receive;
 	}
 
 	@Override

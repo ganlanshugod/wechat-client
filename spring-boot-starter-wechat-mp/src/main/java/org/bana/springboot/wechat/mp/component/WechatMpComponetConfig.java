@@ -45,7 +45,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 public class WechatMpComponetConfig {
 
 	@Bean
-	@ConditionalOnProperty(prefix=WechatMpComponentProperties.WECHAT_MP_COMP_PREFIX,name="enable",havingValue="true",matchIfMissing=false)
+	@ConditionalOnProperty(prefix=WechatMpComponentProperties.WECHAT_MP_COMP_PREFIX,name="receive",havingValue="true",matchIfMissing=false)
 	public WechatMpCompReceiveController wechatMpCompReceiveController() {
 		WechatMpCompReceiveController wechatMpController = new WechatMpCompReceiveController();
 		return wechatMpController;
