@@ -59,7 +59,7 @@ public class WechatMpComponetConfig {
 	}
 	
 	@Bean
-	@ConditionalOnProperty(prefix=WechatMpComponentProperties.WECHAT_MP_COMP_PREFIX,name="enable",havingValue="true",matchIfMissing=false)
+	@ConditionalOnProperty(prefix=WechatMpComponentProperties.WECHAT_MP_COMP_PREFIX,name="receive",havingValue="true",matchIfMissing=false)
 	@ConditionalOnMissingBean
 	public ReceiveMsgHandler receiveMsgHandler() {
 		BasicReceiveMsgHandler componentService = new BasicReceiveMsgHandler();

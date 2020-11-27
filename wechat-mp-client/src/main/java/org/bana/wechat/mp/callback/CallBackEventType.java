@@ -21,6 +21,7 @@ public enum CallBackEventType {
 	上报位置("LOCATION"),
 	点击自定义菜单事件("CLICK"),
 	点击自定义的连接菜单("VIEW"),
+	模板小时是否送达成功("TEMPLATESENDJOBFINISH"),
 	不支持的通知("unknow")
 	;
 	

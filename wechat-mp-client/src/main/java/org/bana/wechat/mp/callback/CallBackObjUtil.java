@@ -20,6 +20,7 @@ import org.bana.wechat.mp.callback.event.ClickCallBackEvent;
 import org.bana.wechat.mp.callback.event.LocationCallBackEvent;
 import org.bana.wechat.mp.callback.event.ScanCallBackEvent;
 import org.bana.wechat.mp.callback.event.SubscribeCallBackEvent;
+import org.bana.wechat.mp.callback.event.TemplateSendJobFinishEvent;
 import org.bana.wechat.mp.callback.event.UnsubscribeCallBackEvent;
 import org.bana.wechat.mp.callback.event.ViewCallBackEvent;
 import org.bana.wechat.mp.callback.msg.ImageCallBackMessage;
@@ -118,6 +119,8 @@ public class CallBackObjUtil {
 			return BeanXmlUtil.xmlToBean(xmlStr, ClickCallBackEvent.class);
 		case 点击自定义的连接菜单:
 			return BeanXmlUtil.xmlToBean(xmlStr, ViewCallBackEvent.class);
+		case 模板小时是否送达成功:
+			return BeanXmlUtil.xmlToBean(xmlStr, TemplateSendJobFinishEvent.class);
 		default:
 			LOG.warn("不支持的事件类型:"+eventStr + xmlStr);
 			throw new RuntimeException("不支持的callback事件类型:"+eventStr + xmlStr);
