@@ -8,6 +8,7 @@
 */ 
 package org.bana.wechat.mp.component.common.impl;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +45,18 @@ public class InMermeryWechatMpComponentManager implements WechatMpComponentManag
 		if(config != null) {
 			cacheMap.put(config.getComponentAppid(), config);
 		}
+	}
+
+	/**
+	* <p>Description: </p> 
+	* @author liuwenjie   
+	* @date 2020年11月30日 上午11:06:22 
+	* @return 
+	* @see org.bana.wechat.mp.component.common.WechatMpComponentManager#getAllConfig() 
+	*/ 
+	@Override
+	public Collection<WechatMpComponentConfig>	getAllConfig() {
+		return cacheMap.values();
 	}
 
 }

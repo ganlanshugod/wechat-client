@@ -8,6 +8,8 @@
 */ 
 package org.bana.wechat.mp.component.common;
 
+import java.util.Collection;
+
 /** 
 * @ClassName: WechatMpComponentManager 
 * @Description: 微信公众号第三方服务商的配置管理类
@@ -23,4 +25,13 @@ public interface WechatMpComponentManager {
 	* @return  
 	*/ 
 	WechatMpComponentConfig getConfig(String appId);
+	
+	
+	/** 
+	* @Description:
+	* @author liuwenjie   
+	* @date 2020年11月30日 上午11:00:31 
+	* @return  
+	*/ 
+	Collection<WechatMpComponentConfig> getAllConfig();
 }
