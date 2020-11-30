@@ -32,6 +32,8 @@ public class WechatMpComponentConfig implements Serializable {
 	private String componentToken ; // 消息校验Token sdqylyelink20200513lkkqsxlLLsdk
 	private String encodingAESKey ; // 消息加解密Key sdqylyelink20200513msgkeylklxhslKDswksdwdgs
 	
+	private String domain; //套件对应的业务域名
+	
 	public String getComponentAppid() {
 		return componentAppid;
 	}
@@ -58,11 +60,17 @@ public class WechatMpComponentConfig implements Serializable {
 		this.encodingAESKey = encodingAESKey;
 	}
 	
+	public String getDomain() {
+		return domain;
+	}
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
 	@Override
 	public String toString() {
 		return "WechatMpComponentConfig [componentAppid=" + componentAppid + ", componentAppsecret="
 				+ componentAppsecret + ", componentToken=" + componentToken + ", encodingAESKey=" + encodingAESKey
-				+ "]";
+				+ ", domain=" + domain + "]";
 	}
 	
 	public boolean isAvailable() {
