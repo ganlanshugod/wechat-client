@@ -9,12 +9,14 @@
 package org.bana.wechat.mp.callback.event;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /** 
 * @ClassName: ClickCallBackEvent 
 * @Description: 点击回调事件
 * @author liuwenjie   
 */
+@XmlRootElement(name="xml")
 public class ClickCallBackEvent extends CallBackEvent {
 
 	/** 
