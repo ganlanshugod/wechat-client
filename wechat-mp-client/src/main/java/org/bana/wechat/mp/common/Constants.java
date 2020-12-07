@@ -36,6 +36,7 @@ public enum Constants {
 	获取公众号的自动回复规则(接口根路径.value + "/cgi-bin/get_current_autoreply_info"),
 	/*素材管理*/
 	获取素材列表(接口根路径.value + "/cgi-bin/material/batchget_material"),
+	新增永久素材文件(接口根路径.value + "/cgi-bin/material/add_material"),
 	/*页面认证*/
 	页面认证获取TOKEN(接口根路径.value + "/sns/oauth2/access_token"),
 	页面认证拉取用户信息(接口根路径.value + "/sns/userinfo"),
