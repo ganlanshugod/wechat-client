@@ -33,7 +33,7 @@ public class ArticleCallBackResult extends CallBackResult {
 	
 	private List<Article> articles;
 
-	@XmlElement(name="Articles")
+	@XmlElement(name="ArticleCount")
 	public long getArticleCount() {
 		return articleCount;
 	}
@@ -42,7 +42,7 @@ public class ArticleCallBackResult extends CallBackResult {
 		this.articleCount = articleCount;
 	}
 
-	@XmlElementWrapper(name="ArticleCount")
+	@XmlElementWrapper(name="Articles")
 	@XmlElement(name="item")
 	public List<Article> getArticles() {
 		return articles;
