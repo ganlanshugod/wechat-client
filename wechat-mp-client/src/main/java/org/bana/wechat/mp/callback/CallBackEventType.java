@@ -22,6 +22,7 @@ public enum CallBackEventType {
 	点击自定义菜单事件("CLICK"),
 	点击自定义的连接菜单("VIEW"),
 	模板小时是否送达成功("TEMPLATESENDJOBFINISH"),
+	点击小程序连接("view_miniprogram"),
 	不支持的通知("unknow")
 	;
 	
