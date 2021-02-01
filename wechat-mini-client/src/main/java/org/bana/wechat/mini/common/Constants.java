@@ -52,6 +52,10 @@ public enum Constants {
 	内容安全图片(接口根路径.value + "/wxa/img_sec_check"),
 	/*收发消息*/
 	获取订单详情接口(接口根路径.value + "/merchant/order/getbyid"),
+	/*获取小程序码*/
+	获取有数量限制的小程序二维码(接口根路径.value + "/cgi-bin/wxaapp/createwxaqrcode"),
+	获取有数量限制的小程序码(接口根路径.value + "/wxa/getwxacode"),
+	获取无数量限制的小程序码(接口根路径.value + "/wxa/getwxacodeunlimit"),
 	/*返回值属性的设置*/
 	返回码("errcode"),
 	返回信息("errmsg"),
