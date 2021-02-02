@@ -44,6 +44,9 @@ public class QrCodeMiniServiceImpl extends WechatMiniService implements QrCodeMi
 	 */
 	@Override
 	public String createWxaqrcode(Wxaqrcode param) {
+		if (StringUtils.isBlank(param.getAppId())) {
+			throw new WeChatMiniException(WeChatMiniException.PARAM_ERROR,"createWxaqrcode时appId参数不能为空 ");
+		}
 		if (StringUtils.isBlank(param.getPath())) {
 			throw new WeChatMiniException(WeChatMiniException.PARAM_ERROR,"createWxaqrcode时path参数不能为空 ");
 		}
@@ -62,6 +65,9 @@ public class QrCodeMiniServiceImpl extends WechatMiniService implements QrCodeMi
 	*/ 
 	@Override
 	public byte[] createWxaqrcodeByteArray(Wxaqrcode param) {
+		if (StringUtils.isBlank(param.getAppId())) {
+			throw new WeChatMiniException(WeChatMiniException.PARAM_ERROR,"createWxaqrcode时appId参数不能为空 ");
+		}
 		if (StringUtils.isBlank(param.getPath())) {
 			throw new WeChatMiniException(WeChatMiniException.PARAM_ERROR,"createWxaqrcode时path参数不能为空 ");
 		}
@@ -99,7 +105,10 @@ public class QrCodeMiniServiceImpl extends WechatMiniService implements QrCodeMi
 
 	
 	private Map<String, Object> structWxaqrcodeParam(WxacodeParam param) {
-		Map<String, Object> mpParam = new HashMap<>();
+		if (StringUtils.isBlank(param.getAppId())) {
+			throw new WeChatMiniException(WeChatMiniException.PARAM_ERROR,"getWxaqrcode时appId参数不能为空 ");
+		}
+		Map<String, Object> mpParam = new HashMap<String, Object>();
 		if (StringUtils.isNotBlank(param.getPath())) {
 			mpParam.put("path", param.getPath());
 		} else {
@@ -153,11 +162,14 @@ public class QrCodeMiniServiceImpl extends WechatMiniService implements QrCodeMi
 	}
 	
 	private Map<String, Object> structUnlimitedParam(WxacodeUnlimitedParam param) {
-		Map<String, Object> mpParam = new HashMap<>();
+		if (StringUtils.isBlank(param.getAppId())) {
+			throw new WeChatMiniException(WeChatMiniException.PARAM_ERROR,"getUnlimited时appId参数不能为空 ");
+		}
+		Map<String, Object> mpParam = new HashMap<String, Object>();
 		if (StringUtils.isNotBlank(param.getScene())) {
 			mpParam.put("scene", param.getScene());
 		} else {
-			mpParam.put("scene", "");
+			throw new WeChatMiniException(WeChatMiniException.PARAM_ERROR,"getUnlimited时scene参数不能为空 ");
 		}
 		if (StringUtils.isNotBlank(param.getPage())) {
 			mpParam.put("page", param.getPage());
