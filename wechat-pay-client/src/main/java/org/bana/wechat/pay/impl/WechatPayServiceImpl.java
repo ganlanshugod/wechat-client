@@ -37,6 +37,21 @@ public class WechatPayServiceImpl implements WechatPayService{
 	public Map<String, String> unifiedOrder(WxPayParam payParam, Map<String, String> reqData) throws Exception {
 		return wxPayFactory.getWxPay(payParam).unifiedOrder(reqData);
 	}
+	
+	/**
+	* <p>Description: 付款码支付</p> 
+	* @author zhangzhichao   
+	* @date 2022年2月23日 下午3:10:27 
+	* @param payParam
+	* @param reqData
+	* @return
+	* @throws Exception 
+	* @see org.bana.wechat.pay.WechatPayService#micropay(org.bana.wechat.pay.app.WxPayParam, java.util.Map) 
+	*/ 
+	@Override
+	public Map<String, String> microPay(WxPayParam payParam, Map<String, String> reqData) throws Exception {
+		return wxPayFactory.getWxPay(payParam).microPay(reqData);
+	}
 	/**
 	* <p>Description: 退款</p> 
 	* @author zhangzhichao   

@@ -31,6 +31,17 @@ public interface WechatPayService {
 	public Map<String, String> unifiedOrder(WxPayParam payParam,Map<String, String> reqData) throws Exception;
 	
 	/** 
+	* @Description: 付款码支付
+	* @author zhangzhichao   
+	* @date 2022年2月23日 下午3:09:58 
+	* @param payParam
+	* @param reqData
+	* @return
+	* @throws Exception  
+	*/ 
+	public Map<String, String> microPay(WxPayParam payParam,Map<String, String> reqData) throws Exception;
+	
+	/** 
 	* @Description: 退款
 	* @author zhangzhichao   
 	* @date May 20, 2020 5:41:36 PM 
